@@ -1,19 +1,16 @@
 package ar.edu.utn.frba.mobile.smarket
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ar.edu.utn.frba.mobile.smarket.ui.main.MainFragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commitNow()
-        }
+        setContentView(R.layout.activity_main)
+        val host = NavHostFragment.create(R.navigation.nav_graph)
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer,host).setPrimaryNavigationFragment(host).commit()
     }
 
 }
