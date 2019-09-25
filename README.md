@@ -1,2 +1,4 @@
 # Smarket
-Smarket
+
+Username: admin
+password: admin

@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Smarket</string>
 
-    <string name="username">UserName</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
+    <string name="username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Ingresar</string>
+    <string name="invalidUsername">Usuario Invalido</string>
+    <string name="invalidPassword">Password Invalido</string>
+    <string name="incorrectUsernameOrPassword">Usuario o Contraseña Incorrecta</string>
 
 </resources>
