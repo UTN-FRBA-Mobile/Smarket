@@ -4,25 +4,9 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.util.*
 
-class Purchase() : Parcelable {
+class Purchase(var id: Int,var date: Date, var price: Double, var amount: Int) : Parcelable {
 
-    var id = 0
-    lateinit var date: Date
-    var price: Double = 0.0
-    var amount: Int = 0
-
-    constructor(parcel: Parcel) : this() {
-        id = parcel.readInt()
-        price = parcel.readDouble()
-        amount = parcel.readInt()
-    }
-
-    constructor(id: Int, date: Date, price: Double, amount: Int) : this() {
-        this.id = id
-        this.date = date
-        this.price = price
-        this.amount = amount
-    }
+    constructor(parcel: Parcel) : this(parcel.readInt(),Date(),parcel.readDouble(), parcel.readInt())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)

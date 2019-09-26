@@ -33,6 +33,12 @@
         <action
             android:id="@+id/action_shoppingCartFragment_to_scanProductFragment"
             app:destination="@id/scanProductFragment" />
+        <action
+            android:id="@+id/action_shoppingCartFragment_to_orderFragment"
+            app:destination="@id/orderFragment" />
+        <action
+            android:id="@+id/action_shoppingCartFragment_to_purchaseHistoryFragment"
+            app:destination="@id/purchaseHistoryFragment" />
     </fragment>
 
     <fragment
@@ -43,20 +49,27 @@
         <action
             android:id="@+id/action_scanProductFragment_to_addProductFragment"
             app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/action_scanProductFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/addProductFragment"
         android:name="ar.edu.utn.frba.mobile.smarket.fragments.AddProductFragment"
         android:label="AddProductFragment"
-        tools:layout="@layout/fragment_add_product"/>
+        tools:layout="@layout/fragment_add_product">
+        <action
+            android:id="@+id/action_addProductFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
+    </fragment>
     <fragment
         android:id="@+id/purchaseHistoryFragment"
         android:name="ar.edu.utn.frba.mobile.smarket.fragments.PurchaseHistoryFragment"
         android:label="fragment_purchase_history"
         tools:layout="@layout/fragment_purchase_history" >
         <action
-            android:id="@+id/action_purchaseHistoryFragment_to_orderFragment"
-            app:destination="@id/orderFragment" />
+            android:id="@+id/action_purchaseHistoryFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
     </fragment>
 </navigation>

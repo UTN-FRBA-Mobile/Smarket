@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -27,34 +26,29 @@ class PurchaseHistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val history = ArrayList<Purchase>()
+        if (savedInstanceState?.get("history") == null)
+            savedInstanceState?.putParcelableArrayList("totalPrice", PurchaseService.getHistory())
 
-        if (savedInstanceState?.get("history") != null)
-            history.addAll(savedInstanceState["history"] as ArrayList<Purchase>)
-        else {
-            history.addAll(PurchaseService.getHistory())
-            savedInstanceState?.putParcelableArrayList("totalPrice", history)
-        }
+        @Suppress("UNCHECKED_CAST")
+        val history = savedInstanceState?.get("history") as ArrayList<Purchase>
 
         showPurchases(history)
 
         buttonNewPurchase.setOnClickListener {
             val action =
-                PurchaseHistoryFragmentDirections.actionPurchaseHistoryFragmentToOrderFragment()
+                PurchaseHistoryFragmentDirections.actionPurchaseHistoryFragmentToShoppingCartFragment()
             findNavController().navigate(action)
         }
     }
 
     private fun showPurchases(history : List<Purchase>) {
         history.forEach {
-            val purchase = it
             val tableRow = TableRow(context)
-            tableRow.addView(newTextView(purchase.date.toString()))
-            tableRow.addView(newTextView(purchase.amount.toString()))
-            tableRow.addView(newTextView("$ " + purchase.price.toString()))
+            tableRow.addView(newTextView(it.date.toString()))
+            tableRow.addView(newTextView(it.amount.toString()))
+            tableRow.addView(newTextView("$ " + it.price.toString()))
             tablePurchaseHistory.addView(tableRow)
         }
-
     }
 
     private fun newTextView(text: String): View {

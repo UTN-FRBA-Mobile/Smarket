@@ -26,5 +26,8 @@
     <string name="products">Productos</string>
     <string name="price">Precio</string>
     <string name="newPurchase">Nueva Compra</string>
+    <string name="product">Producto</string>
+    <string name="amount">Cantidad</string>
+    <string name="actions">Acciones</string>
 
 </resources>
