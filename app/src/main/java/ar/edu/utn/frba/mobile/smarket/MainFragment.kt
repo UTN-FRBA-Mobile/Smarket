@@ -22,7 +22,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         buttonLogin.setOnClickListener {
             if (this.validateUser()) {
-                val action = MainFragmentDirections.actionMainFragmentToHomeFragment()
+                val action = MainFragmentDirections.actionMainFragmentToOrderFragment()
                 findNavController().navigate(action)
             }
         }
@@ -34,14 +34,18 @@ class MainFragment : Fragment() {
         val username = textUsername.text.toString()
         val password = textPassword.text.toString()
 
+        textError.visibility = View.INVISIBLE
+
         textUsernameError.visibility = getError(username)
         textPasswordError.visibility = getError(password)
 
         if (username.isNotBlank() || password.isNotBlank()) {
             if (authenticate(username, password))
                 return true
-            else
+            else {
                 textError.text = resources.getString(R.string.incorrectUsernameOrPassword)
+                textError.visibility = View.VISIBLE
+            }
         }
 
         return false
@@ -55,5 +59,4 @@ class MainFragment : Fragment() {
     private fun getError(text: String) : Int {
         return if (text.isBlank()) View.VISIBLE else View.INVISIBLE
     }
-
 }

@@ -1,11 +1,23 @@
 <resources>
     <string name="app_name">Smarket</string>
 
+    <!--Login-->
     <string name="username">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="login">Ingresar</string>
     <string name="invalidUsername">Usuario Invalido</string>
     <string name="invalidPassword">Password Invalido</string>
     <string name="incorrectUsernameOrPassword">Usuario o Contraseña Incorrecta</string>
+
+    <!--Order-->
+    <string name="order">Pedido</string>
+    <string name="summary">Resumen</string>
+    <string name="total">Total</string>
+    <string name="seeShoppingCart">Ver Carrito</string>
+    <string name="card">Tarjeta</string>
+    <string name="selectCreditCard">Seleccionar Tarjeta de Crédito</string>
+    <string name="contact">Contacto</string>
+    <string name="selectContact">Seleccionar Contacto</string>
+    <string name="finishOrder">Finalizar Pedido</string>
 
 </resources>
