@@ -12,7 +12,7 @@
     <!--Order-->
     <string name="order">Pedido</string>
     <string name="summary">Resumen</string>
-    <string name="total">Total</string>
+    <string name="total">Total : $</string>
     <string name="seeShoppingCart">Ver Carrito</string>
     <string name="card">Tarjeta</string>
     <string name="selectCreditCard">Seleccionar Tarjeta de Crédito</string>

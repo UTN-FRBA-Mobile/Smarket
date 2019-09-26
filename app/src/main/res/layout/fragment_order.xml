@@ -9,39 +9,66 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/summary"/>
+        android:text="@string/summary"
+        android:background="@color/colorLightGrey"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total"/>
+
+        <TextView
+            android:id="@+id/textTotalPrice"
+            android:paddingLeft="1pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textSeeShoppingCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/seeShoppingCart"
+        android:textColor="@color/colorBlue"
+        android:clickable="true"
+        android:focusable="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/total"/>
+        android:text="@string/card"
+        android:background="@color/colorLightGrey"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/seeShoppingCart"/>
+        android:text="@string/selectCreditCard"
+        android:textColor="@color/colorBlue"
+        android:clickable="true"
+        android:focusable="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/card"/>
+        android:text="@string/contact"
+        android:background="@color/colorLightGrey"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/selectCreditCard"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/contact"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/selectContact"/>
+        android:text="@string/selectContact"
+        android:clickable="true"
+        android:focusable="true"
+        android:textColor="@color/colorBlue"/>
 
     <Button
+        android:id="@+id/buttonFinishOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/finishOrder"/>
