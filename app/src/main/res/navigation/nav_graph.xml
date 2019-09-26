@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="ar.edu.utn.frba.mobile.smarket.MainFragment"
+        android:name="ar.edu.utn.frba.mobile.smarket.fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_mainFragment_to_orderFragment"
-            app:destination="@id/orderFragment" />
+            android:id="@+id/action_mainFragment_to_purchaseHistoryFragment"
+            app:destination="@id/purchaseHistoryFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/orderFragment"
-        android:name="ar.edu.utn.frba.mobile.smarket.OrderFragment"
+        android:name="ar.edu.utn.frba.mobile.smarket.fragments.OrderFragment"
         android:label="fragment_order"
         tools:layout="@layout/fragment_order" >
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/shoppingCartFragment"
-        android:name="ar.edu.utn.frba.mobile.smarket.ShoppingCartFragment"
+        android:name="ar.edu.utn.frba.mobile.smarket.fragments.ShoppingCartFragment"
         android:label="fragment_shopping_cart"
         tools:layout="@layout/fragment_shopping_cart">
         <action
@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/scanProductFragment"
-        android:name="ar.edu.utn.frba.mobile.smarket.ScanProductFragment"
+        android:name="ar.edu.utn.frba.mobile.smarket.fragments.ScanProductFragment"
         android:label="ScanProductFragment"
         tools:layout="@layout/fragment_scan_product">
         <action
@@ -47,7 +47,16 @@
 
     <fragment
         android:id="@+id/addProductFragment"
-        android:name="ar.edu.utn.frba.mobile.smarket.AddProductFragment"
+        android:name="ar.edu.utn.frba.mobile.smarket.fragments.AddProductFragment"
         android:label="AddProductFragment"
         tools:layout="@layout/fragment_add_product"/>
+    <fragment
+        android:id="@+id/purchaseHistoryFragment"
+        android:name="ar.edu.utn.frba.mobile.smarket.fragments.PurchaseHistoryFragment"
+        android:label="fragment_purchase_history"
+        tools:layout="@layout/fragment_purchase_history" >
+        <action
+            android:id="@+id/action_purchaseHistoryFragment_to_orderFragment"
+            app:destination="@id/orderFragment" />
+    </fragment>
 </navigation>

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.mobile.smarket
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import ar.edu.utn.frba.mobile.smarket.R
 
 class MainActivity : AppCompatActivity() {
 

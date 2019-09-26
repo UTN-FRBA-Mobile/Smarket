@@ -1,12 +1,13 @@
-package ar.edu.utn.frba.mobile.smarket
+package ar.edu.utn.frba.mobile.smarket.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.service.AuthenticationService
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
@@ -22,7 +23,8 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         buttonLogin.setOnClickListener {
             if (this.validateUser()) {
-                val action = MainFragmentDirections.actionMainFragmentToOrderFragment()
+                val action =
+                    MainFragmentDirections.actionMainFragmentToPurchaseHistoryFragment()
                 findNavController().navigate(action)
             }
         }
@@ -40,7 +42,7 @@ class MainFragment : Fragment() {
         textPasswordError.visibility = getError(password)
 
         if (username.isNotBlank() || password.isNotBlank()) {
-            if (authenticate(username, password))
+            if (AuthenticationService.authenticate(username, password))
                 return true
             else {
                 textError.text = resources.getString(R.string.incorrectUsernameOrPassword)
@@ -49,11 +51,6 @@ class MainFragment : Fragment() {
         }
 
         return false
-    }
-
-    private fun authenticate(username: String, password: String) : Boolean {
-        return username.toUpperCase() == "ADMIN" && password == "admin"
-
     }
 
     private fun getError(text: String) : Int {

@@ -20,4 +20,11 @@
     <string name="selectContact">Seleccionar Contacto</string>
     <string name="finishOrder">Finalizar Pedido</string>
 
+    <!--Purchase History-->
+    <string name="purchaseHistory">Compras</string>
+    <string name="date">Fecha</string>
+    <string name="products">Productos</string>
+    <string name="price">Precio</string>
+    <string name="newPurchase">Nueva Compra</string>
+
 </resources>
