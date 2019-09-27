@@ -16,16 +16,22 @@ import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 
 class ShoppingCartFragment : Fragment() {
 
-    lateinit var activityCommunication: Communication
+    private lateinit var activityCommunication: Communication
 
-    var products = ArrayList<Product>()
+    private var products = ArrayList<Product>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        super.onCreateView(inflater, container, savedInstanceState)
+
         activityCommunication = activity as Communication
+
+        @Suppress("UNCHECKED_CAST")
+        if (activityCommunication.exist("products"))
+            products = activityCommunication.get("products") as ArrayList<Product>
+
         return inflater.inflate(R.layout.fragment_shopping_cart, container, false)
     }
 
@@ -34,22 +40,20 @@ class ShoppingCartFragment : Fragment() {
 
         addProduct()
 
-        @Suppress("UNCHECKED_CAST")
-        if (savedInstanceState?.get("products") != null)
-            products = savedInstanceState["products"] as ArrayList<Product>
-
         showProducts()
-
+        
         buttonAddProduct.setOnClickListener {
             val action =
                 ShoppingCartFragmentDirections.actionShoppingCartFragmentToScanProductFragment()
             findNavController().navigate(action)
         }
+
         buttonFinishPurchase.setOnClickListener {
             val action =
                 ShoppingCartFragmentDirections.actionShoppingCartFragmentToOrderFragment()
             findNavController().navigate(action)
         }
+
         buttonCancelPurchase.setOnClickListener {
             val action =
                 ShoppingCartFragmentDirections.actionShoppingCartFragmentToPurchaseHistoryFragment()
@@ -58,11 +62,15 @@ class ShoppingCartFragment : Fragment() {
     }
 
     private fun addProduct() {
-        if (activityCommunication.get("product") != null)
+        if (activityCommunication.exist("product")) {
             products.add(activityCommunication.get("product") as Product)
+            saveProducts()
+        }
     }
 
     private fun showProducts() {
+        tableShoppingCart.removeAllViews()
+        setTitles()
         products.forEach {
             val tableRow = TableRow(context)
             tableRow.addView(newTextView(it.description.orEmpty()))
@@ -73,7 +81,7 @@ class ShoppingCartFragment : Fragment() {
         }
     }
 
-    private fun newButton(id : Int): View {
+    private fun newButton(id: Int): View {
         val button = Button(context)
         button.text = "Eliminar (H)"
         button.setOnClickListener {
@@ -86,13 +94,27 @@ class ShoppingCartFragment : Fragment() {
         val product = products.firstOrNull { it.id == id }
         if (product != null) {
             products.remove(product)
+            saveProducts()
             showProducts()
         }
+    }
+
+    private fun saveProducts() {
+        activityCommunication.put("products", products)
     }
 
     private fun newTextView(text: String): View {
         val textView = TextView(context)
         textView.text = text
         return textView
+    }
+
+    private fun setTitles() {
+        val tableRow = TableRow(context)
+        tableRow.addView(newTextView(resources.getString(R.string.product)))
+        tableRow.addView(newTextView(resources.getString(R.string.amount)))
+        tableRow.addView(newTextView(resources.getString(R.string.price)))
+        tableRow.addView(newTextView(resources.getString(R.string.actions)))
+        tableShoppingCart.addView(tableRow)
     }
 }

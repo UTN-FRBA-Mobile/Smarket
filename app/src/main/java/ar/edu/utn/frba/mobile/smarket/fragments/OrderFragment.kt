@@ -24,11 +24,6 @@ class OrderFragment  : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (savedInstanceState?.get("totalPrice") != null)
-            totalPrice = savedInstanceState["totalPrice"] as Double
-        else
-            savedInstanceState?.putDouble("totalPrice", totalPrice)
-
         textTotalPrice.text = totalPrice.toString()
 
         textSeeShoppingCart.setOnClickListener {

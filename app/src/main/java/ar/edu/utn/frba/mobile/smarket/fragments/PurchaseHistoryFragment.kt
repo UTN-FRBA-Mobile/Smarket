@@ -26,14 +26,7 @@ class PurchaseHistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val history =
-            if(savedInstanceState != null) {
-                if (savedInstanceState.get("history") == null)
-                    savedInstanceState.putParcelableArrayList("history", PurchaseService.getHistory())
-                @Suppress("UNCHECKED_CAST")
-                savedInstanceState.get("history") as ArrayList<Purchase>
-            } else
-                PurchaseService.getHistory()
+        val history = PurchaseService.getHistory()
 
         showPurchases(history)
 

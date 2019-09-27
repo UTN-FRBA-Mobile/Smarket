@@ -10,10 +10,11 @@ import ar.edu.utn.frba.mobile.smarket.Communication
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import kotlinx.android.synthetic.main.fragment_scan_product.*
+import kotlin.random.Random
 
 class ScanProductFragment  : Fragment() {
 
-    lateinit var activityCommunication: Communication
+    private lateinit var activityCommunication: Communication
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +30,7 @@ class ScanProductFragment  : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         button.setOnClickListener {
-            activityCommunication.put("product", Product(1,1,"Coca Cola 1,5lt", 17.5))
+            activityCommunication.put("product", Product(Random.nextInt(),1,"Coca Cola 1,5lt", 17.5))
             val action =
                 ScanProductFragmentDirections.actionScanProductFragmentToAddProductFragment()
             findNavController().navigate(action)

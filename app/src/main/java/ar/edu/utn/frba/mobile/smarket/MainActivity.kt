@@ -28,4 +28,8 @@ class MainActivity : AppCompatActivity() , Communication {
         cache.remove(key)
     }
 
+    override fun exist(key: String): Boolean {
+        return cache.containsKey(key)
+    }
+
 }
