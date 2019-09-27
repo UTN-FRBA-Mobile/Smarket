@@ -5,8 +5,6 @@ import android.os.Parcelable
 
 class Product(var id: Int, var amount: Int, var description: String?, var price: Double) : Parcelable {
 
-
-
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readInt(),

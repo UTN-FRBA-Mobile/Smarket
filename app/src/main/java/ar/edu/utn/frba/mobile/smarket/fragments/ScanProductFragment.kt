@@ -5,15 +5,35 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import ar.edu.utn.frba.mobile.smarket.Communication
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.model.Product
+import kotlinx.android.synthetic.main.fragment_scan_product.*
 
 class ScanProductFragment  : Fragment() {
+
+    lateinit var activityCommunication: Communication
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        activityCommunication = activity as Communication
+
         return inflater.inflate(R.layout.fragment_scan_product, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        button.setOnClickListener {
+            activityCommunication.put("product", Product(1,1,"Coca Cola 1,5lt", 17.5))
+            val action =
+                ScanProductFragmentDirections.actionScanProductFragmentToAddProductFragment()
+            findNavController().navigate(action)
+        }
+    }
+
 }
