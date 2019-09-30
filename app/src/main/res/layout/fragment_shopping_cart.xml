@@ -45,7 +45,8 @@
         android:id="@+id/buttonFinishPurchase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FINALIZAR COMPRA(H)" />
+        android:text="FINALIZAR COMPRA(H)"
+        android:enabled="false"/>
 
 
 </LinearLayout>

@@ -45,6 +45,7 @@ class ShoppingCartFragment : FragmentCommunication() {
         }
 
         buttonCancelPurchase.setOnClickListener {
+            activityCommunication.put("products", ArrayList<Product>())
             val action =
                 ShoppingCartFragmentDirections.actionShoppingCartFragmentToPurchaseHistoryFragment()
             findNavController().navigate(action)
@@ -57,6 +58,7 @@ class ShoppingCartFragment : FragmentCommunication() {
             products.add(product)
             activityCommunication.remove("product")
             saveProducts()
+            buttonFinishPurchase.isEnabled = true
         }
     }
 
@@ -91,6 +93,8 @@ class ShoppingCartFragment : FragmentCommunication() {
             products.remove(product)
             saveProducts()
             showProducts()
+            if (products.isEmpty())
+                buttonFinishPurchase.isEnabled = false
         }
     }
 
