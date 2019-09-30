@@ -1,29 +1,27 @@
 package ar.edu.utn.frba.mobile.smarket.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.model.Product
+import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import kotlinx.android.synthetic.main.fragment_order.*
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.random.Random
 
-class OrderFragment  : Fragment() {
+class OrderFragment  : FragmentCommunication() {
 
-    var totalPrice : Double = 0.0
+    var totalPrice = 0.0
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order, container, false)
+    override fun getFragment(): Int {
+        return R.layout.fragment_order
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        totalPrice = activityCommunication.get("totalPrice") as Double
         textTotalPrice.text = totalPrice.toString()
 
         textSeeShoppingCart.setOnClickListener {
@@ -33,7 +31,13 @@ class OrderFragment  : Fragment() {
         }
 
         buttonFinishOrder.setOnClickListener {
+            @Suppress("UNCHECKED_CAST")
+            val history = activityCommunication.get("history") as ArrayList<Purchase>
+            val products = activityCommunication.get("products") as ArrayList<Product>
+            history.add(Purchase(Random.nextInt(), Date(), totalPrice, products.sumBy { it.amount }))
 
+            val action = OrderFragmentDirections.actionOrderFragmentToPurchaseHistoryFragment()
+            findNavController().navigate(action)
         }
 
     }

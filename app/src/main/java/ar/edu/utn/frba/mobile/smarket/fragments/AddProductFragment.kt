@@ -10,20 +10,14 @@ import ar.edu.utn.frba.mobile.smarket.Communication
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import kotlinx.android.synthetic.main.fragment_add_product.*
+import kotlin.random.Random
 
-class AddProductFragment : Fragment() {
-
-    lateinit var activityCommunication: Communication
+class AddProductFragment : FragmentCommunication() {
 
     lateinit var product : Product
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        activityCommunication = activity as Communication
-        return inflater.inflate(R.layout.fragment_add_product, container, false)
+    override fun getFragment(): Int {
+        return R.layout.fragment_add_product
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,16 +42,27 @@ class AddProductFragment : Fragment() {
         buttonCancel.setOnClickListener { cancel() }
     }
 
+    private fun disableDecrement() {
+        buttonDecrementUnit.isEnabled = false
+    }
+
+    private fun enableDecrement() {
+        buttonDecrementUnit.isEnabled = true
+    }
+
     private fun increment() {
         product.amount += 1
         updateAmount()
         calculateTotalPrice()
+        enableDecrement()
     }
 
     private fun decrement() {
         product.amount -= 1
         updateAmount()
         calculateTotalPrice()
+        if (product.amount == 1)
+            disableDecrement()
     }
 
     private fun cancel() {
@@ -67,6 +72,7 @@ class AddProductFragment : Fragment() {
     }
 
     private fun ok() {
+        product.id = Random.nextInt(0, Int.MAX_VALUE)
         val action = AddProductFragmentDirections.actionAddProductFragmentToShoppingCartFragment()
         findNavController().navigate(action)
     }

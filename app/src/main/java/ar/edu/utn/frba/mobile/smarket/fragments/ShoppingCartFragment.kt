@@ -1,42 +1,31 @@
 package ar.edu.utn.frba.mobile.smarket.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TableRow
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import ar.edu.utn.frba.mobile.smarket.Communication
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 
-class ShoppingCartFragment : Fragment() {
-
-    private lateinit var activityCommunication: Communication
+class ShoppingCartFragment : FragmentCommunication() {
 
     private var products = ArrayList<Product>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
+    private var totalPrice = 0.0
 
-        activityCommunication = activity as Communication
-
-        @Suppress("UNCHECKED_CAST")
-        if (activityCommunication.exist("products"))
-            products = activityCommunication.get("products") as ArrayList<Product>
-
-        return inflater.inflate(R.layout.fragment_shopping_cart, container, false)
+    override fun getFragment(): Int {
+        return R.layout.fragment_shopping_cart
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        @Suppress("UNCHECKED_CAST")
+        if (activityCommunication.exist("products"))
+            products = activityCommunication.get("products") as ArrayList<Product>
 
         addProduct()
 
@@ -49,6 +38,7 @@ class ShoppingCartFragment : Fragment() {
         }
 
         buttonFinishPurchase.setOnClickListener {
+            activityCommunication.put("totalPrice", totalPrice)
             val action =
                 ShoppingCartFragmentDirections.actionShoppingCartFragmentToOrderFragment()
             findNavController().navigate(action)
@@ -62,8 +52,10 @@ class ShoppingCartFragment : Fragment() {
     }
 
     private fun addProduct() {
-        if (activityCommunication.exist("product")) {
-            products.add(activityCommunication.get("product") as Product)
+        val product = activityCommunication.get("product") as Product?
+        if (product != null && product.id > 0) {
+            products.add(product)
+            activityCommunication.remove("product")
             saveProducts()
         }
     }
@@ -71,6 +63,7 @@ class ShoppingCartFragment : Fragment() {
     private fun showProducts() {
         tableShoppingCart.removeAllViews()
         setTitles()
+        totalPrice = 0.0
         products.forEach {
             val tableRow = TableRow(context)
             tableRow.addView(newTextView(it.description.orEmpty()))
@@ -78,7 +71,9 @@ class ShoppingCartFragment : Fragment() {
             tableRow.addView(newTextView("$ " + (it.price * it.amount).toString()))
             tableRow.addView(newButton(it.id))
             tableShoppingCart.addView(tableRow)
+            totalPrice += it.price * it.amount
         }
+        textTotalPrice.text = totalPrice.toString()
     }
 
     private fun newButton(id: Int): View {
