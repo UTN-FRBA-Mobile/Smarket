@@ -5,9 +5,16 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.service.AuthenticationService
+import com.google.android.gms.auth.api.credentials.CredentialPickerConfig.Prompt.SIGN_IN
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : FragmentCommunication() {
+
+    private val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestEmail()
+        .build()
 
     override fun getFragment(): Int {
         return R.layout.fragment_main
@@ -15,12 +22,18 @@ class MainFragment : FragmentCommunication() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val mGoogleSignInClient = GoogleSignIn.getClient(activity!!, gso)
         buttonLogin.setOnClickListener {
             if (this.validateUser()) {
                 val action =
                     MainFragmentDirections.actionMainFragmentToPurchaseHistoryFragment()
                 findNavController().navigate(action)
             }
+        }
+
+        buttonLoginGoogle.setOnClickListener {
+            val signInIntent = mGoogleSignInClient.signInIntent
+            startActivityForResult(signInIntent, SIGN_IN)
         }
     }
 

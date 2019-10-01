@@ -35,6 +35,4 @@ class Product(var id: Int, var amount: Int, var description: String?, var price:
             return arrayOfNulls(size)
         }
     }
-
-
 }
