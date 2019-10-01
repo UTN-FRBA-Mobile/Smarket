@@ -6,10 +6,9 @@ import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
+import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
 import kotlinx.android.synthetic.main.fragment_order.*
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.random.Random
 
 class OrderFragment  : FragmentCommunication() {
 
@@ -33,8 +32,9 @@ class OrderFragment  : FragmentCommunication() {
         buttonFinishOrder.setOnClickListener {
             val history = activityCommunication.get("history") as ArrayList<Purchase>
             val products = activityCommunication.get("products") as ArrayList<Product>
-            history.add(Purchase(Random.nextInt(), Date(), totalPrice, products.sumBy { it.amount }))
-
+            val purchase = Purchase(UUID.randomUUID().toString(), Date(), totalPrice, products.sumBy { it.amount })
+            history.add(purchase)
+            PurchaseService.savePurchase(purchase)
             findNavController().popBackStack()
         }
 

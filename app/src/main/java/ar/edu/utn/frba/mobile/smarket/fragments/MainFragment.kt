@@ -1,10 +1,7 @@
 package ar.edu.utn.frba.mobile.smarket.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.service.AuthenticationService
@@ -25,7 +22,6 @@ class MainFragment : FragmentCommunication() {
                 findNavController().navigate(action)
             }
         }
-
     }
 
     private fun validateUser() : Boolean {
