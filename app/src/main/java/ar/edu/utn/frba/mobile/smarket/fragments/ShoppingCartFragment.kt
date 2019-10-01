@@ -46,9 +46,7 @@ class ShoppingCartFragment : FragmentCommunication() {
 
         buttonCancelPurchase.setOnClickListener {
             activityCommunication.put("products", ArrayList<Product>())
-            val action =
-                ShoppingCartFragmentDirections.actionShoppingCartFragmentToPurchaseHistoryFragment()
-            findNavController().navigate(action)
+            findNavController().popBackStack()
         }
     }
 

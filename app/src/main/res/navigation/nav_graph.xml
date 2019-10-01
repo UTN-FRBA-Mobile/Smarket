@@ -23,9 +23,6 @@
         <action
             android:id="@+id/action_orderFragment_to_shoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
-        <action
-            android:id="@+id/action_orderFragment_to_purchaseHistoryFragment"
-            app:destination="@id/purchaseHistoryFragment" />
     </fragment>
 
     <fragment
@@ -38,11 +35,8 @@
             app:destination="@id/scanProductFragment" />
         <action
             android:id="@+id/action_shoppingCartFragment_to_orderFragment"
-            app:destination="@id/orderFragment" />
-        <action
-            android:id="@+id/action_shoppingCartFragment_to_purchaseHistoryFragment"
-            app:destination="@id/purchaseHistoryFragment"
-            app:popUpTo="@+id/orderFragment" />
+            app:destination="@id/orderFragment"
+            app:popUpTo="@+id/purchaseHistoryFragment" />
     </fragment>
 
     <fragment
@@ -60,11 +54,8 @@
         android:id="@+id/addProductFragment"
         android:name="ar.edu.utn.frba.mobile.smarket.fragments.AddProductFragment"
         android:label="fragment_add_product"
-        tools:layout="@layout/fragment_add_product">
-        <action
-            android:id="@+id/action_addProductFragment_to_shoppingCartFragment"
-            app:destination="@id/shoppingCartFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_add_product"/>
+
     <fragment
         android:id="@+id/purchaseHistoryFragment"
         android:name="ar.edu.utn.frba.mobile.smarket.fragments.PurchaseHistoryFragment"

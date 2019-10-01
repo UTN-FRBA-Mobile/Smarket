@@ -67,15 +67,11 @@ class AddProductFragment : FragmentCommunication() {
 
     private fun cancel() {
         activityCommunication.remove("product")
-        val action = AddProductFragmentDirections.actionAddProductFragmentToShoppingCartFragment()
-        findNavController().navigate(action)
+        findNavController().popBackStack()
     }
 
     private fun ok() {
         product.id = Random.nextInt(0, Int.MAX_VALUE)
-        val action = AddProductFragmentDirections.actionAddProductFragmentToShoppingCartFragment()
-        //findNavController().navigate(action)
-
         findNavController().popBackStack()
     }
 

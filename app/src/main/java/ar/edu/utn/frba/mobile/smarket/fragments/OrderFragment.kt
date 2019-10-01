@@ -25,21 +25,17 @@ class OrderFragment  : FragmentCommunication() {
         textTotalPrice.text = totalPrice.toString()
 
         textSeeShoppingCart.setOnClickListener {
-            val action =
-                OrderFragmentDirections.actionOrderFragmentToShoppingCartFragment()
+            val action = OrderFragmentDirections.actionOrderFragmentToShoppingCartFragment()
             findNavController().navigate(action)
         }
 
+        @Suppress("UNCHECKED_CAST")
         buttonFinishOrder.setOnClickListener {
-            @Suppress("UNCHECKED_CAST")
             val history = activityCommunication.get("history") as ArrayList<Purchase>
             val products = activityCommunication.get("products") as ArrayList<Product>
             history.add(Purchase(Random.nextInt(), Date(), totalPrice, products.sumBy { it.amount }))
 
-            val action = OrderFragmentDirections.actionOrderFragmentToPurchaseHistoryFragment()
-            findNavController().navigate(action)
-
-            //activity?.onBackPressed()
+            findNavController().popBackStack()
         }
 
     }
