@@ -38,6 +38,8 @@ class OrderFragment  : FragmentCommunication() {
 
             val action = OrderFragmentDirections.actionOrderFragmentToPurchaseHistoryFragment()
             findNavController().navigate(action)
+
+            //activity?.onBackPressed()
         }
 
     }

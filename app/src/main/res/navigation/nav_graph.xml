@@ -41,7 +41,8 @@
             app:destination="@id/orderFragment" />
         <action
             android:id="@+id/action_shoppingCartFragment_to_purchaseHistoryFragment"
-            app:destination="@id/purchaseHistoryFragment" />
+            app:destination="@id/purchaseHistoryFragment"
+            app:popUpTo="@+id/orderFragment" />
     </fragment>
 
     <fragment
@@ -51,7 +52,8 @@
         tools:layout="@layout/fragment_scan_product">
         <action
             android:id="@+id/action_scanProductFragment_to_addProductFragment"
-            app:destination="@id/addProductFragment" />
+            app:destination="@id/addProductFragment"
+            app:popUpTo="@+id/shoppingCartFragment" />
     </fragment>
 
     <fragment

@@ -74,7 +74,9 @@ class AddProductFragment : FragmentCommunication() {
     private fun ok() {
         product.id = Random.nextInt(0, Int.MAX_VALUE)
         val action = AddProductFragmentDirections.actionAddProductFragmentToShoppingCartFragment()
-        findNavController().navigate(action)
+        //findNavController().navigate(action)
+
+        findNavController().popBackStack()
     }
 
     private fun updateAmount() {
