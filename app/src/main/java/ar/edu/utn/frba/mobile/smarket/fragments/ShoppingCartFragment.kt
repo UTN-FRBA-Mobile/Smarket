@@ -52,7 +52,7 @@ class ShoppingCartFragment : FragmentCommunication() {
 
     private fun addProduct() {
         val product = activityCommunication.get("product") as Product?
-        if (product != null && product.id > 0) {
+        if (product?.uid != null) {
             products.add(product)
             activityCommunication.remove("product")
             saveProducts()
@@ -69,24 +69,24 @@ class ShoppingCartFragment : FragmentCommunication() {
             tableRow.addView(newTextView(it.description.orEmpty()))
             tableRow.addView(newTextView(it.amount.toString()))
             tableRow.addView(newTextView("$ " + (it.price * it.amount).toString()))
-            tableRow.addView(newButton(it.id))
+            tableRow.addView(newButton(it.uid!!))
             tableShoppingCart.addView(tableRow)
             totalPrice += it.price * it.amount
         }
         textTotalPrice.text = totalPrice.toString()
     }
 
-    private fun newButton(id: Int): View {
+    private fun newButton(uid: String): View {
         val button = Button(context)
         button.text = "Eliminar (H)"
         button.setOnClickListener {
-            deleteProduct(id)
+            deleteProduct(uid)
         }
         return button
     }
 
-    private fun deleteProduct(id: Int) {
-        val product = products.firstOrNull { it.id == id }
+    private fun deleteProduct(uid: String) {
+        val product = products.firstOrNull { it.uid == uid }
         if (product != null) {
             products.remove(product)
             saveProducts()

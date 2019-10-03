@@ -32,7 +32,7 @@ class OrderFragment  : FragmentCommunication() {
         buttonFinishOrder.setOnClickListener {
             val history = activityCommunication.get("history") as ArrayList<Purchase>
             val products = activityCommunication.get("products") as ArrayList<Product>
-            val purchase = Purchase(UUID.randomUUID().toString(), Date(), totalPrice, products.sumBy { it.amount })
+            val purchase = Purchase(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products)
             history.add(purchase)
             PurchaseService.savePurchase(purchase)
             findNavController().popBackStack()

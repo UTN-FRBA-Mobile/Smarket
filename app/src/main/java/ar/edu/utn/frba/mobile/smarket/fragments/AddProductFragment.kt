@@ -1,20 +1,16 @@
 package ar.edu.utn.frba.mobile.smarket.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import ar.edu.utn.frba.mobile.smarket.Communication
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import kotlinx.android.synthetic.main.fragment_add_product.*
-import kotlin.random.Random
+import java.util.*
 
 class AddProductFragment : FragmentCommunication() {
 
-    lateinit var product : Product
+    private lateinit var product : Product
 
     override fun getFragment(): Int {
         return R.layout.fragment_add_product
@@ -61,7 +57,7 @@ class AddProductFragment : FragmentCommunication() {
         product.amount -= 1
         updateAmount()
         calculateTotalPrice()
-        if (product.amount == 1)
+        if (product.amount == 1L)
             disableDecrement()
     }
 
@@ -71,7 +67,7 @@ class AddProductFragment : FragmentCommunication() {
     }
 
     private fun ok() {
-        product.id = Random.nextInt(0, Int.MAX_VALUE)
+        product.uid = UUID.randomUUID().toString()
         findNavController().popBackStack()
     }
 

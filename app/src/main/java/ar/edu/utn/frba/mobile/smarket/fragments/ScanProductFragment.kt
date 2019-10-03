@@ -19,7 +19,7 @@ class ScanProductFragment  : FragmentCommunication() {
         super.onViewCreated(view, savedInstanceState)
 
         button.setOnClickListener {
-            activityCommunication.put("product", Product(-1,1,"Coca Cola 1,5lt", 17.5))
+            activityCommunication.put("product", Product(null,1,"Coca Cola 1,5lt", 17.5))
             val action =
                 ScanProductFragmentDirections.actionScanProductFragmentToAddProductFragment()
             findNavController().navigate(action)
