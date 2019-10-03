@@ -30,6 +30,8 @@ class ShoppingCartFragment : FragmentCommunication() {
         addProduct()
 
         showProducts()
+
+        setEnabledButtonFinish()
         
         buttonAddProduct.setOnClickListener {
             val action =
@@ -57,7 +59,13 @@ class ShoppingCartFragment : FragmentCommunication() {
             activityCommunication.remove("product")
             saveProducts()
             buttonFinishPurchase.isEnabled = true
+            setEnabledButtonFinish()
         }
+    }
+
+    private fun setEnabledButtonFinish() {
+        buttonFinishPurchase.isEnabled = products.isNotEmpty()
+
     }
 
     private fun showProducts() {
@@ -91,8 +99,7 @@ class ShoppingCartFragment : FragmentCommunication() {
             products.remove(product)
             saveProducts()
             showProducts()
-            if (products.isEmpty())
-                buttonFinishPurchase.isEnabled = false
+            setEnabledButtonFinish()
         }
     }
 
