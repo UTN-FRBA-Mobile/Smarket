@@ -74,7 +74,7 @@ class ShoppingCartFragment : FragmentCommunication() {
         totalPrice = 0.0
         products.forEach {
             val tableRow = TableRow(context)
-            tableRow.addView(newTextView(it.description.orEmpty()))
+            tableRow.addView(newTextView(it.description))
             tableRow.addView(newTextView(it.amount.toString()))
             tableRow.addView(newTextView("$ " + (it.price * it.amount).toString()))
             tableRow.addView(newButton(it.uid!!))
@@ -86,7 +86,7 @@ class ShoppingCartFragment : FragmentCommunication() {
 
     private fun newButton(uid: String): View {
         val button = Button(context)
-        button.text = "Eliminar (H)"
+        button.text = "Eliminar (H)" //todo los nombres con (H) son hardcodeados hay que ver si vva un simbolo o que
         button.setOnClickListener {
             deleteProduct(uid)
         }
