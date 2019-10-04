@@ -6,7 +6,10 @@ import android.widget.Button
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.adapters.PurchasesAdapter
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import ar.edu.utn.frba.mobile.smarket.service.ProductService
 import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
@@ -15,6 +18,8 @@ import kotlinx.android.synthetic.main.fragment_purchase_history.*
 class PurchaseHistoryFragment : FragmentCommunication() {
 
     private lateinit var history : List<Purchase>
+    private lateinit var purchasesAdapter: PurchasesAdapter
+    private lateinit var viewManager: RecyclerView.LayoutManager
 
     override fun getFragment(): Int {
         return R.layout.fragment_purchase_history
@@ -26,11 +31,17 @@ class PurchaseHistoryFragment : FragmentCommunication() {
 
         if (activityCommunication.exist("history")) {
             history = activityCommunication.get("history") as List<Purchase>
-            showHistory()
+            //showHistory()
         } else {
             history = PurchaseService.getHistory { showHistory() }
             activityCommunication.put("history", history)
         }
+
+        recycler_view_purchases.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = purchasesAdapter
+        }
+
         buttonNewPurchase.setOnClickListener {
             goToShoppingCart()
         }
@@ -49,7 +60,7 @@ class PurchaseHistoryFragment : FragmentCommunication() {
             tableRow.addView(newTextView(it.amount.toString()))
             tableRow.addView(newTextView("$ " + it.price.toString()))
             tableRow.addView(newButtonLoad(it))
-            tablePurchaseHistory.addView(tableRow)
+            //tablePurchaseHistory.addView(tableRow)
         }
     }
 
