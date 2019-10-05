@@ -21,7 +21,7 @@ class PurchaseHistoryFragment : FragmentCommunication() {
 
     private lateinit var history : List<Purchase>
     private lateinit var purchasesAdapter: PurchasesAdapter
-    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var viewManager: LinearLayoutManager
 
     override fun getFragment(): Int {
         return R.layout.fragment_purchase_history
@@ -57,9 +57,11 @@ class PurchaseHistoryFragment : FragmentCommunication() {
 
     private fun showHistory() {
         purchasesAdapter = PurchasesAdapter(history)
+        viewManager = LinearLayoutManager(context)
         //agregar boton??? o hacerlo seleccionable
+
         recycler_view_purchases.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = viewManager
             adapter = purchasesAdapter
         }
     }
