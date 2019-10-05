@@ -30,20 +30,7 @@
                 android:paddingBottom="30dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp">
-
-                <Button
-                    android:id="@+id/buttonGoToCurrentCart"
-                    android:layout_width="161dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="19dp"
-                    android:background="#FC017504"
-                    android:src="@android:drawable/ic_delete"
-                    android:text="@string/seeShoppingCart"
-                    android:textColor="#FFFFFF" />
-
+                
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/buttonNewPurchase"
                     android:layout_width="wrap_content"

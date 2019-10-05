@@ -37,6 +37,7 @@ class PurchaseHistoryFragment : FragmentCommunication() {
             activityCommunication.put("history", history)
         }
 
+        purchasesAdapter = PurchasesAdapter(history)
         recycler_view_purchases.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = purchasesAdapter

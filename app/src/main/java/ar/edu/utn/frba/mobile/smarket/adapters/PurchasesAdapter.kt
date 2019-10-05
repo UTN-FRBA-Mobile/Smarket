@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import kotlinx.android.synthetic.main.item_purchase.view.*
+import java.text.SimpleDateFormat
 
 class PurchasesAdapter(private val dataSet: List<Purchase>):
     RecyclerView.Adapter<PurchasesAdapter.ViewHolder>(){
@@ -33,7 +34,9 @@ class PurchasesAdapter(private val dataSet: List<Purchase>):
         // - replace the contents of the view with that element
         holder.itemView.contenido.text = "$ " + dataSet[position].price.toString()
         holder.itemView.productos.text = dataSet[position].amount.toString() + " productos"
-        holder.itemView.fecha.text = dataSet[position].date.toString()
+
+        holder.itemView.fecha.text = SimpleDateFormat("dd-MM-yyyy")
+            .format(dataSet[position].date).toString()
     }
 
     override fun getItemCount() = dataSet.size
