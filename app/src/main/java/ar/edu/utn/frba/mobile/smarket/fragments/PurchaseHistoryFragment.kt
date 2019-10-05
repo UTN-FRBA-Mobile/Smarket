@@ -30,6 +30,12 @@ class PurchaseHistoryFragment : FragmentCommunication() {
                 PurchaseHistoryFragmentDirections.actionPurchaseHistoryFragmentToShoppingCartFragment()
             findNavController().navigate(action)
         }
+
+        buttonMap.setOnClickListener {
+            val action =
+                PurchaseHistoryFragmentDirections.actionPurchaseHistoryFragmentToMapFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun showPurchases(history : List<Purchase>) {
