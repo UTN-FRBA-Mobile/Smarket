@@ -14,6 +14,8 @@ import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import ar.edu.utn.frba.mobile.smarket.service.ProductService
 import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
 import kotlinx.android.synthetic.main.fragment_purchase_history.*
+import ar.edu.utn.frba.mobile.smarket.MainActivity
+
 
 class PurchaseHistoryFragment : FragmentCommunication() {
 
@@ -25,23 +27,22 @@ class PurchaseHistoryFragment : FragmentCommunication() {
         return R.layout.fragment_purchase_history
     }
 
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).setActionBarTitle("Historial de Compras")
+    }
+
     @Suppress("UNCHECKED_CAST")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         if (activityCommunication.exist("history")) {
             history = activityCommunication.get("history") as List<Purchase>
-            //showHistory()
         } else {
-            history = PurchaseService.getHistory { showHistory() }
+            history = PurchaseService.getHistory {}
             activityCommunication.put("history", history)
         }
-
-        purchasesAdapter = PurchasesAdapter(history)
-        recycler_view_purchases.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = purchasesAdapter
-        }
+        showHistory()
 
         buttonNewPurchase.setOnClickListener {
             goToShoppingCart()
@@ -55,13 +56,11 @@ class PurchaseHistoryFragment : FragmentCommunication() {
     }
 
     private fun showHistory() {
-        history.forEach {
-            val tableRow = TableRow(context)
-            tableRow.addView(newTextView(it.date.toString()))
-            tableRow.addView(newTextView(it.amount.toString()))
-            tableRow.addView(newTextView("$ " + it.price.toString()))
-            tableRow.addView(newButtonLoad(it))
-            //tablePurchaseHistory.addView(tableRow)
+        purchasesAdapter = PurchasesAdapter(history)
+        //agregar boton??? o hacerlo seleccionable
+        recycler_view_purchases.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = purchasesAdapter
         }
     }
 

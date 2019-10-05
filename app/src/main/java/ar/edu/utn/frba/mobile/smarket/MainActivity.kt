@@ -8,6 +8,10 @@ class MainActivity : AppCompatActivity() , Communication {
 
     private val cache = HashMap<String, Any>()
 
+    fun setActionBarTitle(title: String) {
+        supportActionBar!!.title = title
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -15,6 +19,7 @@ class MainActivity : AppCompatActivity() , Communication {
         val host = NavHostFragment.create(R.navigation.nav_graph)
         supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer,host).setPrimaryNavigationFragment(host).commit()
     }
+
 
     override fun put(key: String, value: Any) {
         cache[key] = value
