@@ -53,5 +53,15 @@
         <action
             android:id="@+id/action_purchaseHistoryFragment_to_shoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
+        <action
+            android:id="@+id/action_purchaseHistoryFragment_to_mapFragment"
+            app:destination="@id/mapActivity" />
     </fragment>
+	
+	<activity
+        android:id="@+id/mapActivity"
+        android:name="ar.edu.utn.frba.mobile.smarket.fragments.MapActivity"
+        android:label="activity_map"
+        tools:layout="@layout/activity_map" >
+    </activity>
 </navigation>

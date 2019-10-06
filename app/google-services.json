@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "943933601518",
+    "firebase_url": "https://smarket-e0872.firebaseio.com",
+    "project_id": "smarket-e0872",
+    "storage_bucket": "smarket-e0872.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943933601518:android:61b303c3fc37199a54e5ff",
+        "android_client_info": {
+          "package_name": "ar.edu.utn.frba.mobile.smarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943933601518-qrqh8k03ar2l6gt9oss2n9d6dkcg7a6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbHY9boW_IrwUEYbcGS7OwKQ83e4EfhGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943933601518-qrqh8k03ar2l6gt9oss2n9d6dkcg7a6f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

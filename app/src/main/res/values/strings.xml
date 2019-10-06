@@ -42,5 +42,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="defaultWebClientIid">AIzaSyDvOAQMUopVj4x9-UlxIAKsHuyr6DBMLVs</string>
     <string name="repeat">REPETIR</string>
+    <string name="title_activity_maps">Mapa</string>
 
 </resources>

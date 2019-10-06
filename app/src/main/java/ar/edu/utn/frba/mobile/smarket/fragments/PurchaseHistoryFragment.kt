@@ -47,6 +47,12 @@ class PurchaseHistoryFragment : FragmentCommunication() {
         buttonNewPurchase.setOnClickListener {
             goToShoppingCart()
         }
+
+        buttonMap.setOnClickListener {
+            val action =
+                PurchaseHistoryFragmentDirections.actionPurchaseHistoryFragmentToMapFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun goToShoppingCart() {
