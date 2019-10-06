@@ -3,15 +3,18 @@ package ar.edu.utn.frba.mobile.smarket.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.fragments.PurchaseHistoryFragmentDirections
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import kotlinx.android.synthetic.main.item_purchase.view.*
 import java.text.SimpleDateFormat
 
-class PurchasesAdapter(private val dataSet: List<Purchase>):
-    RecyclerView.Adapter<PurchasesAdapter.ViewHolder>(){
+class PurchasesAdapter(
+        private val dataSet: List<Purchase>
+    ): RecyclerView.Adapter<PurchasesAdapter.ViewHolder>(){
 
     override fun getItemViewType(position: Int): Int {
         return R.layout.item_purchase
@@ -37,6 +40,16 @@ class PurchasesAdapter(private val dataSet: List<Purchase>):
 
         holder.itemView.fecha.text = SimpleDateFormat("dd-MM-yyyy")
             .format(dataSet[position].date).toString()
+
+        holder.itemView.action_button_1.setOnClickListener {
+            var action =
+                PurchaseHistoryFragmentDirections
+                    .actionPurchaseHistoryFragmentToShoppingCartFragment()
+
+            NavHostFragment
+                .findNavController(FragmentManager.findFragment(it))
+                .navigate(action)
+        }
     }
 
     override fun getItemCount() = dataSet.size
