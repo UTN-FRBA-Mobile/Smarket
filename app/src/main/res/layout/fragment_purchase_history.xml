@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.PurchaseHistoryFragment"
     android:orientation="vertical">
 
-    <TableLayout
-        android:id="@+id/tablePurchaseHistory"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TableRow
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_purchases"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            tools:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_purchase" />
 
-            <TextView
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_alignEnd="@+id/recycler_view_purchases"
+            android:gravity="end"
+            android:paddingRight="20dp"
+            android:paddingBottom="30dp">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/buttonMap"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/date"/>
+                android:layout_marginBottom="8dp"
+                android:layout_above="@id/buttonNewPurchase"
+                android:src="@android:drawable/ic_dialog_map"
+                app:backgroundTint="#E9001A7A"/>
 
-            <TextView
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/buttonNewPurchase"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/products"/>
+                android:overScrollMode="ifContentScrolls"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/icon_add"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/price"/>
+        </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/actions"/>
-        </TableRow>
-
-    </TableLayout>
-
-    <Button
-        android:id="@+id/buttonNewPurchase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newPurchase"/>
-
-    <Button
-        android:id="@+id/buttonMap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mapa"/>
+    </RelativeLayout>
+               
 </LinearLayout>

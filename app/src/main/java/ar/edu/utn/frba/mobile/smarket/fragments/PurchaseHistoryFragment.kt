@@ -6,18 +6,30 @@ import android.widget.Button
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.adapters.PurchasesAdapter
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import ar.edu.utn.frba.mobile.smarket.service.ProductService
 import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
 import kotlinx.android.synthetic.main.fragment_purchase_history.*
+import ar.edu.utn.frba.mobile.smarket.MainActivity
+
 
 class PurchaseHistoryFragment : FragmentCommunication() {
 
     private lateinit var history : List<Purchase>
+    private lateinit var purchasesAdapter: PurchasesAdapter
+    private lateinit var viewManager: LinearLayoutManager
 
     override fun getFragment(): Int {
         return R.layout.fragment_purchase_history
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).setActionBarTitle("Historial de Compras")
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -26,11 +38,12 @@ class PurchaseHistoryFragment : FragmentCommunication() {
 
         if (activityCommunication.exist("history")) {
             history = activityCommunication.get("history") as List<Purchase>
-            showHistory()
         } else {
-            history = PurchaseService.getHistory { showHistory() }
+            history = PurchaseService.getHistory {}
             activityCommunication.put("history", history)
         }
+        showHistory()
+
         buttonNewPurchase.setOnClickListener {
             goToShoppingCart()
         }
@@ -49,13 +62,13 @@ class PurchaseHistoryFragment : FragmentCommunication() {
     }
 
     private fun showHistory() {
-        history.forEach {
-            val tableRow = TableRow(context)
-            tableRow.addView(newTextView(it.date.toString()))
-            tableRow.addView(newTextView(it.amount.toString()))
-            tableRow.addView(newTextView("$ " + it.price.toString()))
-            tableRow.addView(newButtonLoad(it))
-            tablePurchaseHistory.addView(tableRow)
+        purchasesAdapter = PurchasesAdapter(history)
+        viewManager = LinearLayoutManager(context)
+        //agregar boton??? o hacerlo seleccionable
+
+        recycler_view_purchases.apply {
+            layoutManager = viewManager
+            adapter = purchasesAdapter
         }
     }
 
