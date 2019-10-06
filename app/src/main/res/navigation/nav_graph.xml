@@ -31,23 +31,12 @@
         android:label="fragment_shopping_cart"
         tools:layout="@layout/fragment_shopping_cart">
         <action
-            android:id="@+id/action_shoppingCartFragment_to_scanProductFragment"
-            app:destination="@id/scanProductFragment" />
-        <action
             android:id="@+id/action_shoppingCartFragment_to_orderFragment"
             app:destination="@id/orderFragment"
             app:popUpTo="@+id/purchaseHistoryFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/scanProductFragment"
-        android:name="ar.edu.utn.frba.mobile.smarket.fragments.ScanProductFragment"
-        android:label="fragment_scan_product"
-        tools:layout="@layout/fragment_scan_product">
         <action
-            android:id="@+id/action_scanProductFragment_to_addProductFragment"
-            app:destination="@id/addProductFragment"
-            app:popUpTo="@+id/shoppingCartFragment" />
+            android:id="@+id/action_shoppingCartFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
     </fragment>
 
     <fragment

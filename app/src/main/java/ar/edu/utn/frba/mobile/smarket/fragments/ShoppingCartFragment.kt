@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.mobile.smarket.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -7,10 +8,14 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.ScanActivity
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import kotlinx.android.synthetic.main.fragment_shopping_cart.*
+import kotlin.random.Random
 
 class ShoppingCartFragment : FragmentCommunication() {
+
+    private val RC_SCAN = 2
 
     private var products = ArrayList<Product>()
 
@@ -30,11 +35,11 @@ class ShoppingCartFragment : FragmentCommunication() {
         addProduct()
 
         showProducts()
-        
+
+        setEnabledButtonFinish()
+
         buttonAddProduct.setOnClickListener {
-            val action =
-                ShoppingCartFragmentDirections.actionShoppingCartFragmentToScanProductFragment()
-            findNavController().navigate(action)
+            showScan()
         }
 
         buttonFinishPurchase.setOnClickListener {
@@ -50,14 +55,26 @@ class ShoppingCartFragment : FragmentCommunication() {
         }
     }
 
+    private fun showScan() {
+        val intent = Intent(activity!!, ScanActivity::class.java)
+        startActivityForResult(intent, RC_SCAN)
+
+    }
+
     private fun addProduct() {
         val product = activityCommunication.get("product") as Product?
-        if (product != null && product.id > 0) {
+        if (product?.uid != null) {
             products.add(product)
             activityCommunication.remove("product")
             saveProducts()
             buttonFinishPurchase.isEnabled = true
+            setEnabledButtonFinish()
         }
+    }
+
+    private fun setEnabledButtonFinish() {
+        buttonFinishPurchase.isEnabled = products.isNotEmpty()
+
     }
 
     private fun showProducts() {
@@ -66,33 +83,33 @@ class ShoppingCartFragment : FragmentCommunication() {
         totalPrice = 0.0
         products.forEach {
             val tableRow = TableRow(context)
-            tableRow.addView(newTextView(it.description.orEmpty()))
+            tableRow.addView(newTextView(it.description))
             tableRow.addView(newTextView(it.amount.toString()))
             tableRow.addView(newTextView("$ " + (it.price * it.amount).toString()))
-            tableRow.addView(newButton(it.id))
+            tableRow.addView(newButton(it.uid!!))
             tableShoppingCart.addView(tableRow)
             totalPrice += it.price * it.amount
         }
         textTotalPrice.text = totalPrice.toString()
     }
 
-    private fun newButton(id: Int): View {
+    private fun newButton(uid: String): View {
         val button = Button(context)
-        button.text = "Eliminar (H)"
+        button.text =
+            "Eliminar (H)" //todo los nombres con (H) son hardcodeados hay que ver si vva un simbolo o que
         button.setOnClickListener {
-            deleteProduct(id)
+            deleteProduct(uid)
         }
         return button
     }
 
-    private fun deleteProduct(id: Int) {
-        val product = products.firstOrNull { it.id == id }
+    private fun deleteProduct(uid: String) {
+        val product = products.firstOrNull { it.uid == uid }
         if (product != null) {
             products.remove(product)
             saveProducts()
             showProducts()
-            if (products.isEmpty())
-                buttonFinishPurchase.isEnabled = false
+            setEnabledButtonFinish()
         }
     }
 
@@ -114,4 +131,20 @@ class ShoppingCartFragment : FragmentCommunication() {
         tableRow.addView(newTextView(resources.getString(R.string.actions)))
         tableShoppingCart.addView(tableRow)
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_SCAN) {
+            val barCode = data?.extras?.get("barCode") as String
+            activityCommunication.put(
+                "product",
+                Product(null, 1, barCode, Random.nextInt(1, 50).toDouble())
+            )
+            val action =
+                ShoppingCartFragmentDirections.actionShoppingCartFragmentToAddProductFragment()
+            findNavController().navigate(action)
+        }
+    }
+
 }

@@ -2,7 +2,9 @@ package ar.edu.utn.frba.mobile.smarket.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.service.AuthenticationService
@@ -20,13 +22,22 @@ class MainFragment : FragmentCommunication() {
 
     private lateinit var auth: FirebaseAuth
 
-    private val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestIdToken("146266657134-k66q1vuj4qnjgrcontj6sejn6eguietq.apps.googleusercontent.com")
-        .requestEmail()
-        .build()
+    private lateinit var gso : GoogleSignInOptions
     
     override fun getFragment(): Int {
         return R.layout.fragment_main
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onStart() {
@@ -109,5 +120,4 @@ class MainFragment : FragmentCommunication() {
                 }
             }
     }
-
 }
