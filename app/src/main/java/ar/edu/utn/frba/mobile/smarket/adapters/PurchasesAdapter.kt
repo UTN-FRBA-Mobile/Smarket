@@ -41,6 +41,9 @@ class PurchasesAdapter(
         holder.itemView.fecha.text = SimpleDateFormat("dd-MM-yyyy")
             .format(dataSet[position].date).toString()
 
+        holder.itemView.hora.text = SimpleDateFormat("hh:mm")
+            .format(dataSet[position].date).toString()
+
         holder.itemView.action_button_1.setOnClickListener {
             var action =
                 PurchaseHistoryFragmentDirections
