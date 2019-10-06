@@ -33,13 +33,12 @@
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/buttonNewPurchase"
+                    style="@style/Widget.MaterialComponents.FloatingActionButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:forceDarkAllowed="false"
+                    android:layout_alignParentEnd="true"
                     android:overScrollMode="ifContentScrolls"
-                    android:src="@android:drawable/ic_input_add"
-                    android:textColor="#FC012875"/>
+                    android:src="@drawable/icon_add"/>
             </RelativeLayout>
 
         </LinearLayout>
