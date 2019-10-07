@@ -1,8 +1,9 @@
-package ar.edu.utn.frba.mobile.smarket
+package ar.edu.utn.frba.mobile.smarket.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import ar.edu.utn.frba.mobile.smarket.R
 
 class MainActivity : AppCompatActivity() , Communication {
 

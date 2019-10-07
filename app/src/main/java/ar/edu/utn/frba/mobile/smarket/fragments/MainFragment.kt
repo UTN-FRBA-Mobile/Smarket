@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import ar.edu.utn.frba.mobile.smarket.MainActivity
+import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.service.AuthenticationService
 import com.google.android.gms.auth.api.signin.GoogleSignIn

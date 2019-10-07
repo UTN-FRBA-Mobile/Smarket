@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.mobile.smarket.fragments
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -8,7 +9,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
-import ar.edu.utn.frba.mobile.smarket.ScanActivity
+import ar.edu.utn.frba.mobile.smarket.activities.ScanActivity
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 import kotlin.random.Random
@@ -135,7 +136,7 @@ class ShoppingCartFragment : FragmentCommunication() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RC_SCAN) {
+        if (requestCode == RC_SCAN && resultCode == RESULT_OK) {
             val barCode = data?.extras?.get("barCode") as String
             activityCommunication.put(
                 "product",

@@ -21,11 +21,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAk9_NhLtIn1FqyUawlGTnHPSsFm6z-i4k" />
       
-        <activity android:name=".ScanActivity"></activity>
+        <activity android:name=".activities.ScanActivity"></activity>
         <activity
-            android:name=".fragments.MapActivity"
+            android:name=".activities.MapActivity"
             android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

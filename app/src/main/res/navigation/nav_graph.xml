@@ -60,7 +60,7 @@
 	
 	<activity
         android:id="@+id/mapActivity"
-        android:name="ar.edu.utn.frba.mobile.smarket.fragments.MapActivity"
+        android:name="ar.edu.utn.frba.mobile.smarket.activities.MapActivity"
         android:label="activity_map"
         tools:layout="@layout/activity_map" >
     </activity>

@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.mobile.smarket
+package ar.edu.utn.frba.mobile.smarket.activities
 
 interface Communication {
 
