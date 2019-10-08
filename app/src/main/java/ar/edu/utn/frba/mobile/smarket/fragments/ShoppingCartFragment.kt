@@ -8,8 +8,10 @@ import android.widget.Button
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.activities.ScanActivity
+import ar.edu.utn.frba.mobile.smarket.adapters.ProductsAdapter
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 import kotlin.random.Random
@@ -21,6 +23,8 @@ class ShoppingCartFragment : FragmentCommunication() {
     private var products = ArrayList<Product>()
 
     private var totalPrice = 0.0
+    private lateinit var productsAdapter: ProductsAdapter
+    private lateinit var viewManager: LinearLayoutManager
 
     override fun getFragment(): Int {
         return R.layout.fragment_shopping_cart
@@ -49,11 +53,13 @@ class ShoppingCartFragment : FragmentCommunication() {
                 ShoppingCartFragmentDirections.actionShoppingCartFragmentToOrderFragment()
             findNavController().navigate(action)
         }
+        /*
 
         buttonCancelPurchase.setOnClickListener {
             activityCommunication.put("products", ArrayList<Product>())
             findNavController().popBackStack()
         }
+        */
     }
 
     private fun showScan() {
@@ -68,18 +74,28 @@ class ShoppingCartFragment : FragmentCommunication() {
             products.add(product)
             activityCommunication.remove("product")
             saveProducts()
-            buttonFinishPurchase.isEnabled = true
+            //buttonFinishPurchase.isEnabled = true
             setEnabledButtonFinish()
         }
     }
 
     private fun setEnabledButtonFinish() {
-        buttonFinishPurchase.isEnabled = products.isNotEmpty()
+        //buttonFinishPurchase.isEnabled = products.isNotEmpty()
 
     }
 
     private fun showProducts() {
-        tableShoppingCart.removeAllViews()
+
+        productsAdapter = ProductsAdapter(products)
+        viewManager = LinearLayoutManager(context)
+
+        recycler_view_products.apply {
+            layoutManager = viewManager
+            adapter = productsAdapter
+        }
+
+
+        /*tableShoppingCart.removeAllViews()
         setTitles()
         totalPrice = 0.0
         products.forEach {
@@ -91,7 +107,7 @@ class ShoppingCartFragment : FragmentCommunication() {
             tableShoppingCart.addView(tableRow)
             totalPrice += it.price * it.amount
         }
-        textTotalPrice.text = totalPrice.toString()
+        textTotalPrice.text = totalPrice.toString()*/
     }
 
     private fun newButton(uid: String): View {
@@ -130,7 +146,7 @@ class ShoppingCartFragment : FragmentCommunication() {
         tableRow.addView(newTextView(resources.getString(R.string.amount)))
         tableRow.addView(newTextView(resources.getString(R.string.price)))
         tableRow.addView(newTextView(resources.getString(R.string.actions)))
-        tableShoppingCart.addView(tableRow)
+        //tableShoppingCart.addView(tableRow)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
