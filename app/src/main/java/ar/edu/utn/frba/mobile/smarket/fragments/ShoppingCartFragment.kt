@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.mobile.smarket.fragments
 
 import android.app.Activity.RESULT_OK
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -10,6 +12,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 import ar.edu.utn.frba.mobile.smarket.activities.ScanActivity
 import ar.edu.utn.frba.mobile.smarket.adapters.ProductsAdapter
 import ar.edu.utn.frba.mobile.smarket.model.Product
@@ -37,12 +40,19 @@ class ShoppingCartFragment : FragmentCommunication() {
         if (activityCommunication.exist("products"))
             products = activityCommunication.get("products") as ArrayList<Product>
 
+            val numero = 45
+            products.add(Product("1", 3, "Galletas Manon x 20 Grs", numero.toDouble()))
+            products.add(Product("2", 1, "Bebida Coca Cola x 1lt", numero.toDouble()))
+            products.add(Product("3", 2, "Jabon en polvo Ariel x 1kg", numero.toDouble()))
+            products.add(Product("4", 1,"Aceite Pirulo x 1lt", numero.toDouble()))
+            products.add(Product("5", 40, "Descripcion", numero.toDouble()))
+            products.add(Product("6", 50, "Descripcion", numero.toDouble()))
+            products.add(Product("1", 60, "Descripcion", numero.toDouble()))
+            products.add(Product("1", 70, "Descripcion", numero.toDouble()))
+
         addProduct()
-
         showProducts()
-
         setEnabledButtonFinish()
-
         buttonAddProduct.setOnClickListener {
             showScan()
         }
@@ -53,13 +63,11 @@ class ShoppingCartFragment : FragmentCommunication() {
                 ShoppingCartFragmentDirections.actionShoppingCartFragmentToOrderFragment()
             findNavController().navigate(action)
         }
-        /*
+    }
 
-        buttonCancelPurchase.setOnClickListener {
-            activityCommunication.put("products", ArrayList<Product>())
-            findNavController().popBackStack()
-        }
-        */
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).setActionBarTitle("Carrito de Compras")
     }
 
     private fun showScan() {
@@ -74,79 +82,67 @@ class ShoppingCartFragment : FragmentCommunication() {
             products.add(product)
             activityCommunication.remove("product")
             saveProducts()
-            //buttonFinishPurchase.isEnabled = true
             setEnabledButtonFinish()
         }
+        setTotal()
     }
 
     private fun setEnabledButtonFinish() {
-        //buttonFinishPurchase.isEnabled = products.isNotEmpty()
+        buttonFinishPurchase.isEnabled = products.isNotEmpty()
+    }
 
+    private fun setTotal(){
+        val inicial = 0
+        val total = products
+            .map { it.price * it.amount }
+            .fold(inicial.toDouble(), {
+                total, next -> total + next
+            })
+
+        finishPurchaseText.text = "TOTAL: $$total"
+    }
+
+    private fun removeProductCallback(product: Product){
+        val builder = AlertDialog.Builder(context)
+        builder
+            .setTitle(product.description)
+            .setMessage("¿Desea eliminar este producto?")
+            .setPositiveButton("Eliminar") { _, _ ->
+                removeProduct(product)
+            }
+        builder.create().show()
+    }
+
+    private fun removeProduct(product: Product){
+        products.remove(product)
+        saveProducts()
+        productsAdapter.notifyDataSetChanged()
+        setEnabledButtonFinish()
+        setTotal()
+    }
+
+    private fun updateCant(product: Product, cant: Int){
+        product.amount += cant
+
+        productsAdapter.notifyDataSetChanged()
+        setEnabledButtonFinish()
+        setTotal()
     }
 
     private fun showProducts() {
 
-        productsAdapter = ProductsAdapter(products)
+        productsAdapter = ProductsAdapter(products, ::removeProductCallback, ::updateCant)
         viewManager = LinearLayoutManager(context)
 
         recycler_view_products.apply {
             layoutManager = viewManager
             adapter = productsAdapter
         }
-
-
-        /*tableShoppingCart.removeAllViews()
-        setTitles()
-        totalPrice = 0.0
-        products.forEach {
-            val tableRow = TableRow(context)
-            tableRow.addView(newTextView(it.description))
-            tableRow.addView(newTextView(it.amount.toString()))
-            tableRow.addView(newTextView("$ " + (it.price * it.amount).toString()))
-            tableRow.addView(newButton(it.uid!!))
-            tableShoppingCart.addView(tableRow)
-            totalPrice += it.price * it.amount
-        }
-        textTotalPrice.text = totalPrice.toString()*/
-    }
-
-    private fun newButton(uid: String): View {
-        val button = Button(context)
-        button.text =
-            "Eliminar (H)" //todo los nombres con (H) son hardcodeados hay que ver si vva un simbolo o que
-        button.setOnClickListener {
-            deleteProduct(uid)
-        }
-        return button
-    }
-
-    private fun deleteProduct(uid: String) {
-        val product = products.firstOrNull { it.uid == uid }
-        if (product != null) {
-            products.remove(product)
-            saveProducts()
-            showProducts()
-            setEnabledButtonFinish()
-        }
+        setTotal()
     }
 
     private fun saveProducts() {
         activityCommunication.put("products", products)
-    }
-
-    private fun newTextView(text: String): View {
-        val textView = TextView(context)
-        textView.text = text
-        return textView
-    }
-
-    private fun setTitles() {
-        val tableRow = TableRow(context)
-        tableRow.addView(newTextView(resources.getString(R.string.product)))
-        tableRow.addView(newTextView(resources.getString(R.string.amount)))
-        tableRow.addView(newTextView(resources.getString(R.string.price)))
-        tableRow.addView(newTextView(resources.getString(R.string.actions)))
-        //tableShoppingCart.addView(tableRow)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

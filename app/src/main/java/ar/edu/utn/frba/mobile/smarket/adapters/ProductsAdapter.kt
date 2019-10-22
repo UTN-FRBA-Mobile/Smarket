@@ -3,37 +3,51 @@ package ar.edu.utn.frba.mobile.smarket.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.model.Product
+import kotlinx.android.synthetic.main.fragment_shopping_cart.view.*
 import kotlinx.android.synthetic.main.item_product.view.*
 
 class ProductsAdapter(
-    private val products: List<Product>
+    private val products: List<Product>,
+    private val actionRemoveProduct: (Product) -> Unit,
+    private val actionUpdateProductCant: (Product, Int) -> Unit
 ): RecyclerView.Adapter<ProductsAdapter.ViewHolder>(){
 
     override fun getItemViewType(position: Int): Int {
         return R.layout.item_product
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): ViewHolder {
-        // create a new view
-        val textView = LayoutInflater.from(parent.context)
-            .inflate(viewType, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater
+                            .from(parent.context)
+                            .inflate(viewType, parent, false)
 
-        // set the view's size, margins, paddings and layout parameters
-        return ViewHolder(textView)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.producto_nombre.text = products[position].description
-        holder.itemView.producto_precio.text = products[position].price.toString()
-        holder.itemView.producto_cantidad.text = products[position].amount.toString()
+        holder.bindData(products[position])
     }
 
     override fun getItemCount() = products.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+        fun bindData(product: Product){
+            itemView.producto_nombre.text = product.description
+            itemView.producto_precio.text = "$ " + product.price.toString()
+            itemView.producto_cantidad.text = product.amount.toString()
+
+            itemView.producto_eliminar.setOnClickListener { actionRemoveProduct(product) }
+
+            itemView.producto_increase_cantidad.setOnClickListener { actionUpdateProductCant(product, 1) }
+
+            itemView.producto_decrease_cantidad.isEnabled = product.amount > 1
+            itemView.producto_decrease_cantidad.setOnClickListener { actionUpdateProductCant(product, -1) }
+        }
+    }
 
 }

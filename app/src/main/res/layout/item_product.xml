@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:src="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="120dp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:paddingStart="16dp"
@@ -20,7 +20,16 @@
             android:layout_width="match_parent"
             android:layout_height="94dp"
             android:paddingTop="10dp"
-            android:layout_marginBottom="4dp">
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/producto_imagen"
+                android:paddingLeft="10dp"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:src="@mipmap/ic_launcher_round"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/producto_nombre"
@@ -28,26 +37,66 @@
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/producto_imagen"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/producto_precio"
                 android:paddingTop="10dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/producto_nombre"/>
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/producto_decrease_cantidad"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:layout_width="46dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:paddingTop="10dp"
+                app:icon="@drawable/icon_remove"
+                app:iconGravity="textStart"
+                app:iconTint="#115021"
+                app:layout_constraintStart_toStartOf="@id/producto_nombre"
+                app:layout_constraintTop_toBottomOf="@id/producto_nombre" />
 
             <TextView
                 android:id="@+id/producto_cantidad"
-                android:paddingTop="10dp"
-                android:layout_marginStart="10dp"
+                android:paddingTop="15dp"
+                android:layout_marginStart="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/producto_precio"/>
+                android:text="20"
+                app:layout_constraintStart_toEndOf="@id/producto_decrease_cantidad"
+                app:layout_constraintTop_toBottomOf="@id/producto_precio"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/producto_increase_cantidad"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:layout_width="46dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:icon="@drawable/icon_add"
+                app:iconGravity="textStart"
+                app:iconTint="#115021"
+                app:layout_constraintStart_toEndOf="@id/producto_cantidad"
+                app:layout_constraintTop_toBottomOf="@id/producto_precio"/>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/producto_eliminar"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:layout_width="46dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:icon="@drawable/icon_trash"
+                app:iconGravity="textStart"
+                app:iconTint="#AF0000"
+                app:layout_constraintStart_toEndOf="@id/producto_increase_cantidad"
+                app:layout_constraintTop_toBottomOf="@id/producto_precio"
+                app:rippleColor="#AF0000" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

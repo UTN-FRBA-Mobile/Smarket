@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.ShoppingCartFragment"
-    android:orientation="vertical">
+    tools:context=".fragments.ShoppingCartFragment">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -15,17 +14,17 @@
             android:id="@+id/recycler_view_products"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/finishPurchaseLayout"
             tools:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/item_product"
-            android:layout_above="@+id/buttonFinishPurchase"/>
+            tools:listitem="@layout/item_product" />
 
         <RelativeLayout
             android:id="@+id/relativeLayout1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_alignEnd="@+id/recycler_view_products"
             android:gravity="end"
+            android:orientation="vertical"
             android:paddingRight="20dp"
             android:paddingBottom="30dp">
 
@@ -34,29 +33,40 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp"
-                android:backgroundTint="#E9001A7A"
-                app:borderWidth="3dp"
-                android:overScrollMode="ifContentScrolls"
                 android:layout_alignParentBottom="true"
-                android:src="@drawable/icon_add"/>
+                android:layout_marginBottom="70dp"
+                android:backgroundTint="#E9001A7A"
+                android:overScrollMode="ifContentScrolls"
+                android:src="@drawable/icon_add"
+                app:borderWidth="3dp" />
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/buttonFinishPurchase"
+        <LinearLayout
+            android:id="@+id/finishPurchaseLayout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="FINALIZAR COMPRA"/>
+            android:background="#22ADA5A5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/finishPurchaseText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_horizontal"
+                android:textColor="#2B1919"
+                android:textSize="14sp">
+
+            </TextView>
+
+            <Button
+                android:id="@+id/buttonFinishPurchase"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="FINALIZAR COMPRA" />
+        </LinearLayout>
 
     </RelativeLayout>
-    <!--
-        <TextView
-            android:id="@+id/textTotalPrice"
-            android:paddingLeft="1pt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
-    -->
 
 </LinearLayout>

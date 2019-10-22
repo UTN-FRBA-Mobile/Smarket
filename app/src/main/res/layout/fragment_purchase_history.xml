@@ -43,9 +43,9 @@
                 style="@style/Widget.MaterialComponents.FloatingActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:overScrollMode="ifContentScrolls"
                 android:layout_alignParentBottom="true"
-                android:src="@drawable/icon_add"/>
+                android:overScrollMode="ifContentScrolls"
+                android:src="@drawable/icon_add_shopping_cart" />
 
         </RelativeLayout>
 
