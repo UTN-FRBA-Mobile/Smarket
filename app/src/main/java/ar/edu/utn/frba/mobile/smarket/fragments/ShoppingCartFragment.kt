@@ -46,10 +46,6 @@ class ShoppingCartFragment : FragmentCommunication() {
             products.add(Product("3", 2, "Jabon en polvo Ariel x 1kg", numero.toDouble()))
             products.add(Product("4", 1,"Aceite Pirulo x 1lt", numero.toDouble()))
             products.add(Product("5", 40, "Descripcion", numero.toDouble()))
-            products.add(Product("6", 50, "Descripcion", numero.toDouble()))
-            products.add(Product("1", 60, "Descripcion", numero.toDouble()))
-            products.add(Product("1", 70, "Descripcion", numero.toDouble()))
-
         addProduct()
         showProducts()
         setEnabledButtonFinish()

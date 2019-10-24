@@ -14,11 +14,13 @@
     <TextView
         android:id="@+id/textDetailProduct"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,10 +49,10 @@
             style="@style/Widget.MaterialComponents.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="30dp"
             android:src="@drawable/icon_remove"
-            android:backgroundTint="#00FFFFFF"
-            android:tint="#00574B"/>
+            android:backgroundTint="#3738AF"
+            android:tint="#FFFFFFFF"/>
 
         <TextView
             android:id="@+id/textUnityAmount"
@@ -67,10 +69,11 @@
             style="@style/Widget.MaterialComponents.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:backgroundTint="#00FFFFFF"
+            android:layout_marginLeft="30dp"
             android:src="@drawable/icon_add"
-            android:tint="#00574B" />
+            android:backgroundTint="#3738AF"
+            android:tint="#FFFFFFFF"/>
+            <!--FFFFFFFF-->
 
     </LinearLayout>
 
@@ -83,7 +86,8 @@
     <TextView
         android:id="@+id/textTotalPrice"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"/>
 
     <Button
         android:id="@+id/buttonOk"
