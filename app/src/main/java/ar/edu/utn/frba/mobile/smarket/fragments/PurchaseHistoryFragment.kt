@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.mobile.smarket.fragments
 
+import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -32,6 +33,8 @@ class PurchaseHistoryFragment : FragmentCommunication() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activityCommunication as MainActivity).permissions[RequestCode.RC_PERMISSION_LOCATION] = { showMap() }
+
         if (activityCommunication.exist("history")) {
             history = activityCommunication.get("history") as List<Purchase>
         } else {
@@ -45,10 +48,14 @@ class PurchaseHistoryFragment : FragmentCommunication() {
         }
 
         buttonMap.setOnClickListener {
-            val action =
-                PurchaseHistoryFragmentDirections.actionPurchaseHistoryFragmentToMapFragment()
-            findNavController().navigate(action)
+            super.getPermission(Manifest.permission.ACCESS_FINE_LOCATION, RequestCode.RC_PERMISSION_LOCATION) { showMap() }
         }
+    }
+
+    private fun showMap() {
+        val action =
+            PurchaseHistoryFragmentDirections.actionPurchaseHistoryFragmentToMapFragment()
+        findNavController().navigate(action)
     }
 
     private fun goToShoppingCart() {

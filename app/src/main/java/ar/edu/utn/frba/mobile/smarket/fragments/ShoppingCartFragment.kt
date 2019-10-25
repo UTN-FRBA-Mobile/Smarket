@@ -1,7 +1,9 @@
 package ar.edu.utn.frba.mobile.smarket.fragments
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -9,14 +11,13 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 import ar.edu.utn.frba.mobile.smarket.activities.ScanActivity
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 import kotlin.random.Random
 
 class ShoppingCartFragment : FragmentCommunication() {
-
-    private val RC_SCAN = 2
 
     private var products = ArrayList<Product>()
 
@@ -32,6 +33,9 @@ class ShoppingCartFragment : FragmentCommunication() {
         @Suppress("UNCHECKED_CAST")
         if (activityCommunication.exist("products"))
             products = activityCommunication.get("products") as ArrayList<Product>
+
+        val activityMain = activityCommunication as MainActivity
+        activityMain.permissions[RequestCode.RC_PERMISSION_CAMERA] = { showActivityScan() }
 
         addProduct()
 
@@ -57,9 +61,15 @@ class ShoppingCartFragment : FragmentCommunication() {
     }
 
     private fun showScan() {
-        val intent = Intent(activity!!, ScanActivity::class.java)
-        startActivityForResult(intent, RC_SCAN)
+        getPermission(
+            Manifest.permission.CAMERA,
+            RequestCode.RC_PERMISSION_CAMERA
+        ) { showActivityScan() }
+    }
 
+    private fun showActivityScan() {
+        val intent = Intent(activity!!, ScanActivity::class.java)
+        startActivityForResult(intent, RequestCode.RC_SCAN)
     }
 
     private fun addProduct() {
@@ -75,7 +85,6 @@ class ShoppingCartFragment : FragmentCommunication() {
 
     private fun setEnabledButtonFinish() {
         buttonFinishPurchase.isEnabled = products.isNotEmpty()
-
     }
 
     private fun showProducts() {
@@ -136,7 +145,7 @@ class ShoppingCartFragment : FragmentCommunication() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RC_SCAN && resultCode == RESULT_OK) {
+        if (requestCode == RequestCode.RC_SCAN && resultCode == RESULT_OK) {
             val barCode = data?.extras?.get("barCode") as String
             activityCommunication.put(
                 "product",
