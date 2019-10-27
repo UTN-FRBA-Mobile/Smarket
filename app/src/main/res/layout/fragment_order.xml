@@ -48,24 +48,57 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/selectCreditCard"
-        android:textColor="@color/colorBlue"
-        android:clickable="true"
-        android:focusable="true"/>
+        android:text="@string/cardNumber"/>
+    <EditText
+        android:id="@+id/textCardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cardTitular"/>
+    <EditText
+        android:id="@+id/textCardTitular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cardDueDate"/>
+    <EditText
+        android:id="@+id/textCardDueDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cardSecurityCode"/>
+    <EditText
+        android:id="@+id/textCardSecurityCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/contact"
         android:background="@color/colorLightGrey"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/selectContact"
-        android:clickable="true"
-        android:focusable="true"
-        android:textColor="@color/colorBlue"/>
+        android:text="@string/contactName"/>
+    <EditText
+        android:id="@+id/textContactName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/contactNumber"/>
+    <EditText
+        android:id="@+id/textContactNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/buttonFinishOrder"
