@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -49,34 +50,99 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/cardNumber"/>
-    <EditText
-        android:id="@+id/textCardNumber"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/imageCardNumberStatus"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"/>
+        <EditText
+            android:id="@+id/textCardNumber"
+            android:inputType="number"
+            android:maxLength="19"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/imageCardLogo"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/cardTitular"/>
-    <EditText
-        android:id="@+id/textCardTitular"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageCardTitularStatus"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"/>
+        <EditText
+            android:id="@+id/textCardTitular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/cardDueDate"/>
-    <EditText
-        android:id="@+id/textCardDueDate"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/imageCardDueDateStatus"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"/>
+        <EditText
+            android:id="@+id/textCardDueMonth"
+            android:inputType="number"
+            android:maxLength="2"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" / "/>
+        <EditText
+            android:id="@+id/textCardDueYear"
+            android:inputType="number"
+            android:maxLength="2"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cardDueDateFormat"/>
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/cardSecurityCode"/>
-    <EditText
-        android:id="@+id/textCardSecurityCode"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageCardSecurityCodeStatus"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"/>
+
+        <EditText
+            android:id="@+id/textCardSecurityCode"
+            android:inputType="numberPassword"
+            android:enabled="false"
+            android:maxLength="4"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"

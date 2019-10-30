@@ -12,6 +12,7 @@ import ar.edu.utn.frba.mobile.smarket.service.ProductService
 import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
 import kotlinx.android.synthetic.main.fragment_purchase_history.*
 import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
+import ar.edu.utn.frba.mobile.smarket.enums.RequestCode
 
 
 class PurchaseHistoryFragment : FragmentCommunication() {

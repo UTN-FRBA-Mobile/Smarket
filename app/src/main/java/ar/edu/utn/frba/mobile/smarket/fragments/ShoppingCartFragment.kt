@@ -3,7 +3,6 @@ package ar.edu.utn.frba.mobile.smarket.fragments
 import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -13,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 import ar.edu.utn.frba.mobile.smarket.activities.ScanActivity
+import ar.edu.utn.frba.mobile.smarket.enums.RequestCode
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 import kotlin.random.Random

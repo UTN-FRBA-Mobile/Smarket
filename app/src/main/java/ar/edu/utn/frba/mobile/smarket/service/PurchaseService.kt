@@ -7,6 +7,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import java.lang.RuntimeException
 import java.util.*
 
 object PurchaseService {
@@ -19,8 +20,8 @@ object PurchaseService {
                     response.result!!.filterNotNull()
                         .forEach { history.add(transform(it)) }
                     action()
-                } else
-                    println("BASE DE DATOS ERROR READ")
+                } //else
+//                    throw RuntimeException("Error al conectarse con la base de datos")
             }
         return history
     }
@@ -44,7 +45,7 @@ object PurchaseService {
             .addOnSuccessListener(OnSuccessListener<Any> {
                 ProductService.save(purchase.products!!, (it as DocumentReference).id)
             })
-            .addOnFailureListener(OnFailureListener { println("BASE DE DATOS ERROR") })
+            .addOnFailureListener(OnFailureListener { throw RuntimeException("Error al conectarse con la base de datos") })
     }
 
 

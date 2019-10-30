@@ -51,5 +51,6 @@
     <string name="contactName">Nombre</string>
     <string name="contactNumber">Telefono</string>
     <string name="cardDueDate">Fecha de Vencimiento</string>
+    <string name="cardDueDateFormat">MM/YY</string>
 
 </resources>
