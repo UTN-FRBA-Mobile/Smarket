@@ -4,4 +4,26 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MapActivity" />
+    tools:context=".activities.MapActivity" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="248dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:layout_weight="0.5"
+            android:inputType="textPersonName"
+            android:hint="Calle y altura" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationSearch"
+            android:layout_weight="0.5"
+            android:text="Buscar" />
+
+    </LinearLayout>
+</fragment>
