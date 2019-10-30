@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.mobile.smarket.service
 
+import ar.edu.utn.frba.mobile.smarket.enums.PurchaseStatus
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -7,7 +8,6 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import java.lang.RuntimeException
 import java.util.*
 
 object PurchaseService {
@@ -32,7 +32,8 @@ object PurchaseService {
                         Date(data["date"] as Long),
                         data["price"] as Number,
                         data["amount"] as Number,
-                        null)
+                        null,
+                        PurchaseStatus.valueOf(data["status"] as String))
     }
 
     fun savePurchase(purchase: Purchase) {
@@ -45,7 +46,7 @@ object PurchaseService {
             .addOnSuccessListener(OnSuccessListener<Any> {
                 ProductService.save(purchase.products!!, (it as DocumentReference).id)
             })
-            .addOnFailureListener(OnFailureListener { throw RuntimeException("Error al conectarse con la base de datos") })
+            .addOnFailureListener(OnFailureListener {})// throw RuntimeException("Error al conectarse con la base de datos") })
     }
 
 

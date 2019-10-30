@@ -52,5 +52,10 @@
     <string name="contactNumber">Telefono</string>
     <string name="cardDueDate">Fecha de Vencimiento</string>
     <string name="cardDueDateFormat">MM/YY</string>
+    <string name="status">Estado :</string>
+    <string name="finish">Finalizado</string>
+    <string name="status_pending">Pendiente</string>
+    <string name="status_finished">Finalizado</string>
+    <string name="status_on_route">En Camino</string>
 
 </resources>

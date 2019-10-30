@@ -67,7 +67,7 @@ class PurchaseHistoryFragment : FragmentCommunication() {
 
     private fun showHistory() {
         purchasesAdapter =
-            PurchasesAdapter(history, ::repeatPurchase)
+            PurchasesAdapter(history, ::repeatPurchase, context!!)
         viewManager = LinearLayoutManager(context)
 
         recycler_view_purchases.apply {

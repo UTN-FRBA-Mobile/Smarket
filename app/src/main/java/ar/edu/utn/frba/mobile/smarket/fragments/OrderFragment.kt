@@ -10,6 +10,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.enums.CardType
+import ar.edu.utn.frba.mobile.smarket.enums.PurchaseStatus
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
@@ -39,7 +40,7 @@ class OrderFragment  : FragmentCommunication() {
         buttonFinishOrder.setOnClickListener {
             val history = activityCommunication.get("history") as ArrayList<Purchase>
             val products = activityCommunication.get("products") as ArrayList<Product>
-            val purchase = Purchase(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products)
+            val purchase = Purchase(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products, PurchaseStatus.PENDING)
             history.add(purchase)
             PurchaseService.savePurchase(purchase)
             findNavController().popBackStack()
