@@ -43,5 +43,19 @@
     <string name="defaultWebClientIid">AIzaSyDvOAQMUopVj4x9-UlxIAKsHuyr6DBMLVs</string>
     <string name="repeat">REPETIR</string>
     <string name="title_activity_maps">Mapa</string>
+    <string name="cardNumber">Numero de Tarjeta</string>
+    <string name="cardTitular">Nombre Completo</string>
+    <string name="cardVencDate">Fecha de Vencimiento</string>
+    <string name="cardExpiredDate">Fecha de Vencimiento</string>
+    <string name="cardSecurityCode">Codigo de Seguridad</string>
+    <string name="contactName">Nombre</string>
+    <string name="contactNumber">Telefono</string>
+    <string name="cardDueDate">Fecha de Vencimiento</string>
+    <string name="cardDueDateFormat">MM/YY</string>
+    <string name="status">Estado :</string>
+    <string name="finish">Finalizado</string>
+    <string name="status_pending">Pendiente</string>
+    <string name="status_finished">Finalizado</string>
+    <string name="status_on_route">En Camino</string>
 
 </resources>

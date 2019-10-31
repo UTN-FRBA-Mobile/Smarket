@@ -1,20 +1,20 @@
 package ar.edu.utn.frba.mobile.smarket.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.fragment.NavHostFragment
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import ar.edu.utn.frba.mobile.smarket.R
-import ar.edu.utn.frba.mobile.smarket.fragments.PurchaseHistoryFragmentDirections
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import kotlinx.android.synthetic.main.item_purchase.view.*
 import java.text.SimpleDateFormat
 
 class PurchasesAdapter(
     private val dataSet: List<Purchase>,
-    private val actionRepeatPurchase: (Purchase) -> Unit
+    private val actionRepeatPurchase: (Purchase) -> Unit,
+    private val context: Context
 ): RecyclerView.Adapter<PurchasesAdapter.ViewHolder>(){
 
     override fun getItemViewType(position: Int): Int {
@@ -40,6 +40,9 @@ class PurchasesAdapter(
 
         holder.itemView.textHour.text = SimpleDateFormat("hh:mm")
             .format(purchase.date).toString()
+
+        holder.itemView.textStatus.text = context.resources.getString(purchase.status.value)
+        holder.itemView.textStatus.setTextColor(ContextCompat.getColor(context, purchase.status.color))
 
         holder.itemView.buttonRepeatPurchase.setOnClickListener {
             actionRepeatPurchase(purchase)

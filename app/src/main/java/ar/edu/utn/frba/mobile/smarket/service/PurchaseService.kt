@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.mobile.smarket.service
 
+import ar.edu.utn.frba.mobile.smarket.enums.PurchaseStatus
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -19,8 +20,8 @@ object PurchaseService {
                     response.result!!.filterNotNull()
                         .forEach { history.add(transform(it)) }
                     action()
-                } else
-                    println("BASE DE DATOS ERROR READ")
+                } //else
+//                    throw RuntimeException("Error al conectarse con la base de datos")
             }
         return history
     }
@@ -31,7 +32,8 @@ object PurchaseService {
                         Date(data["date"] as Long),
                         data["price"] as Number,
                         data["amount"] as Number,
-                        null)
+                        null,
+                        PurchaseStatus.valueOf(data["status"] as String))
     }
 
     fun savePurchase(purchase: Purchase) {
@@ -44,7 +46,7 @@ object PurchaseService {
             .addOnSuccessListener(OnSuccessListener<Any> {
                 ProductService.save(purchase.products!!, (it as DocumentReference).id)
             })
-            .addOnFailureListener(OnFailureListener { println("BASE DE DATOS ERROR") })
+            .addOnFailureListener(OnFailureListener {})// throw RuntimeException("Error al conectarse con la base de datos") })
     }
 
 

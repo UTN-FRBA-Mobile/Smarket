@@ -1,8 +1,11 @@
 package ar.edu.utn.frba.mobile.smarket.activities
 
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import ar.edu.utn.frba.mobile.smarket.R
@@ -15,6 +18,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_map.*
+import kotlinx.android.synthetic.main.fragment_add_product.*
+import java.io.IOException
+import java.util.*
 
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -24,11 +31,14 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_map)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        locationSearch.setOnClickListener{ searchLocation() }
     }
     /**
      * Manipulates the map once available.
@@ -68,6 +78,31 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         val markerOptions = MarkerOptions().position(location)
         // 2
         mMap.addMarker(markerOptions)
+    }
+
+    fun searchLocation() {
+        var location = editText.text.toString()
+
+        if (location.isNullOrBlank()) {
+            Toast.makeText(applicationContext,"Tenés que insertar la dirección",Toast.LENGTH_SHORT).show()
+        }
+        else{
+            val geoCoder = Geocoder(this)
+            try {
+                var addressList: List<Address> = geoCoder.getFromLocationName(location, 1)
+                if(!addressList.isNullOrEmpty()) {
+                    val address = addressList[0]
+                    val latLng = LatLng(address.latitude, address.longitude)
+                    mMap.addMarker(MarkerOptions().position(latLng).title(location))
+                    mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+                }
+                else {
+                    //Toast.makeText(applicationContext,"No existe la dirección",Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: IOException) {
+                //Toast.makeText(applicationContext,"No se pudo obtener la dirección",Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setUpMap() {
