@@ -27,7 +27,7 @@ class PurchaseHistoryFragment : FragmentCommunication() {
 
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).setActionBarTitle("Historial de Compras")
+        (activity as MainActivity).setActionBarTitle("Mis Compras")
     }
 
     @Suppress("UNCHECKED_CAST")
