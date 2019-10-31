@@ -57,5 +57,6 @@
     <string name="status_pending">Pendiente</string>
     <string name="status_finished">Finalizado</string>
     <string name="status_on_route">En Camino</string>
+    <string name="qualify">Calificar</string>
 
 </resources>
