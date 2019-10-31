@@ -43,7 +43,7 @@ class ProductsAdapter(
 
             itemView.buttonRemoveProduct.setOnClickListener { actionRemoveProduct(product) }
 
-            itemView.producto_increase_cantidad.setOnClickListener { actionUpdateProductCant(product, 1) }
+            itemView.buttonIncreaseUnit.setOnClickListener { actionUpdateProductCant(product, 1) }
 
             itemView.buttonDecreaseUnit.isEnabled = product.amount > 1
             itemView.buttonDecreaseUnit.setOnClickListener { actionUpdateProductCant(product, -1) }
