@@ -37,16 +37,16 @@ class ProductsAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         fun bindData(product: Product){
-            itemView.producto_nombre.text = product.description
-            itemView.producto_precio.text = "$ " + product.price.toString()
-            itemView.producto_cantidad.text = product.amount.toString()
+            itemView.productName.text = product.description
+            itemView.productPrice.text = "$ " + product.price.toString()
+            itemView.productUnits.text = product.amount.toString()
 
-            itemView.producto_eliminar.setOnClickListener { actionRemoveProduct(product) }
+            itemView.buttonRemoveProduct.setOnClickListener { actionRemoveProduct(product) }
 
             itemView.producto_increase_cantidad.setOnClickListener { actionUpdateProductCant(product, 1) }
 
-            itemView.producto_decrease_cantidad.isEnabled = product.amount > 1
-            itemView.producto_decrease_cantidad.setOnClickListener { actionUpdateProductCant(product, -1) }
+            itemView.buttonDecreaseUnit.isEnabled = product.amount > 1
+            itemView.buttonDecreaseUnit.setOnClickListener { actionUpdateProductCant(product, -1) }
         }
     }
 
