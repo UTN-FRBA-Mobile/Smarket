@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "943933601518",
-    "firebase_url": "https://smarket-e0872.firebaseio.com",
-    "project_id": "smarket-e0872",
-    "storage_bucket": "smarket-e0872.appspot.com"
+    "project_number": "468497267171",
+    "firebase_url": "https://mobile-smarket-254714.firebaseio.com",
+    "project_id": "mobile-smarket-254714",
+    "storage_bucket": "mobile-smarket-254714.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:943933601518:android:61b303c3fc37199a54e5ff",
+        "mobilesdk_app_id": "1:468497267171:android:47d6e386f593470a48c8d6",
         "android_client_info": {
           "package_name": "ar.edu.utn.frba.mobile.smarket"
         }
       },
       "oauth_client": [
         {
-          "client_id": "943933601518-qrqh8k03ar2l6gt9oss2n9d6dkcg7a6f.apps.googleusercontent.com",
+          "client_id": "468497267171-59g6foonk1obns1r4g16is4hd0bha68p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ar.edu.utn.frba.mobile.smarket",
+            "certificate_hash": "a39404adf16002b17f78f48ebab6d0e651f6aa15"
+          }
+        },
+        {
+          "client_id": "468497267171-0kci4bchv5g1ftd83s7ttlbcotkavjo4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDbHY9boW_IrwUEYbcGS7OwKQ83e4EfhGE"
+          "current_key": "AIzaSyDXODzb2OhxVocLcsTKr2BGyoaK7fuuJjs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "943933601518-qrqh8k03ar2l6gt9oss2n9d6dkcg7a6f.apps.googleusercontent.com",
+              "client_id": "468497267171-0kci4bchv5g1ftd83s7ttlbcotkavjo4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

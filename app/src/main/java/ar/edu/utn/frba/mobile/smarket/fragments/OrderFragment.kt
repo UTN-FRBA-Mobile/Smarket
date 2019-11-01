@@ -7,14 +7,16 @@ import android.text.InputFilter
 import android.text.Spanned
 import android.text.TextWatcher
 import android.view.View
-import android.widget.ImageView
+import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.enums.CardType
 import ar.edu.utn.frba.mobile.smarket.enums.PurchaseStatus
+import ar.edu.utn.frba.mobile.smarket.model.Card
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
+import ar.edu.utn.frba.mobile.smarket.service.UserService
 import kotlinx.android.synthetic.main.fragment_order.*
 import java.util.*
 
@@ -48,9 +50,10 @@ class OrderFragment  : FragmentCommunication() {
             findNavController().popBackStack()
         }
 
+        getAdapterCreditCard()
+
         textCardNumber.addTextChangedListener(object : TextWatcher {
 
-            @SuppressLint("SetTextI18n")
             override fun afterTextChanged(s: Editable?) {
                 val text = textCardNumber.text.toString()
                 val length = text.length
@@ -77,7 +80,6 @@ class OrderFragment  : FragmentCommunication() {
                     textCardNumber.setSelection(textSplit.length)
                 }
                 if (length == 19) {
-                    textCardDueMonth.setSelection(0)
                     imageCardNumberStatus.setImageResource(R.mipmap.ic_success)
                     textCardSecurityCode.isEnabled = (length == 19)
                 } else
@@ -245,6 +247,20 @@ class OrderFragment  : FragmentCommunication() {
 
         })
 
+    }
+
+    private fun getAdapterCreditCard() {
+        if (this.activityCommunication.exist("cards"))
+            setAdapterCreditCard(this.activityCommunication.get("cards") as List<Card>)
+        else
+            UserService.getCreditCards{ setAdapterCreditCard(it) }
+
+
+    }
+
+    private fun setAdapterCreditCard(listCard: List<Card>) {
+        activityCommunication.put("cards", listCard)
+        textCardNumber.setAdapter(ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1, listCard.map { it.number }))
     }
 
     private fun splitNumber(text: String) : String {

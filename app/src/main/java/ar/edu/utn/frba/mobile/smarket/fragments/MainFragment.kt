@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 import ar.edu.utn.frba.mobile.smarket.R
-import ar.edu.utn.frba.mobile.smarket.service.AuthenticationService
+import ar.edu.utn.frba.mobile.smarket.enums.RequestCode
+import ar.edu.utn.frba.mobile.smarket.service.UserService
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -18,8 +19,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : FragmentCommunication() {
-
-    private val RC_SIGN_IN = 1
 
     private lateinit var auth: FirebaseAuth
 
@@ -84,7 +83,7 @@ class MainFragment : FragmentCommunication() {
         textPasswordError.visibility = getError(password)
 
         if (username.isNotBlank() || password.isNotBlank()) {
-            if (AuthenticationService.authenticate(username, password))
+            if (UserService.authenticate(username, password))
                 return true
             else {
                 textError.text = resources.getString(R.string.incorrectUsernameOrPassword)
@@ -102,7 +101,7 @@ class MainFragment : FragmentCommunication() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == RequestCode.RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             val account = task.getResult(ApiException::class.java)
             firebaseAuthWithGoogle(account!!)
@@ -111,7 +110,7 @@ class MainFragment : FragmentCommunication() {
     private fun signIn() {
         val mGoogleSignInClient = GoogleSignIn.getClient(activity!!, gso)
         val signInIntent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        startActivityForResult(signInIntent, RequestCode.RC_SIGN_IN)
     }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -59,11 +58,13 @@
             android:id="@+id/imageCardNumberStatus"
             android:layout_width="15dp"
             android:layout_height="match_parent"/>
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/textCardNumber"
             android:inputType="number"
+            android:singleLine="true"
             android:maxLength="19"
             android:layout_width="180dp"
+            android:completionThreshold="1"
             android:layout_height="wrap_content" />
         <ImageView
             android:id="@+id/imageCardLogo"
@@ -84,6 +85,7 @@
             android:layout_height="match_parent"/>
         <EditText
             android:id="@+id/textCardTitular"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -101,6 +103,7 @@
             android:layout_height="match_parent"/>
         <EditText
             android:id="@+id/textCardDueMonth"
+            android:singleLine="true"
             android:inputType="number"
             android:maxLength="2"
             android:layout_width="30dp"
@@ -108,9 +111,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:text=" / "/>
         <EditText
             android:id="@+id/textCardDueYear"
+            android:singleLine="true"
             android:inputType="number"
             android:maxLength="2"
             android:layout_width="30dp"
@@ -137,6 +142,7 @@
 
         <EditText
             android:id="@+id/textCardSecurityCode"
+            android:singleLine="true"
             android:inputType="numberPassword"
             android:enabled="false"
             android:maxLength="4"
@@ -165,6 +171,7 @@
 
         <EditText
             android:id="@+id/textContactName"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -190,6 +197,7 @@
 
         <EditText
             android:id="@+id/textContactNumber"
+            android:singleLine="true"
             android:inputType="number"
             android:maxLength="9"
             android:layout_width="90dp"

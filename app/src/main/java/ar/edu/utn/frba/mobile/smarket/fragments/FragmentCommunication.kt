@@ -38,4 +38,5 @@ abstract class FragmentCommunication : Fragment() {
         else
             action()
     }
+
 }
