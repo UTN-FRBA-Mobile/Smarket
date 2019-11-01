@@ -73,6 +73,7 @@ class PurchasesAdapter(
             holder.itemView.buttonQualifyOk.setOnClickListener {
                 RatingService.qualify(purchase.uid, holder.itemView.ratingBar.rating)
                 purchase.status = PurchaseStatus.QUALIFIED
+                PurchaseService.updateStatus(purchase)
                // holder.itemView.relativeLayoutItemPurchase.layoutParams = RelativeLayout.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT)
                 holder.itemView.relativeLayoutRatingBar.layoutParams.width = 0
                 holder.itemView.relativeLayoutRatingBar.layoutParams.height = 0

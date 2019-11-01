@@ -58,5 +58,6 @@
     <string name="status_finished">Finalizado</string>
     <string name="status_on_route">En Camino</string>
     <string name="qualify">Calificar</string>
+    <string name="numberPrefix">(+54) 11</string>
 
 </resources>

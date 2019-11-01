@@ -7,6 +7,7 @@ import android.text.InputFilter
 import android.text.Spanned
 import android.text.TextWatcher
 import android.view.View
+import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.enums.CardType
@@ -70,7 +71,7 @@ class OrderFragment  : FragmentCommunication() {
                         }
                         else -> 0
                     })
-                val textSplit = splitCardNumber(text.replace(" ", ""))
+                val textSplit = splitNumber(text.replace(" ", ""))
                 if (textSplit != text) {
                     textCardNumber.setText(textSplit)
                     textCardNumber.setSelection(textSplit.length)
@@ -90,10 +91,8 @@ class OrderFragment  : FragmentCommunication() {
 
         textCardTitular.addTextChangedListener(object : TextWatcher {
 
-            @SuppressLint("SetTextI18n")
             override fun afterTextChanged(s: Editable?) {
-                val text = textCardTitular.text.toString()
-                val split = text.split(" ")
+                val split = textCardTitular.text.toString().split(" ")
                 if (split.size > 1 && split[1].length > 1)
                     imageCardTitularStatus.setImageResource(R.mipmap.ic_success)
                 else
@@ -211,12 +210,47 @@ class OrderFragment  : FragmentCommunication() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
+        textContactName.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable?) {
+                if (textContactName.text.isNotEmpty())
+                    imageContactNameStatus.setImageResource(R.mipmap.ic_success)
+                else
+                    imageContactNameStatus.setImageResource(0)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        textContactNumber.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable?) {
+                val text = textContactNumber.text.toString()
+                val textSplit = splitNumber(text.replace(" ", ""))
+                if (textSplit != text) {
+                    textContactNumber.setText(textSplit)
+                    textContactNumber.setSelection(textSplit.length)
+                }
+                if (text.length == 9)
+                    imageContactNumberStatus.setImageResource(R.mipmap.ic_success)
+                else
+                    imageContactNumberStatus.setImageResource(0)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+        })
+
     }
 
-    private fun splitCardNumber(text: String) : String {
+    private fun splitNumber(text: String) : String {
         return if (text.length > 4) {
             val subString = text.substring(0, 4)
-            subString + " " + splitCardNumber(text.substring(4))
+            subString + " " + splitNumber(text.substring(4))
         } else
             text
     }

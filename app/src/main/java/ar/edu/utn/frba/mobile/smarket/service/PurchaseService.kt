@@ -55,4 +55,11 @@ object PurchaseService {
     private fun getInstance(): CollectionReference {
         return FirebaseFirestore.getInstance().collection("history")
     }
+
+    fun updateStatus(purchase: Purchase) {
+        val database = FirebaseDatabase.getInstance().reference
+        val query = HashMap<String, Any>()
+        query["status"] = purchase.status.toString()
+        database.child("history").child(purchase.uid).setValue(query)
+    }
 }

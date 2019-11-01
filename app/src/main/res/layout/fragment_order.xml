@@ -153,18 +153,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/contactName"/>
-    <EditText
-        android:id="@+id/textContactName"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageContactNameStatus"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"/>
+
+        <EditText
+            android:id="@+id/textContactName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/contactNumber"/>
-    <EditText
-        android:id="@+id/textContactNumber"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageContactNumberStatus"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numberPrefix"/>
+
+        <EditText
+            android:id="@+id/textContactNumber"
+            android:inputType="number"
+            android:maxLength="9"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/buttonFinishOrder"
