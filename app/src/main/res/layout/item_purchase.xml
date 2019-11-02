@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="110dp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:paddingStart="16dp"
@@ -11,131 +11,117 @@
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/relativeLayoutRatingBar"
-        android:layout_width="0dp"
-        android:layout_height="0dp">
-
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:numStars="5"
-            android:rating="0" />
-
-        <Button
-            android:id="@+id/buttonQualifyOk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ok"/>
-
-        <Button
-            android:id="@+id/buttonQualifyCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/relativeLayoutItemPurchase"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="2dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/status"/>
-
-        <TextView
-            android:id="@+id/textStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"/>
-
-        <Button
-            android:id="@+id/buttonQualify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:text="@string/qualify"/>
-
-
-        <com.google.android.material.card.MaterialCardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardCornerRadius="3dp"
-            app:cardElevation="2dp">
+            android:paddingTop="10dp"
+            android:layout_marginBottom="4dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="94dp"
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:paddingLeft="10dp"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:src="@mipmap/ic_launcher_round"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textDescription"
                 android:paddingTop="10dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="@id/imageView"
+                app:layout_constraintStart_toEndOf="@id/imageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textProducts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintLeft_toLeftOf="@+id/textDescription"
+                app:layout_constraintStart_toEndOf="@+id/textDescription"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/textHour"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/textHour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="80dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonRepeatPurchase"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/repeat"
+                android:textSize="12sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textDescription"/>
+
+            <TextView
+                android:id="@+id/textStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textDate"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonQualify"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/qualify"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/buttonRepeatPurchase"
+                app:layout_constraintTop_toBottomOf="@+id/textDescription"/>
 
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:paddingLeft="10dp"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
-                    android:src="@mipmap/ic_launcher_round"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <RatingBar
+                android:id="@+id/qualifyResult"
+                style="@android:style/Widget.Holo.RatingBar.Small"
+                android:stepSize="0.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="20dp"
+                android:rating="5"
+                android:isIndicator="true"
+                app:layout_constraintStart_toEndOf="@id/buttonRepeatPurchase"
+                app:layout_constraintTop_toBottomOf="@+id/textDescription"/>
 
-                <TextView
-                    android:id="@+id/textDescription"
-                    android:paddingTop="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@id/imageView"
-                    app:layout_constraintStart_toEndOf="@id/imageView"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textProducts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:layout_marginStart="5dp"
-                    app:layout_constraintLeft_toLeftOf="@+id/textDescription"
-                    app:layout_constraintStart_toEndOf="@+id/textDescription"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/textDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginEnd="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/textHour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:layout_marginStart="80dp"
-                    app:layout_constraintEnd_toEndOf="@+id/textDate"
-                    app:layout_constraintTop_toBottomOf="@+id/textDate"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/buttonRepeatPurchase"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/repeat"
-                    android:textSize="16sp"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                    app:layout_constraintStart_toStartOf="@id/textDescription"
-                    app:layout_constraintTop_toBottomOf="@+id/textDescription"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
