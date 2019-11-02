@@ -9,6 +9,8 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import java.util.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 object PurchaseService {
 
@@ -20,8 +22,8 @@ object PurchaseService {
                     response.result!!.filterNotNull()
                         .forEach { history.add(transform(it)) }
                     action()
-                } //else
-//                    throw RuntimeException("Error al conectarse con la base de datos")
+                } else
+                    throw RuntimeException("Error al conectarse con la base de datos")
             }
         return history
     }
@@ -41,16 +43,23 @@ object PurchaseService {
         query["date"] = purchase.date.time
         query["price"] = purchase.price
         query["amount"] = purchase.amount
+        query["status"] = purchase.status.toString()
 
         getInstance().add(query)
             .addOnSuccessListener(OnSuccessListener<Any> {
                 ProductService.save(purchase.products!!, (it as DocumentReference).id)
             })
-            .addOnFailureListener(OnFailureListener {})// throw RuntimeException("Error al conectarse con la base de datos") })
+            .addOnFailureListener(OnFailureListener { throw RuntimeException("Error al conectarse con la base de datos") })
     }
-
 
     private fun getInstance(): CollectionReference {
         return FirebaseFirestore.getInstance().collection("history")
+    }
+
+    fun updateStatus(purchase: Purchase) {
+        val database = FirebaseDatabase.getInstance().reference
+        val query = HashMap<String, Any>()
+        query["status"] = purchase.status.toString()
+        database.child("history").child(purchase.uid).setValue(query)
     }
 }

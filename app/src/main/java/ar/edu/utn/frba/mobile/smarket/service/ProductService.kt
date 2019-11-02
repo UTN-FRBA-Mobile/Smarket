@@ -25,7 +25,7 @@ object ProductService {
                         }
                     action()
                 } else
-                    println("BASE DE DATOS ERROR READ")
+                    throw RuntimeException("Error al conectarse con la base de datos")
             }
         return products
     }
