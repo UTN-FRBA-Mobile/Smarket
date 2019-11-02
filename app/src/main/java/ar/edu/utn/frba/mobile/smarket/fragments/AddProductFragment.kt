@@ -57,8 +57,9 @@ class AddProductFragment : FragmentCommunication() {
         product.amount -= 1
         updateAmount()
         calculateTotalPrice()
-        if (product.amount == 1L)
+        if (product.amount <= 1){
             disableDecrement()
+        }
     }
 
     private fun cancel() {

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
+            android:paddingTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/productImage"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:src="@mipmap/ic_launcher_round"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/productName"
+                android:paddingTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/productImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/productPrice"
+                android:paddingTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonDecreaseUnit"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:layout_width="46dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:paddingTop="10dp"
+                app:icon="@drawable/icon_remove"
+                app:iconGravity="textStart"
+                app:iconTint="#115021"
+                app:layout_constraintStart_toStartOf="@id/productName"
+                app:layout_constraintTop_toBottomOf="@id/productName" />
+
+            <TextView
+                android:id="@+id/productUnits"
+                android:paddingTop="15dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/buttonDecreaseUnit"
+                app:layout_constraintTop_toBottomOf="@id/productPrice"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonIncreaseUnit"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:layout_width="46dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:icon="@drawable/icon_add"
+                app:iconGravity="textStart"
+                app:iconTint="#115021"
+                app:layout_constraintStart_toEndOf="@id/productUnits"
+                app:layout_constraintTop_toBottomOf="@id/productPrice"/>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonRemoveProduct"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:layout_width="46dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:icon="@drawable/icon_trash"
+                app:iconGravity="textStart"
+                app:iconTint="#AF0000"
+                app:layout_constraintStart_toEndOf="@id/buttonIncreaseUnit"
+                app:layout_constraintTop_toBottomOf="@id/productPrice"
+                app:rippleColor="#AF0000" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

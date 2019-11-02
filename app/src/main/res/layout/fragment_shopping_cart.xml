@@ -1,51 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ShoppingCartFragment"
-    android:orientation="vertical">
+    tools:context=".fragments.ShoppingCartFragment">
 
-    <TableLayout
-        android:id="@+id/tableShoppingCart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </TableLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_products"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/finishPurchaseLayout"
+            tools:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_product" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignEnd="@+id/recycler_view_products"
+            android:gravity="end"
+            android:orientation="vertical"
+            android:paddingRight="20dp"
+            android:paddingBottom="30dp">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/buttonAddProduct"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="70dp"
+                android:backgroundTint="#E9001A7A"
+                android:overScrollMode="ifContentScrolls"
+                android:src="@drawable/icon_add"
+                app:borderWidth="3dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/finishPurchaseLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/totalPrice"/>
+            android:layout_alignParentBottom="true"
+            android:background="#22ADA5A5"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textTotalPrice"
-            android:paddingLeft="1pt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/finishPurchaseText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_horizontal"
+                android:textColor="#2B1919"
+                android:textSize="14sp">
 
-    <Button
-        android:id="@+id/buttonCancelPurchase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CANCELAR(H)" />
+            </TextView>
 
-    <Button
-        android:id="@+id/buttonAddProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agregar un  PRODUCTO(H)" />
+            <Button
+                android:id="@+id/buttonFinishPurchase"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="FINALIZAR COMPRA" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonFinishPurchase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FINALIZAR COMPRA(H)"/>
-
+    </RelativeLayout>
 
 </LinearLayout>
