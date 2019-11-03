@@ -42,29 +42,7 @@
             android:clickable="true"
             android:focusable="true"/>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/location"
-            android:background="@color/colorLightGrey"/>
-
-        <Spinner
-            android:id="@+id/locations_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dialog" />
-        <Button
-            android:id="@+id/newLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/newLocation"/>
-    </LinearLayout>
-
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
