@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import ar.edu.utn.frba.mobile.smarket.activities.Communication
-import ar.edu.utn.frba.mobile.smarket.enums.RequestCode
 
 abstract class FragmentCommunication : Fragment() {
 

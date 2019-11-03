@@ -7,7 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import ar.edu.utn.frba.mobile.smarket.R
 
 
-class MainActivity : AppCompatActivity() , Communication {
+class MainActivity : AppCompatActivity() {
 
     private val cache = HashMap<String, Any>()
     val permissions = HashMap<Int, () -> Unit>()
