@@ -39,6 +39,7 @@ class ProductsAdapter(
         fun bindData(product: Product){
             itemView.productName.text = product.description
             itemView.productPrice.text = "$ " + product.price.toString()
+            itemView.productTotalPrice.text = "$ " + product.getTotalPrice().toString()
             itemView.productUnits.text = product.amount.toString()
 
             itemView.buttonRemoveProduct.setOnClickListener { actionRemoveProduct(product) }

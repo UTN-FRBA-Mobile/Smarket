@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.mobile.smarket.adapters
 
-import android.app.ActionBar
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
 import kotlinx.android.synthetic.main.item_purchase.view.*
 import java.text.SimpleDateFormat
-import ar.edu.utn.frba.mobile.smarket.service.RatingService
 
 class PurchasesAdapter(
     private val dataSet: List<Purchase>,
@@ -46,7 +44,7 @@ class PurchasesAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         fun bindData(purchase: Purchase){
-            itemView.textDescription.text = "$ " + purchase.price.toString()
+            itemView.textPrice.text = "$ " + purchase.price.toString()
             itemView.textProducts.text = purchase.amount.toString() + " productos"
 
             itemView.textDate.text = SimpleDateFormat("dd-MM-yy hh:mm")
@@ -69,12 +67,11 @@ class PurchasesAdapter(
                         builder.setView(ratingBar)
 
                         builder.setPositiveButton("Confirmar") { _, _ ->
-                            val number = ratingBar.findViewById<RatingBar>(R.id.ratingBar).rating
-                            RatingService.qualify(purchase.uid, number)
+                            purchase.rating = ratingBar.findViewById<RatingBar>(R.id.ratingBar).rating
                             purchase.status = PurchaseStatus.QUALIFIED
 
-                            PurchaseService.updateStatus(purchase)
-                            updateViewOnQualifyResult(purchase, number)
+                            PurchaseService.updatePurchase(purchase)
+                            updateViewOnQualifyResult(purchase)
                         }
                         builder.create().show()
                     }
@@ -82,15 +79,15 @@ class PurchasesAdapter(
 
                 purchase.status == PurchaseStatus.QUALIFIED -> {
                     setButtonQualifyGone()
-                    //TODO: obtener rating
+                    itemView.qualifyResult.rating = purchase.rating!!
                 }
 
                 else -> setButtonQualifyAndStatusGone()
             }
         }
 
-        private fun updateViewOnQualifyResult(purchase: Purchase, number: Float){
-            itemView.qualifyResult.rating = number
+        private fun updateViewOnQualifyResult(purchase: Purchase){
+            itemView.qualifyResult.rating = purchase.rating!!
             setPurchaseTextStatus(purchase)
             setButtonQualifyGone()
         }

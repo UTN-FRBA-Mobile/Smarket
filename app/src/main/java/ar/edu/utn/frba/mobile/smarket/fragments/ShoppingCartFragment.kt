@@ -92,13 +92,13 @@ class ShoppingCartFragment : FragmentCommunication() {
 
     private fun setTotal(){
         val inicial = 0
-        val total = products
+        totalPrice = products
             .map { it.price * it.amount }
             .fold(inicial.toDouble(), {
                 total, next -> total + next
             })
 
-        finishPurchaseText.text = "TOTAL: $$total"
+        finishPurchaseText.text = "TOTAL: $$totalPrice"
     }
 
     private fun removeProductCallback(product: Product){

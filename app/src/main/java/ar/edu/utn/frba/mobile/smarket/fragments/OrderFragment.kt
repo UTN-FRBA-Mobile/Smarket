@@ -7,7 +7,6 @@ import android.text.InputFilter
 import android.text.Spanned
 import android.text.TextWatcher
 import android.view.View
-import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.enums.CardType

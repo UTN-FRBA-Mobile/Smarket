@@ -10,4 +10,6 @@ class Purchase(
     var amount: Number,
     var products: List<Product>?,
     var status: PurchaseStatus
-)
+) {
+    var rating: Float? = null
+}
