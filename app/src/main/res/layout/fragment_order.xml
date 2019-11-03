@@ -1,199 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.OrderFragment"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/summary"
-        android:background="@color/colorLightGrey"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/totalPrice"/>
+            android:text="@string/summary"
+            android:background="@color/colorLightGrey"/>
 
-        <TextView
-            android:id="@+id/textTotalPrice"
-            android:paddingLeft="1pt"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </TextView>
-    </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/totalPrice"/>
 
-    <TextView
-        android:id="@+id/textSeeShoppingCart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/seeShoppingCart"
-        android:textColor="@color/colorBlue"
-        android:clickable="true"
-        android:focusable="true"/>
+            <TextView
+                android:id="@+id/textTotalPrice"
+                android:paddingLeft="1pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/card"
-        android:background="@color/colorLightGrey"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cardNumber"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/imageCardNumberStatus"
-            android:layout_width="15dp"
-            android:layout_height="match_parent"/>
-        <EditText
-            android:id="@+id/textCardNumber"
-            android:inputType="number"
-            android:maxLength="19"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/imageCardLogo"
-            android:layout_width="45dp"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cardTitular"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/imageCardTitularStatus"
-            android:layout_width="15dp"
-            android:layout_height="match_parent"/>
-        <EditText
-            android:id="@+id/textCardTitular"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cardDueDate"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/imageCardDueDateStatus"
-            android:layout_width="15dp"
-            android:layout_height="match_parent"/>
-        <EditText
-            android:id="@+id/textCardDueMonth"
-            android:inputType="number"
-            android:maxLength="2"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/textSeeShoppingCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/seeShoppingCart"
+            android:textColor="@color/colorBlue"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/location"
+            android:background="@color/colorLightGrey"/>
+
+        <Spinner
+            android:id="@+id/locations_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog" />
+        <Button
+            android:id="@+id/newLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" / "/>
-        <EditText
-            android:id="@+id/textCardDueYear"
-            android:inputType="number"
-            android:maxLength="2"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"/>
+            android:text="@string/newLocation"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cardDueDateFormat"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cardSecurityCode"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imageCardSecurityCodeStatus"
-            android:layout_width="15dp"
-            android:layout_height="match_parent"/>
-
-        <EditText
-            android:id="@+id/textCardSecurityCode"
-            android:inputType="numberPassword"
-            android:enabled="false"
-            android:maxLength="4"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/contact"
-        android:background="@color/colorLightGrey"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/contactName"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imageContactNameStatus"
-            android:layout_width="15dp"
-            android:layout_height="match_parent"/>
-
-        <EditText
-            android:id="@+id/textContactName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/contactNumber"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imageContactNumberStatus"
-            android:layout_width="15dp"
-            android:layout_height="match_parent"/>
+            android:text="@string/card"
+            android:background="@color/colorLightGrey"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/numberPrefix"/>
+            android:text="@string/cardNumber"/>
 
-        <EditText
-            android:id="@+id/textContactNumber"
-            android:inputType="number"
-            android:maxLength="9"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/imageCardNumberStatus"
+                android:layout_width="15dp"
+                android:layout_height="match_parent"/>
+            <EditText
+                android:id="@+id/textCardNumber"
+                android:inputType="number"
+                android:maxLength="19"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/imageCardLogo"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cardTitular"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageCardTitularStatus"
+                android:layout_width="15dp"
+                android:layout_height="match_parent"/>
+            <EditText
+                android:id="@+id/textCardTitular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cardDueDate"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/imageCardDueDateStatus"
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"/>
+                    <EditText
+                        android:id="@+id/textCardDueMonth"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:hint="MM"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" / "/>
+                    <EditText
+                        android:id="@+id/textCardDueYear"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:hint="YY"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cardSecurityCode"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imageCardSecurityCodeStatus"
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"/>
+
+                    <EditText
+                        android:id="@+id/textCardSecurityCode"
+                        android:inputType="numberPassword"
+                        android:enabled="false"
+                        android:maxLength="4"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contact"
+            android:background="@color/colorLightGrey"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contactName"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageContactNameStatus"
+                android:layout_width="15dp"
+                android:layout_height="match_parent"/>
+
+            <EditText
+                android:id="@+id/textContactName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contactNumber"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageContactNumberStatus"
+                android:layout_width="15dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/numberPrefix"/>
+
+            <EditText
+                android:id="@+id/textContactNumber"
+                android:inputType="number"
+                android:maxLength="9"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
 
     <Button

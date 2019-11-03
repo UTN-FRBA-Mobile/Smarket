@@ -1,29 +1,51 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.MapActivity" >
+    android:layout_height="wrap_content"
+    tools:context=".activities.MapActivity"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        android:layout_margin="5dp"
+        android:orientation="vertical">
         <EditText
-            android:layout_width="248dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:id="@+id/editText"
             android:layout_weight="0.5"
-            android:inputType="textPersonName"
             android:hint="Calle y altura" />
-
-        <Button
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/locations_spinner"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/locationSearch"
-            android:layout_weight="0.5"
-            android:text="Buscar" />
+            android:spinnerMode="dialog"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/locationSearch"
+                android:layout_marginRight="5dp"
+                android:text="Buscar"/>
 
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/confirm"
+                android:text="Confirmar" />
+        </LinearLayout>
     </LinearLayout>
-</fragment>
+
+    <fragment android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment">
+    </fragment>
+</LinearLayout >

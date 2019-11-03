@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.adapters.LocationSpinnerAdapter
+import ar.edu.utn.frba.mobile.smarket.service.LocationService
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -19,10 +21,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_map.*
-import kotlinx.android.synthetic.main.fragment_add_product.*
 import java.io.IOException
-import java.util.*
-
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private lateinit var mMap: GoogleMap
@@ -39,7 +38,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         locationSearch.setOnClickListener{ searchLocation() }
+        confirm.setOnClickListener{ confirmLocation() }
+
+        var locations = LocationService.getLocations()
+        var spinnerAdapter = LocationSpinnerAdapter(locations, android.R.layout.simple_spinner_dropdown_item, applicationContext)
+        locations_spinner?.adapter = spinnerAdapter
     }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -57,31 +62,35 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
         setUpMap()
 
-         mMap.isMyLocationEnabled = true
+        mMap.isMyLocationEnabled = true
 
         fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
             // Got last known location. In some rare situations this can be null.
-            // 3
             if (location != null) {
                 lastLocation = location
-                val currentLatLng = LatLng(location.latitude, location.longitude)
-                placeMarkerOnMap(currentLatLng)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 14f))
+                placeMarkerOnMap(LatLng(location.latitude, location.longitude))
             }
         }
     }
 
     override fun onMarkerClick(p0: Marker?) = false
 
-    private fun placeMarkerOnMap(location: LatLng) {
-        // 1
-        val markerOptions = MarkerOptions().position(location)
-        // 2
+    private fun placeMarkerOnMap(latLng: LatLng, title: String = "") {
+        val markerOptions = MarkerOptions().position(latLng)
+        if(!title.isNullOrBlank()) {
+            markerOptions.title(title)
+        }
         mMap.addMarker(markerOptions)
+
+        mMap.animateCamera((CameraUpdateFactory.newLatLngZoom(latLng, 14f)))
     }
 
-    fun searchLocation() {
-        var location = editText.text.toString()
+    private fun confirmLocation() {
+        Toast.makeText(applicationContext,"No implementado",Toast.LENGTH_SHORT).show()
+    }
+
+    private fun searchLocation() {
+        var location = editText.text.toString() + ", " + (locations_spinner.selectedItem as ar.edu.utn.frba.mobile.smarket.model.Location).description
 
         if (location.isNullOrBlank()) {
             Toast.makeText(applicationContext,"Tenés que insertar la dirección",Toast.LENGTH_SHORT).show()
@@ -93,14 +102,14 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
                 if(!addressList.isNullOrEmpty()) {
                     val address = addressList[0]
                     val latLng = LatLng(address.latitude, address.longitude)
-                    mMap.addMarker(MarkerOptions().position(latLng).title(location))
-                    mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+                    mMap.clear()
+                    placeMarkerOnMap(latLng, location)
                 }
                 else {
-                    //Toast.makeText(applicationContext,"No existe la dirección",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext,"No existe la dirección",Toast.LENGTH_SHORT).show()
                 }
             } catch (e: IOException) {
-                //Toast.makeText(applicationContext,"No se pudo obtener la dirección",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"No se pudo obtener la dirección",Toast.LENGTH_SHORT).show()
             }
         }
     }

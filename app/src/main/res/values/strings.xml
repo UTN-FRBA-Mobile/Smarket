@@ -10,22 +10,15 @@
     <string name="incorrectUsernameOrPassword">Usuario o Contraseña Incorrecta</string>
 
     <!--Order-->
-    <string name="order">Pedido</string>
     <string name="summary">Resumen</string>
     <string name="totalPrice">Total : $</string>
     <string name="seeShoppingCart">Ver Carrito</string>
     <string name="card">Tarjeta</string>
-    <string name="selectCreditCard">Seleccionar Tarjeta de Crédito</string>
     <string name="contact">Contacto</string>
-    <string name="selectContact">Seleccionar Contacto</string>
     <string name="finishOrder">Finalizar Pedido</string>
 
     <!--Purchase History-->
-    <string name="purchaseHistory">Compras</string>
-    <string name="date">Fecha</string>
-    <string name="products">Productos</string>
     <string name="price">Precio</string>
-    <string name="newPurchase">Nueva Compra</string>
     <string name="product">Producto</string>
     <string name="amount">Cantidad</string>
     <string name="actions">Acciones</string>
@@ -39,25 +32,20 @@
     <string name="cancel">Cancelar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="defaultWebClientIid">AIzaSyDvOAQMUopVj4x9-UlxIAKsHuyr6DBMLVs</string>
     <string name="repeat">REPETIR</string>
     <string name="title_activity_maps">Mapa</string>
-    <string name="cardNumber">Numero de Tarjeta</string>
+    <string name="cardNumber">Número de Tarjeta</string>
     <string name="cardTitular">Nombre Completo</string>
-    <string name="cardVencDate">Fecha de Vencimiento</string>
-    <string name="cardExpiredDate">Fecha de Vencimiento</string>
-    <string name="cardSecurityCode">Codigo de Seguridad</string>
+    <string name="cardSecurityCode">Código de Seguridad</string>
     <string name="contactName">Nombre</string>
-    <string name="contactNumber">Telefono</string>
+    <string name="contactNumber">Teléfono</string>
     <string name="cardDueDate">Fecha de Vencimiento</string>
-    <string name="cardDueDateFormat">MM/YY</string>
-    <string name="status">Estado :</string>
-    <string name="finish">Finalizado</string>
     <string name="status_pending">Pendiente</string>
     <string name="status_finished">Finalizado</string>
     <string name="status_on_route">En Camino</string>
     <string name="qualify">Calificar</string>
     <string name="numberPrefix">(+54) 11</string>
+    <string name="location">Ubicación</string>
+    <string name="newLocation">Nueva ubicación</string>
 
 </resources>
