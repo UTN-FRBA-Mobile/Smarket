@@ -34,7 +34,7 @@
     <string name="detailProduct">Detalle del Producto</string>
     <string name="unitaryPrice">Precio por Unidad : $</string>
     <string name="unitsToBuy">Unidades a Llevar</string>
-    <string name="total">Total</string>
+    <string name="total">TOTAL: $</string>
     <string name="ok">Continua</string>
     <string name="cancel">Cancelar</string>
 

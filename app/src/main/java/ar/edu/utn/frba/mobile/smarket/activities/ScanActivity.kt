@@ -19,6 +19,9 @@ class ScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     public override fun onResume() {
         super.onResume()
+        if (supportActionBar != null) {
+            supportActionBar!!.title  = "Escanear Producto"
+        }
         mScannerView!!.setResultHandler(this)
         mScannerView!!.startCamera()
     }

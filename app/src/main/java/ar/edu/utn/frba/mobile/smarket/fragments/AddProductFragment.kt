@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import kotlinx.android.synthetic.main.fragment_add_product.*
 import java.util.*
@@ -14,6 +15,11 @@ class AddProductFragment : FragmentCommunication() {
 
     override fun getFragment(): Int {
         return R.layout.fragment_add_product
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).setActionBarTitle("Agregar Producto")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
