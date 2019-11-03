@@ -14,6 +14,7 @@ import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
 import kotlinx.android.synthetic.main.item_purchase.view.*
 import java.text.SimpleDateFormat
+import android.widget.Toast
 
 class PurchasesAdapter(
     private val dataSet: List<Purchase>,
@@ -72,6 +73,7 @@ class PurchasesAdapter(
 
                             PurchaseService.updatePurchase(purchase)
                             updateViewOnQualifyResult(purchase)
+                            Toast.makeText(context, "Gracias por calificar!", Toast.LENGTH_SHORT).show()
                         }
                         builder.create().show()
                     }

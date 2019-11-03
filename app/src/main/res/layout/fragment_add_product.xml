@@ -58,7 +58,7 @@
             android:layout_marginEnd="30dp"
             android:src="@drawable/icon_remove"
             android:backgroundTint="#3738AF"
-            android:tint="#FFFFFFFF"/>
+            app:tint="#FFFFFFFF"/>
 
         <TextView
             android:id="@+id/textUnityAmount"
@@ -78,7 +78,7 @@
             android:layout_marginLeft="30dp"
             android:src="@drawable/icon_add"
             android:backgroundTint="#3738AF"
-            android:tint="#FFFFFFFF"/>
+            app:tint="#FFFFFF"/>
 
     </LinearLayout>
 
@@ -115,6 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ok"
+        android:backgroundTint="#004D40"
         app:icon="@drawable/icon_add_shopping_cart"/>
 
     <Button

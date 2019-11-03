@@ -126,7 +126,7 @@ class OrderFragment  : FragmentCommunication() {
                 if (length == 2)
                     textCardDueYear.setSelection(0)
 
-                if (textCardDueYear.text.length == 2 && length > 0) {
+                if (textCardDueYear.text!!.length == 2 && length > 0) {
                     val year = textCardDueYear.text.toString().toInt()
                     val month = text.toInt()
                     validateDate(year, month)
@@ -142,7 +142,7 @@ class OrderFragment  : FragmentCommunication() {
             override fun filter(source: CharSequence,start: Int,end: Int,dest: Spanned,
                                 dstart: Int,dend: Int): CharSequence? {
                 val text = dest.toString() + source.toString()
-                if (textCardDueMonth.text.length == 1) {
+                if (textCardDueMonth.text!!.length == 1) {
                     val year = Integer.parseInt(dest.toString() + source.toString())
                     if (year == 0)
                         return ""
@@ -169,7 +169,7 @@ class OrderFragment  : FragmentCommunication() {
                     validateDate(year, month)
                     textCardSecurityCode.setSelection(0)
                 } else {
-                    if (textCardDueMonth.text.length == 1)
+                    if (textCardDueMonth.text!!.length == 1)
                         textCardNumber.setText("0" + textCardDueMonth.text.toString())
                 }
             }
@@ -212,7 +212,7 @@ class OrderFragment  : FragmentCommunication() {
         textContactName.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable?) {
-                if (textContactName.text.isNotEmpty())
+                if (textContactName.text!!.isNotEmpty())
                     imageContactNameStatus.setImageResource(R.mipmap.ic_success)
                 else
                     imageContactNameStatus.setImageResource(0)
