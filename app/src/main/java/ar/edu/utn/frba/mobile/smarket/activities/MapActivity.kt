@@ -1,14 +1,13 @@
 package ar.edu.utn.frba.mobile.smarket.activities
 
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
-import android.location.Location
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.adapters.LocationSpinnerAdapter
 import ar.edu.utn.frba.mobile.smarket.service.LocationService
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -20,12 +19,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.activity_map.*
 import java.io.IOException
+import android.content.Intent
+import ar.edu.utn.frba.mobile.smarket.R
+import kotlinx.android.synthetic.main.activity_map.*
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private lateinit var mMap: GoogleMap
-    private lateinit var lastLocation: Location
+    private lateinit var selectedLatLng: LatLng
+    private lateinit var selectedAddress: String
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +41,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
         locationSearch.setOnClickListener{ searchLocation() }
         confirm.setOnClickListener{ confirmLocation() }
+        confirm.isEnabled = false
 
         var locations = LocationService.getLocations()
         var spinnerAdapter = LocationSpinnerAdapter(locations, android.R.layout.simple_spinner_dropdown_item, applicationContext)
@@ -67,7 +70,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
             // Got last known location. In some rare situations this can be null.
             if (location != null) {
-                lastLocation = location
                 placeMarkerOnMap(LatLng(location.latitude, location.longitude))
             }
         }
@@ -86,10 +88,16 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
     }
 
     private fun confirmLocation() {
-        Toast.makeText(applicationContext,"No implementado",Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MainActivity::class.java) //ShoppingCartFragment
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
+        intent.putExtra("latLng", selectedLatLng)
+        intent.putExtra("address", selectedAddress)
+        setResult(Activity.RESULT_OK, intent)
+        this.finish()
     }
 
     private fun searchLocation() {
+        confirm.isEnabled = false
         var location = editText.text.toString() + ", " + (locations_spinner.selectedItem as ar.edu.utn.frba.mobile.smarket.model.Location).description
 
         if (location.isNullOrBlank()) {
@@ -104,6 +112,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
                     val latLng = LatLng(address.latitude, address.longitude)
                     mMap.clear()
                     placeMarkerOnMap(latLng, location)
+                    selectedLatLng = latLng
+                    selectedAddress = location
+                    confirm.isEnabled = true
                 }
                 else {
                     Toast.makeText(applicationContext,"No existe la dirección",Toast.LENGTH_SHORT).show()
