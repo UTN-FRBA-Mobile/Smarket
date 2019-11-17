@@ -56,9 +56,6 @@
         <action
             android:id="@+id/action_purchaseHistoryFragment_to_shoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
-        <action
-            android:id="@+id/action_purchaseHistoryFragment_to_mapFragment"
-            app:destination="@id/mapActivity" />
     </fragment>
 	
 	<activity

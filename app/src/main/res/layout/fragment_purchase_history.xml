@@ -29,17 +29,6 @@
             android:paddingBottom="30dp">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/buttonMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_above="@id/buttonNewPurchase"
-                android:src="@android:drawable/ic_dialog_map"
-                app:tint="#FFFFFF"
-                app:backgroundTint="#E9001A7A"
-                />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/buttonNewPurchase"
                 style="@style/Widget.MaterialComponents.FloatingActionButton"
                 android:layout_width="wrap_content"
