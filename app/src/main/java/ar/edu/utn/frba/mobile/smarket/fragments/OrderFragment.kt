@@ -9,18 +9,23 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
-import ar.edu.utn.frba.mobile.smarket.enums.CardType
 import ar.edu.utn.frba.mobile.smarket.enums.PurchaseStatus
+import ar.edu.utn.frba.mobile.smarket.model.Card
+import ar.edu.utn.frba.mobile.smarket.model.Contact
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
+import ar.edu.utn.frba.mobile.smarket.service.CardService
+import ar.edu.utn.frba.mobile.smarket.service.ContactService
 import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
 import kotlinx.android.synthetic.main.fragment_order.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class OrderFragment  : FragmentCommunication() {
 
     var totalPrice = 0.0
-    lateinit var cardType: CardType
+    var contacts = ArrayList<Contact>()
+    var cards = ArrayList<Card>().toList()
 
     override fun getFragment(): Int {
         return R.layout.fragment_order
@@ -30,6 +35,8 @@ class OrderFragment  : FragmentCommunication() {
         super.onViewCreated(view, savedInstanceState)
         totalPrice = activityCommunication.get("totalPrice") as Double
         textTotalPrice.text = totalPrice.toString()
+        cards = CardService.get(this.context!!)
+        contacts = ContactService.get()
 
         textSeeShoppingCart.setOnClickListener {
            val action = OrderFragmentDirections.actionOrderFragmentToShoppingCartFragment()
@@ -40,10 +47,15 @@ class OrderFragment  : FragmentCommunication() {
         buttonFinishOrder.setOnClickListener {
             val history = activityCommunication.get("history") as ArrayList<Purchase>
             val products = activityCommunication.get("products") as ArrayList<Product>
-            val purchase = Purchase(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products, PurchaseStatus.FINISHED
-            )
+            val purchase = Purchase(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products, PurchaseStatus.PENDING)
+            val card = Card(textCardNumber, textCardDueYear, textCardDueMonth, textCardTitular)
+            val contact = Contact(textContactName, textContactNumber)
+
             history.add(purchase)
             PurchaseService.savePurchase(purchase)
+            CardService.save(card, this.context!!)
+            ContactService.save(contact)
+
             findNavController().popBackStack()
         }
 
@@ -54,22 +66,6 @@ class OrderFragment  : FragmentCommunication() {
                 val text = textCardNumber.text.toString()
                 val length = text.length
 
-                imageCardLogo.setImageResource(
-                    when(text[0]) {
-                        '5' -> {
-                            cardType = CardType.MASTERCARD
-                            R.mipmap.ic_logo_mastercard
-                        }
-                        '4' -> {
-                            cardType = CardType.VISA
-                            R.mipmap.ic_logo_visa
-                        }
-                        '3' -> {
-                            cardType = CardType.AMERICAN_EXPRESS
-                            R.mipmap.ic_logo_american_express
-                        }
-                        else -> 0
-                    })
                 val textSplit = splitNumber(text.replace(" ", ""))
                 if (textSplit != text) {
                     textCardNumber.setText(textSplit)
@@ -183,7 +179,7 @@ class OrderFragment  : FragmentCommunication() {
             override fun filter(source: CharSequence,start: Int,end: Int,dest: Spanned,
                                 dstart: Int,dend: Int): CharSequence? {
                 val text = dest.toString()
-                if (text.length == 3 && cardType != CardType.AMERICAN_EXPRESS)
+                if (text.length == CardService.logMaxSecurityCode(textCardNumber.text.toString()))
                     return ""
 
                 return null
@@ -191,12 +187,9 @@ class OrderFragment  : FragmentCommunication() {
         })
 
         textCardSecurityCode.addTextChangedListener(object : TextWatcher {
-
             @SuppressLint("SetTextI18n")
             override fun afterTextChanged(s: Editable?) {
-                val limit =
-                    if (cardType == CardType.AMERICAN_EXPRESS) 4
-                    else 3
+                val limit = CardService.logMaxSecurityCode(textCardNumber.text.toString())
 
                 when (textCardSecurityCode.text.toString().length) {
                     limit -> imageCardSecurityCodeStatus.setImageResource(R.mipmap.ic_success)
@@ -243,7 +236,6 @@ class OrderFragment  : FragmentCommunication() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
         })
-
     }
 
     private fun splitNumber(text: String) : String {

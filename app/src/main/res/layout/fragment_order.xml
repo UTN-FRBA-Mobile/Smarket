@@ -92,16 +92,8 @@
                     android:maxLength="19"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:id="@+id/imageCardLogo"
-                android:layout_width="45dp"
-                android:layout_height="match_parent"/>
         </LinearLayout>
 
-        <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cardTitular"/>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -109,12 +101,6 @@
                 android:id="@+id/imageCardTitularStatus"
                 android:layout_width="15dp"
                 android:layout_height="match_parent"/>
-            <!--
-            <EditText
-                android:id="@+id/textCardTitular"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-            />-->
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -143,11 +129,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
-                <!--<TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cardDueDate" />-->
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -207,10 +188,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <!--<TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cardSecurityCode"/>-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -219,14 +197,6 @@
                         android:id="@+id/imageCardSecurityCodeStatus"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"/>
-
-                    <!--<EditText
-                        android:id="@+id/textCardSecurityCode"
-                        android:inputType="numberPassword"
-                        android:enabled="false"
-                        android:maxLength="4"
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content" />-->
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -253,15 +223,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/contact"
-            android:background="@color/colorLightGrey"/>-->
-        <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/contactName"/>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -271,11 +232,6 @@
                 android:id="@+id/imageContactNameStatus"
                 android:layout_width="15dp"
                 android:layout_height="match_parent"/>
-
-            <!--<EditText
-                android:id="@+id/textContactName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />-->
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -294,11 +250,6 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-<!--        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/contactNumber"/>-->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -307,18 +258,6 @@
                 android:id="@+id/imageContactNumberStatus"
                 android:layout_width="15dp"
                 android:layout_height="match_parent"/>
-
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/numberPrefix"/>-->
-
-            <!--<EditText
-                android:id="@+id/textContactNumber"
-                android:inputType="number"
-                android:maxLength="9"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content" />-->
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
