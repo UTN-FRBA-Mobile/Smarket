@@ -55,11 +55,6 @@
             android:text="@string/card"
             android:background="@color/colorLightGrey"/>
 
-        <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cardNumber"/>-->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,12 +63,6 @@
                 android:id="@+id/imageCardNumberStatus"
                 android:layout_width="15dp"
                 android:layout_height="match_parent"/>
-            <!--<EditText
-                android:id="@+id/textCardNumber"
-                android:inputType="number"
-                android:maxLength="19"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content" />-->
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -114,7 +103,8 @@
                     android:id="@+id/textCardTitular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="19"/>
+                    android:maxLength="19"
+                    android:singleLine="true"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -245,8 +235,9 @@
                     android:id="@+id/textContactName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="12dp"
-                    android:maxLength="19"/>
+                    android:maxLength="19"
+                    android:singleLine="true"
+                    android:paddingBottom="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
