@@ -36,10 +36,10 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="70dp"
                 app:tint="#FFFFFF"
-                android:backgroundTint="#E9001A7A"
+                android:backgroundTint="@color/colorDarkBlue"
                 android:overScrollMode="ifContentScrolls"
                 android:src="@drawable/icon_add"
-                app:borderWidth="3dp" />
+                app:borderWidth="3dp"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -64,8 +64,9 @@
             <Button
                 android:id="@+id/buttonFinishPurchase"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:text="FINALIZAR COMPRA" />
+                android:layout_height="65dp"
+                android:backgroundTint="@color/colorDarkBlue"
+                android:text="@string/finishPurchase"/>
         </LinearLayout>
 
     </RelativeLayout>

@@ -22,6 +22,7 @@
     <string name="product">Producto</string>
     <string name="amount">Cantidad</string>
     <string name="actions">Acciones</string>
+    <string name="noPurchases"> No tenes compras!! Hacé click en el botón con este ícono para comenzar</string>
 
     <!--Add Product-->
     <string name="detailProduct">Detalle del Producto</string>
@@ -31,6 +32,7 @@
     <string name="ok">Continua</string>
     <string name="cancel">Cancelar</string>
 
+    <string name="finishPurchase">FINALIZAR COMPRA</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="repeat">REPETIR</string>
     <string name="title_activity_maps">Mapa</string>

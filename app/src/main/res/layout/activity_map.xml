@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/locationSearch"
                 android:layout_marginRight="5dp"
-                android:text="Buscar"/>
+                android:text="Buscar" />
 
             <Button
                 android:layout_width="0dp"
