@@ -91,7 +91,7 @@ class PurchaseHistoryFragment : FragmentCommunication() {
 
         if (requestCode == RequestCode.RC_MAP && resultCode == Activity.RESULT_OK) {
             val address = data?.extras?.get("address") as String
-            val latLng = data?.extras?.get("latLng") as LatLng
+            val latLng = data.extras?.get("latLng") as LatLng
             activityCommunication.put(
                 "address", Address(address, latLng)
             )

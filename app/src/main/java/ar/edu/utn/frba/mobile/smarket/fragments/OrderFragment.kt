@@ -24,7 +24,7 @@ import kotlin.collections.ArrayList
 class OrderFragment  : FragmentCommunication() {
 
     var totalPrice = 0.0
-    var contacts = ArrayList<Contact>()
+    var contacts = ArrayList<Contact>().toList()
     var cards = ArrayList<Card>().toList()
 
     override fun getFragment(): Int {
@@ -36,7 +36,7 @@ class OrderFragment  : FragmentCommunication() {
         totalPrice = activityCommunication.get("totalPrice") as Double
         textTotalPrice.text = totalPrice.toString()
         cards = CardService.get(this.context!!)
-        contacts = ContactService.get()
+        contacts = ContactService.get(this.context!!)
 
         textSeeShoppingCart.setOnClickListener {
            val action = OrderFragmentDirections.actionOrderFragmentToShoppingCartFragment()
@@ -54,7 +54,7 @@ class OrderFragment  : FragmentCommunication() {
             history.add(purchase)
             PurchaseService.savePurchase(purchase)
             CardService.save(card, this.context!!)
-            ContactService.save(contact)
+            ContactService.save(contact, this.context!!)
 
             findNavController().popBackStack()
         }
