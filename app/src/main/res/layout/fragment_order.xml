@@ -270,7 +270,8 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button"
         android:id="@+id/buttonFinishOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
