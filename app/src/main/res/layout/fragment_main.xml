@@ -45,7 +45,8 @@
         android:layout_height="60dp"
         app:counterMaxLength="50"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:startIconDrawable="@drawable/icon_key">
+        app:startIconDrawable="@drawable/icon_key"
+        app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textPassword"
