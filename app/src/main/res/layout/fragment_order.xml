@@ -71,15 +71,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textCardNumberController"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                style="@style/SmarketInputLayout"
                 android:hint="@string/cardNumber"
                 app:counterMaxLength="50"
-                app:startIconDrawable="@drawable/icon_credit_card"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/icon_check"
-                app:endIconTint="@color/colorGreen">
+                app:startIconDrawable="@drawable/icon_credit_card">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textCardNumber"
@@ -98,15 +93,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textCardTitularController"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                style="@style/SmarketInputLayout"
                 android:hint="@string/contactName"
                 app:counterMaxLength="50"
-                app:startIconDrawable="@drawable/fui_ic_anonymous_white_24dp"
-                app:endIconMode="custom"
-                app:endIconTint="@color/colorGreen"
-                app:endIconDrawable="@drawable/icon_check">
+                app:startIconDrawable="@drawable/fui_ic_anonymous_white_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textCardTitular"
@@ -198,12 +188,11 @@
                         android:layout_height="match_parent"/>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
+                        style="@style/SmarketInputLayout"
                         android:hint="@string/cardSecurityCode"
                         app:startIconDrawable="@drawable/icon_key"
-                        android:layout_height="60dp"
-                        app:counterMaxLength="4">
+                        app:counterMaxLength="4"
+                        app:endIconMode="none">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textCardSecurityCode"
@@ -229,15 +218,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textContactNameController"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                style="@style/SmarketInputLayout"
                 android:hint="@string/contact"
                 app:counterMaxLength="50"
-                app:startIconDrawable="@drawable/icon_contact"
-                app:endIconMode="custom"
-                app:endIconTint="@color/colorGreen"
-                app:endIconDrawable="@drawable/icon_check">
+                app:startIconDrawable="@drawable/icon_contact">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textContactName"
@@ -255,16 +239,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textContactNumberController"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                style="@style/SmarketInputLayout"
                 android:hint="@string/contactNumber"
                 app:counterMaxLength="50"
                 app:startIconDrawable="@drawable/fui_ic_phone_white_24dp"
-                app:prefixText="@string/numberPrefix"
-                app:endIconMode="custom"
-                app:endIconTint="@color/colorGreen"
-                app:endIconDrawable="@drawable/icon_check">
+                app:prefixText="@string/numberPrefix">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textContactNumber"
