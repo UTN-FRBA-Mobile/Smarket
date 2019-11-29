@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.OrderFragment"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/summary"
-            android:background="@color/colorLightGrey"/>
+            android:background="@color/colorLightGrey" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -68,18 +68,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/imageCardNumberStatus"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"/>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textCardNumberController"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="@string/cardNumber"
                 app:counterMaxLength="50"
-                app:startIconDrawable="@drawable/icon_credit_card">
+                app:startIconDrawable="@drawable/icon_credit_card"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/icon_check"
+                app:endIconTint="@color/colorGreen">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textCardNumber"
@@ -95,18 +95,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/imageCardTitularStatus"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"/>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textCardTitularController"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="@string/contactName"
                 app:counterMaxLength="50"
-                app:startIconDrawable="@drawable/fui_ic_anonymous_white_24dp">
+                app:startIconDrawable="@drawable/fui_ic_anonymous_white_24dp"
+                app:endIconMode="custom"
+                app:endIconTint="@color/colorGreen"
+                app:endIconDrawable="@drawable/icon_check">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textCardTitular"
@@ -227,18 +227,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageContactNameStatus"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"/>
-
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textContactNameController"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="@string/contact"
                 app:counterMaxLength="50"
-                app:startIconDrawable="@drawable/icon_contact">
+                app:startIconDrawable="@drawable/icon_contact"
+                app:endIconMode="custom"
+                app:endIconTint="@color/colorGreen"
+                app:endIconDrawable="@drawable/icon_check">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textContactName"
@@ -254,19 +253,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageContactNumberStatus"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"/>
-
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textContactNumberController"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="@string/contactNumber"
                 app:counterMaxLength="50"
                 app:startIconDrawable="@drawable/fui_ic_phone_white_24dp"
-                app:prefixText="@string/numberPrefix">
+                app:prefixText="@string/numberPrefix"
+                app:endIconMode="custom"
+                app:endIconTint="@color/colorGreen"
+                app:endIconDrawable="@drawable/icon_check">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textContactNumber"
@@ -280,11 +278,10 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/SmarketButton"
         android:id="@+id/buttonFinishOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/finishOrder"
-        android:backgroundTint="@color/colorDarkBlue"
         android:layout_gravity="center_horizontal"/>
 </LinearLayout>

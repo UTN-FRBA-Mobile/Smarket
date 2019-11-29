@@ -8,4 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item> <!-- Color del focus de un textEdit -->
     </style>
 
+    <style name="SmarketButton" parent="@style/Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@drawable/button_background_selector</item>
+    </style>
 </resources>
