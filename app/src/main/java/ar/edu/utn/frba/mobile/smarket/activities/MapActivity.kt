@@ -8,8 +8,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import ar.edu.utn.frba.mobile.smarket.adapters.LocationSpinnerAdapter
-import ar.edu.utn.frba.mobile.smarket.service.LocationService
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -42,10 +40,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         locationSearch.setOnClickListener{ searchLocation() }
         confirm.setOnClickListener{ confirmLocation() }
         confirm.isEnabled = false
-
-        var locations = LocationService.getLocations()
-        var spinnerAdapter = LocationSpinnerAdapter(locations, android.R.layout.simple_spinner_dropdown_item, applicationContext)
-        locations_spinner?.adapter = spinnerAdapter
     }
 
     /**
@@ -98,7 +92,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
     private fun searchLocation() {
         confirm.isEnabled = false
-        var location = editText.text.toString() + ", " + (locations_spinner.selectedItem as ar.edu.utn.frba.mobile.smarket.model.Location).description
+        var location = editText.text.toString()
 
         if (location.isNullOrBlank()) {
             Toast.makeText(applicationContext,"Tenés que insertar la dirección",Toast.LENGTH_SHORT).show()
