@@ -39,7 +39,8 @@ class OrderFragment  : FragmentCommunication() {
         textCardTitularController.isEndIconVisible = false
         textContactNumberController.isEndIconVisible = false
         textContactNameController.isEndIconVisible = false
-
+        dateInputLayoutController.isEndIconVisible = false
+        textCardSecurityCode.isEnabled = false
         setButtonFinishEnabled()
 
         textSeeShoppingCart.setOnClickListener {
@@ -79,8 +80,11 @@ class OrderFragment  : FragmentCommunication() {
                     textCardDueMonth.setSelection(0)
                     textCardSecurityCode.isEnabled = (length == 19)
                     textCardNumberController.isEndIconVisible = true
+                    textCardSecurityCode.isEnabled = true
                 } else{
                     textCardNumberController.isEndIconVisible = false
+                    textCardSecurityCode.isEnabled = false
+                    textCardSecurityCode.setText("")
                 }
                 setButtonFinishEnabled()
 
@@ -129,8 +133,9 @@ class OrderFragment  : FragmentCommunication() {
                 if (textCardDueYear.text!!.length == 2 && length > 0) {
                     val year = textCardDueYear.text.toString().toInt()
                     val month = text.toInt()
-                    validateDate(year, month)
+                    dateInputLayoutController.isEndIconVisible = validateDate(year, month)
                 }
+                setButtonFinishEnabled()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -162,16 +167,18 @@ class OrderFragment  : FragmentCommunication() {
                 val textYear = textCardDueYear.text.toString()
                 val lengthYear = textYear.length
                 val textMonth = textCardDueMonth.text.toString()
-                imageCardDueDateStatus.setImageResource(0)
+                // imageCardDueDateStatus.setImageResource(0)
                 if (lengthYear == 2) {
                     val year = textYear.toInt()
                     val month = textMonth.toInt()
-                    validateDate(year, month)
+                    dateInputLayoutController.isEndIconVisible = validateDate(year, month)
                     textCardSecurityCode.setSelection(0)
                 } else {
+                    dateInputLayoutController.isEndIconVisible = false
                     if (textCardDueMonth.text!!.length == 1)
                         textCardNumber.setText("0" + textCardDueMonth.text.toString())
                 }
+                setButtonFinishEnabled()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -247,12 +254,16 @@ class OrderFragment  : FragmentCommunication() {
             text
     }
 
-    private fun validateDate(year: Int, month: Int) {
+    private fun validateDate(year: Int, month: Int):Boolean {
+        return !((2000 + year) == Calendar.getInstance().get(Calendar.YEAR)
+                        && month < Calendar.getInstance().get(Calendar.MONTH))
+        /*
         if ((2000 + year) == Calendar.getInstance().get(Calendar.YEAR) &&
             month < Calendar.getInstance().get(Calendar.MONTH))
             imageCardDueDateStatus.setImageResource(R.mipmap.ic_error)
         else
             imageCardDueDateStatus.setImageResource(R.mipmap.ic_success)
+         */
     }
 
     private fun setButtonFinishEnabled(){
@@ -264,5 +275,6 @@ class OrderFragment  : FragmentCommunication() {
                 && textCardTitularController.isEndIconVisible
                 && textContactNumberController.isEndIconVisible
                 && textContactNameController.isEndIconVisible
+                && dateInputLayoutController.isEndIconVisible
     }
 }
