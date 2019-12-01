@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.OrderFragment"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,33 +16,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/summary"
-            android:background="@color/colorLightGrey"/>
+            android:background="@color/colorLightGrey" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/descriptionTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/totalPrice"/>
+                android:text="@string/totalPrice"
+                android:layout_marginTop="8dp"
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/textTotalPrice"
-                android:paddingLeft="1pt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="18sp"
+                android:layout_toEndOf="@+id/descriptionTotalPrice">
             </TextView>
-        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textSeeShoppingCart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/seeShoppingCart"
-            android:textColor="@color/colorBlue"
-            android:clickable="true"
-            android:focusable="true"/>
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:id="@+id/textSeeShoppingCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorDarkBlue"
+                android:text="@string/seeShoppingCart"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp">
+            </com.google.android.material.button.MaterialButton>
+        </RelativeLayout>
+
     </LinearLayout>
     
     <LinearLayout
@@ -55,57 +64,36 @@
             android:text="@string/card"
             android:background="@color/colorLightGrey"/>
 
-        <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cardNumber"/>-->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/imageCardNumberStatus"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"/>
-            <!--<EditText
-                android:id="@+id/textCardNumber"
-                android:inputType="number"
-                android:maxLength="19"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content" />-->
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:id="@+id/textCardNumberController"
+                style="@style/SmarketInputLayout"
                 android:hint="@string/cardNumber"
                 app:counterMaxLength="50"
                 app:startIconDrawable="@drawable/icon_credit_card">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textCardNumber"
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/autoCompleteCardNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="12dp"
                     android:inputType="number"
+                    android:completionThreshold="3"
                     android:maxLength="19"/>
             </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/imageCardTitularStatus"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:id="@+id/textCardTitularController"
+                style="@style/SmarketInputLayout"
                 android:hint="@string/contactName"
                 app:counterMaxLength="50"
                 app:startIconDrawable="@drawable/fui_ic_anonymous_white_24dp">
@@ -114,7 +102,8 @@
                     android:id="@+id/textCardTitular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="19"/>
+                    android:maxLength="19"
+                    android:singleLine="true"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -135,18 +124,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/imageCardDueDateStatus"
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent" />
-
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="55dp"
-                        android:layout_height="50dp"
+                        android:layout_height="60dp"
                         android:hint="MM"
-                        app:helperText="Hola"
-                        app:helperTextEnabled="true"
                         app:counterMaxLength="2">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -163,12 +145,13 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text=" / "
-                        android:textSize="24sp" />
+                        android:textSize="26sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="55dp"
-                        android:layout_height="50dp"
+                        android:id="@+id/dateInputLayoutController"
+                        style="@style/SmarketInputLayout"
+                        android:layout_width="85dp"
+                        android:layout_height="60dp"
                         android:hint="AA"
                         app:counterMaxLength="2">
 
@@ -199,12 +182,11 @@
                         android:layout_height="match_parent"/>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
+                        style="@style/SmarketInputLayout"
                         android:hint="@string/cardSecurityCode"
                         app:startIconDrawable="@drawable/icon_key"
-                        android:layout_height="60dp"
-                        app:counterMaxLength="4">
+                        app:counterMaxLength="4"
+                        app:endIconMode="none">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textCardSecurityCode"
@@ -228,15 +210,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageContactNameStatus"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"/>
-
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:id="@+id/textContactNameController"
+                style="@style/SmarketInputLayout"
                 android:hint="@string/contact"
                 app:counterMaxLength="50"
                 app:startIconDrawable="@drawable/icon_contact">
@@ -245,8 +221,9 @@
                     android:id="@+id/textContactName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="19"
                     android:paddingBottom="12dp"
-                    android:maxLength="19"/>
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -254,15 +231,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageContactNumberStatus"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"/>
-
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:id="@+id/textContactNumberController"
+                style="@style/SmarketInputLayout"
                 android:hint="@string/contactNumber"
                 app:counterMaxLength="50"
                 app:startIconDrawable="@drawable/fui_ic_phone_white_24dp"
@@ -273,16 +244,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="9"
+                    android:singleLine="true"
                     android:inputType="number"/>
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        style="@style/SmarketButton"
         android:id="@+id/buttonFinishOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/finishOrder"
         android:layout_gravity="center_horizontal"/>
+
+
 </LinearLayout>

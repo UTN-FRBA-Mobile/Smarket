@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item> <!-- Color del focus de un textEdit -->
     </style>
 
+    <style name="SmarketButton" parent="@style/Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@drawable/button_background_selector</item>
+    </style>
+
+    <style name="SmarketInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="endIconMode">custom</item>
+        <item name="endIconTint">@color/colorGreen</item>
+        <item name="endIconDrawable">@drawable/icon_check</item>
+    </style>
 </resources>

@@ -7,40 +7,66 @@
     tools:context=".fragments.PurchaseHistoryFragment"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_purchases"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/item_purchase" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:indeterminate="true"
+            android:indeterminateDuration="3000"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorDarkBlue"/>
 
         <RelativeLayout
-            android:id="@+id/relativeLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_alignEnd="@+id/recycler_view_purchases"
-            android:gravity="end"
-            android:paddingRight="20dp"
-            android:paddingBottom="30dp">
+            android:id="@+id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/buttonNewPurchase"
-                style="@style/Widget.MaterialComponents.FloatingActionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:overScrollMode="ifContentScrolls"
-                android:src="@drawable/icon_add_shopping_cart"
-                app:backgroundTint="#004D40"
-                app:tint="#FFFFFF" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_purchases"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/item_purchase" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_alignEnd="@+id/recycler_view_purchases"
+                android:gravity="end"
+                android:paddingRight="20dp"
+                android:paddingBottom="30dp">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/buttonNewPurchase"
+                    style="@style/Widget.MaterialComponents.FloatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:overScrollMode="ifContentScrolls"
+                    android:src="@drawable/icon_add_shopping_cart"
+                    app:backgroundTint="@color/colorDarkBlue"
+                    app:tint="#FFFFFF" />
+
+            </RelativeLayout>
+
+        <TextView
+            android:id="@+id/noPurchasesText"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="120dp"
+            android:layout_height="80dp"
+            android:drawableBottom="@drawable/icon_add_shopping_cart"
+            android:drawableTint="@color/colorDarkBlue"
+            android:gravity="center_horizontal"
+            android:text="@string/noPurchases"
+            android:textSize="20sp" />
+
 
         </RelativeLayout>
-
-    </RelativeLayout>
-               
+    </FrameLayout>
 </LinearLayout>
