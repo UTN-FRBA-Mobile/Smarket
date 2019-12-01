@@ -2,9 +2,13 @@
     <string name="app_name">Smarket</string>
 
     <!--Login-->
-    <string name="username">Usuario</string>
+    <string name="username">Correo electrónico</string>
     <string name="password">Contraseña</string>
+    <string name="confirmPassword">Confirmar Contraseña</string>
     <string name="login">Ingresar</string>
+    <string name="newAccount">Registrar usuario</string>
+    <string name="createAccount">Crear cuenta</string>
+    <string name="registerUser">Registrar</string>
     <string name="invalidUsername">Usuario Invalido</string>
     <string name="invalidPassword">Password Invalido</string>
     <string name="incorrectUsernameOrPassword">Usuario o Contraseña Incorrecta</string>

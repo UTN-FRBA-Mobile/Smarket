@@ -7,4 +7,5 @@ object RequestCode {
     val RC_PERMISSION_CAMERA = 3
     val RC_MAP = 4
     val RC_SIGN_IN = 5
+    val RC_NEW_USER = 6
 }
