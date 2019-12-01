@@ -35,7 +35,7 @@ object LocationService {
     private fun transform(query: QueryDocumentSnapshot): List<Location> {
         val data = query.data
         @Suppress("UNCHECKED_CAST")
-        val products = data["products"] as List<HashMap<String, Any>>
+        val products = data["purchases"] as List<HashMap<String, Any>>
         return products.map {
             Location(
                 it["id"] as Long,

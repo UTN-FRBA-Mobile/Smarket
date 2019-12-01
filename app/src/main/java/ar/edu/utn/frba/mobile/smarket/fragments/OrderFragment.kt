@@ -12,7 +12,7 @@ import ar.edu.utn.frba.mobile.smarket.enums.PurchaseStatus
 import ar.edu.utn.frba.mobile.smarket.model.*
 import ar.edu.utn.frba.mobile.smarket.service.CardService
 import ar.edu.utn.frba.mobile.smarket.service.ContactService
-import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
+import ar.edu.utn.frba.mobile.smarket.service.HistoryService
 import kotlinx.android.synthetic.main.fragment_order.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -66,14 +66,14 @@ class OrderFragment  : FragmentCommunication() {
 
         @Suppress("UNCHECKED_CAST")
         buttonFinishOrder.setOnClickListener {
-            val history = activityCommunication.get("history") as ArrayList<Purchase>
-            val products = activityCommunication.get("products") as ArrayList<Product>
-            val purchase = Purchase(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products, PurchaseStatus.PENDING)
+            val history = activityCommunication.get("history") as ArrayList<History>
+            val products = activityCommunication.get("purchases") as ArrayList<Purchase>
+            val purchase = History(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products, PurchaseStatus.PENDING)
             val card = Card(autoCompleteCardNumber, textCardDueYear, textCardDueMonth, textCardTitular)
             val contact = Contact(autoCompleteContactName, textContactNumber)
 
             history.add(purchase)
-            PurchaseService.savePurchase(purchase)
+            HistoryService.savePurchase(purchase)
 
             CardService.save(card, this.context!!)
             ContactService.save(contact, this.context!!)

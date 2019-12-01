@@ -6,12 +6,14 @@ import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 import ar.edu.utn.frba.mobile.smarket.model.Product
+import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import kotlinx.android.synthetic.main.fragment_add_product.*
 import java.util.*
 
 class AddProductFragment : FragmentCommunication() {
 
-    private lateinit var product : Product
+    private lateinit var purchase : Purchase
+    private lateinit var product: Product
 
     override fun getFragment(): Int {
         return R.layout.fragment_add_product
@@ -27,9 +29,13 @@ class AddProductFragment : FragmentCommunication() {
 
         product = activityCommunication.get("product") as Product
 
-        textUnitaryPrice.text = product.price.toString()
+        purchase = Purchase(null, 1, product.description, product.price)
 
-        textDetailProduct.text = product.description
+        activityCommunication.put("purchase", purchase)
+
+        textUnitaryPrice.text = purchase.price.toString()
+
+        textDetailProduct.text = purchase.description
 
         updateAmount()
 
@@ -53,37 +59,37 @@ class AddProductFragment : FragmentCommunication() {
     }
 
     private fun increment() {
-        product.amount += 1
+        purchase.amount += 1
         updateAmount()
         calculateTotalPrice()
         enableDecrement()
     }
 
     private fun decrement() {
-        product.amount -= 1
+        purchase.amount -= 1
         updateAmount()
         calculateTotalPrice()
-        if (product.amount <= 1){
+        if (purchase.amount <= 1){
             disableDecrement()
         }
     }
 
     private fun cancel() {
-        activityCommunication.remove("product")
+        activityCommunication.remove("purchase")
         findNavController().popBackStack()
     }
 
     private fun ok() {
-        product.uid = UUID.randomUUID().toString()
+        purchase.uid = product.barcode
         findNavController().popBackStack()
     }
 
     private fun updateAmount() {
-        textUnityAmount.text = product.amount.toString()
+        textUnityAmount.text = purchase.amount.toString()
     }
 
     private fun calculateTotalPrice() {
-        val totalPrice = product.price * product.amount
+        val totalPrice = purchase.price * purchase.amount
         textTotalPrice.text = totalPrice.toString()
     }
 }

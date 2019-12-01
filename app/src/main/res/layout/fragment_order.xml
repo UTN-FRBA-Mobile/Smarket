@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="12dp"
                     android:inputType="number"
-                    android:completionThreshold="0"
+                    android:completionThreshold="1"
                     android:maxLength="19"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -222,7 +222,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="12dp"
-                    android:completionThreshold="0"
+                    android:completionThreshold="1"
                     android:singleLine="true"
                     android:maxLength="20"/>
             </com.google.android.material.textfield.TextInputLayout>

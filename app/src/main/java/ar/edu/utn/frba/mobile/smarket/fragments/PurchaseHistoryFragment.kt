@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -13,9 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.adapters.PurchasesAdapter
-import ar.edu.utn.frba.mobile.smarket.model.Purchase
-import ar.edu.utn.frba.mobile.smarket.service.ProductService
+import ar.edu.utn.frba.mobile.smarket.model.History
 import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
+import ar.edu.utn.frba.mobile.smarket.service.HistoryService
 import kotlinx.android.synthetic.main.fragment_purchase_history.*
 import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 import ar.edu.utn.frba.mobile.smarket.activities.MapActivity
@@ -25,7 +24,7 @@ import com.google.android.gms.maps.model.LatLng
 
 class PurchaseHistoryFragment : FragmentCommunication() {
 
-    private lateinit var history: List<Purchase>
+    private lateinit var history: List<History>
     private lateinit var purchasesAdapter: PurchasesAdapter
     private lateinit var viewManager: LinearLayoutManager
 
@@ -53,10 +52,10 @@ class PurchaseHistoryFragment : FragmentCommunication() {
         (activityCommunication as MainActivity).permissions[RequestCode.RC_PERMISSION_LOCATION] = { showMap() }
 
         if (activityCommunication.exist("history")) {
-            history = activityCommunication.get("history") as List<Purchase>
+            history = activityCommunication.get("history") as List<History>
             showHistory()
         } else {
-            history = PurchaseService.getHistory { showHistory() }
+            history = HistoryService.getHistory { showHistory() }
             activityCommunication.put("history", history)
         }
 
@@ -102,13 +101,13 @@ class PurchaseHistoryFragment : FragmentCommunication() {
         }
     }
 
-    private fun repeatPurchase(purchase: Purchase) {
-        if (purchase.products != null) {
-            activityCommunication.put("products", purchase.products!!)
+    private fun repeatPurchase(history: History) {
+        if (history.purchases != null) {
+            activityCommunication.put("purchases", history.purchases!!)
             goToShoppingCart()
         } else
-            activityCommunication.put("products", ProductService.getProducts(
-                purchase.uid
+            activityCommunication.put("purchases", PurchaseService.getProducts(
+                history.uid
             ) { goToShoppingCart() })
     }
 
