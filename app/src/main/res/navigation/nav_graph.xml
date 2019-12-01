@@ -19,6 +19,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/locationsFragment"
+        android:name="ar.edu.utn.frba.mobile.smarket.fragments.LocationsFragment"
+        android:label="fragment_locations"
+        tools:layout="@layout/fragment_locations" >
+        <action
+            android:id="@+id/action_locations_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/orderFragment"
         android:name="ar.edu.utn.frba.mobile.smarket.fragments.OrderFragment"
         android:label="fragment_order"
@@ -54,8 +64,8 @@
         android:label="fragment_purchase_history"
         tools:layout="@layout/fragment_purchase_history" >
         <action
-            android:id="@+id/action_purchaseHistoryFragment_to_shoppingCartFragment"
-            app:destination="@id/shoppingCartFragment" />
+            android:id="@+id/action_purchaseHistoryFragment_to_locationsFragment"
+            app:destination="@id/locationsFragment" />
     </fragment>
 	
 	<activity

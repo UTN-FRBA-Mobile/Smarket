@@ -1,3 +1,5 @@
 package ar.edu.utn.frba.mobile.smarket.model
 
-class Location(var id: Long?, var description: String)
+import com.google.android.gms.maps.model.LatLng
+
+class Location(var address: String, var latLng: LatLng)

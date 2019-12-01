@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.LocationsFragment"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_locations"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_location" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_alignEnd="@+id/recycler_view_locations"
+            android:gravity="end"
+            android:paddingRight="20dp"
+            android:paddingBottom="30dp" >
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/buttonNew"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:overScrollMode="ifContentScrolls"
+                android:src="@drawable/icon_add"
+                app:backgroundTint="#004D40"
+                app:tint="#FFFFFF" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
