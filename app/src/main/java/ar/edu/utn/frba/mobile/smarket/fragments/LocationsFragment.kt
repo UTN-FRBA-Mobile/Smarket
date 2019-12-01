@@ -39,23 +39,25 @@ class LocationsFragment : FragmentCommunication() {
 
         if (mainActivity.mViewModel.locations != null) {
             locations = mainActivity.mViewModel.locations!!
-            showHistory()
+            showLocations()
         } else {
-            locations = LocationService.getLocations { showHistory() }
+            locations = LocationService.getLocations { showLocations() }
             mainActivity.mViewModel.locations = locations
         }
 
         buttonNew.setOnClickListener {
-            super.getPermission(Manifest.permission.ACCESS_FINE_LOCATION, RequestCode.RC_PERMISSION_LOCATION) { showMap() }
+            showMap()
         }
     }
 
     private fun showMap() {
-        val intent = Intent(activity!!, MapActivity::class.java)
-        startActivityForResult(intent, RequestCode.RC_MAP)
+        super.getPermission(Manifest.permission.ACCESS_FINE_LOCATION, RequestCode.RC_PERMISSION_LOCATION) {
+            val intent = Intent(activity!!, MapActivity::class.java)
+            startActivityForResult(intent, RequestCode.RC_MAP)
+        }
     }
 
-    private fun showHistory() {
+    private fun showLocations() {
         locationsAdapter =
             LocationsAdapter(locations, ::removeCallback, ::onItemClick)
         viewManager = LinearLayoutManager(context)
@@ -64,9 +66,13 @@ class LocationsFragment : FragmentCommunication() {
             layoutManager = viewManager
             adapter = locationsAdapter
         }
+
+        if(locations.isEmpty()) {
+            showMap()
+        }
     }
 
-    fun onItemClick() {
+    private fun onItemClick(item: Location) {
         val action = LocationsFragmentDirections.actionLocationsToShoppingCartFragment()
         findNavController().navigate(action)
     }

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
+    android:layout_height="80dp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:paddingStart="16dp"
@@ -20,32 +20,28 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="10dp"
-            android:layout_marginBottom="4dp">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/locationDescription"
-                android:paddingTop="10dp"
-                android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonRemove"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorDarkBlue"
-                android:text="@string/delete"
-                android:textSize="12sp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/locationDescription" />
+                android:layout_width="wrap_content"
+                android:gravity="end"
+                android:layout_marginEnd="10px"
+                app:icon="@drawable/icon_trash"
+                app:iconTint="#AF0000"
+                app:layout_constraintStart_toEndOf="@id/locationDescription"
+                app:layout_constraintTop_toTopOf="@id/locationDescription"
+                app:rippleColor="#AF0000" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
