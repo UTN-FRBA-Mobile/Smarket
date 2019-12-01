@@ -17,7 +17,6 @@ import ar.edu.utn.frba.mobile.smarket.model.Location
 import ar.edu.utn.frba.mobile.smarket.service.LocationService
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_locations.*
-import android.widget.Toast
 
 class LocationsFragment : FragmentCommunication() {
 
@@ -40,23 +39,25 @@ class LocationsFragment : FragmentCommunication() {
 
         if (activityCommunication.exist("locations")) {
             locations = activityCommunication.get("locations") as ArrayList<Location>
-            showHistory()
+            showLocations()
         } else {
-            locations = LocationService.getLocations { showHistory() }
+            locations = LocationService.getLocations { showLocations() }
             activityCommunication.put("locations", locations)
         }
 
         buttonNew.setOnClickListener {
-            super.getPermission(Manifest.permission.ACCESS_FINE_LOCATION, RequestCode.RC_PERMISSION_LOCATION) { showMap() }
+            showMap()
         }
     }
 
     private fun showMap() {
-        val intent = Intent(activity!!, MapActivity::class.java)
-        startActivityForResult(intent, RequestCode.RC_MAP)
+        super.getPermission(Manifest.permission.ACCESS_FINE_LOCATION, RequestCode.RC_PERMISSION_LOCATION) {
+            val intent = Intent(activity!!, MapActivity::class.java)
+            startActivityForResult(intent, RequestCode.RC_MAP)
+        }
     }
 
-    private fun showHistory() {
+    private fun showLocations() {
         locationsAdapter =
             LocationsAdapter(locations, ::removeCallback, ::onItemClick)
         viewManager = LinearLayoutManager(context)
@@ -65,9 +66,13 @@ class LocationsFragment : FragmentCommunication() {
             layoutManager = viewManager
             adapter = locationsAdapter
         }
+
+        if(locations.isEmpty()) {
+            showMap()
+        }
     }
 
-    fun onItemClick(item: Location) {
+    private fun onItemClick(item: Location) {
         val action = LocationsFragmentDirections.actionLocationsToShoppingCartFragment()
         findNavController().navigate(action)
     }
