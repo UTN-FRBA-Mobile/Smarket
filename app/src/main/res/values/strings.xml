@@ -55,4 +55,6 @@
     <string name="location">Ubicación</string>
     <string name="newLocation">Nueva ubicación</string>
 
+    <!--Location-->
+    <string name="delete">ELIMINAR</string>
 </resources>

@@ -17,6 +17,7 @@ import ar.edu.utn.frba.mobile.smarket.model.Location
 import ar.edu.utn.frba.mobile.smarket.service.LocationService
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_locations.*
+import android.widget.Toast
 
 class LocationsFragment : FragmentCommunication() {
 
@@ -57,13 +58,18 @@ class LocationsFragment : FragmentCommunication() {
 
     private fun showHistory() {
         locationsAdapter =
-            LocationsAdapter(locations, ::removeCallback)
+            LocationsAdapter(locations, ::removeCallback, ::onItemClick)
         viewManager = LinearLayoutManager(context)
 
         recycler_view_locations.apply {
             layoutManager = viewManager
             adapter = locationsAdapter
         }
+    }
+
+    fun onItemClick(item: Location) {
+        val action = LocationsFragmentDirections.actionLocationsToShoppingCartFragment()
+        findNavController().navigate(action)
     }
 
     private fun removeCallback(location: Location){
@@ -87,9 +93,9 @@ class LocationsFragment : FragmentCommunication() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == RequestCode.RC_MAP && resultCode == Activity.RESULT_OK) {
-            val address = data?.extras?.get("address") as String
-            val latLng = data.extras?.get("latLng") as LatLng
-            val location = Location(address, latLng)
+            val location = Location(
+                data?.extras?.get("address") as String,
+                data.extras?.get("latLng") as LatLng)
             LocationService.save(location)
             locations.add(location)
 
