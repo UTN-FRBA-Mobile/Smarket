@@ -5,6 +5,7 @@
     <color name="colorAccent">#00574B</color>
     <color name="colorTextError">#FA0303</color>
     <color name="colorLightGrey">#EAE7E7</color>
+    <color name="colorUltraLightGrey">#FAFAFA</color>
     <color name="colorBlue">#1700FF</color>
     <color name="colorGreen">#23CA01</color>
     <color name="colorOrange">#FF4D00</color>
