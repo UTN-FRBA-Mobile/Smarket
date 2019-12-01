@@ -30,7 +30,7 @@ class OrderFragment  : FragmentCommunication() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        totalPrice = activityCommunication.get("totalPrice") as Double
+        totalPrice = mainActivity.mViewModel.totalPrice
         textTotalPrice.text = totalPrice.toString()
         cards = CardService.get(this.context!!)
 
@@ -66,8 +66,8 @@ class OrderFragment  : FragmentCommunication() {
 
         @Suppress("UNCHECKED_CAST")
         buttonFinishOrder.setOnClickListener {
-            val history = activityCommunication.get("history") as ArrayList<History>
-            val products = activityCommunication.get("purchases") as ArrayList<Purchase>
+            val history = mainActivity.mViewModel.history!!
+            val products = mainActivity.mViewModel.purchases!!
             val purchase = History(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products, PurchaseStatus.PENDING)
             val card = Card(autoCompleteCardNumber, textCardDueYear, textCardDueMonth, textCardTitular)
             val contact = Contact(autoCompleteContactName, textContactNumber)
@@ -116,7 +116,7 @@ class OrderFragment  : FragmentCommunication() {
 
             override fun afterTextChanged(s: Editable?) {
                 val split = textCardTitular.text.toString().split(" ")
-                textCardTitularController.isEndIconVisible = (split.size > 1 && split[1].length > 1)
+                textCardTitularController.isEndIconVisible = (split.size > 1 && split[0].length > 1)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -184,17 +184,13 @@ class OrderFragment  : FragmentCommunication() {
                 val textYear = textCardDueYear.text.toString()
                 val lengthYear = textYear.length
                 val textMonth = textCardDueMonth.text.toString()
-                // imageCardDueDateStatus.setImageResource(0)
                 if (lengthYear == 2) {
                     val year = textYear.toInt()
                     val month = textMonth.toInt()
                     dateInputLayoutController.isEndIconVisible = validateDate(year, month)
-                    textCardSecurityCode.setSelection(0)
-                } else {
+                } else
                     dateInputLayoutController.isEndIconVisible = false
-                    if (textCardDueMonth.text!!.length == 1)
-                        autoCompleteCardNumber.setText("0" + textCardDueMonth.text.toString())
-                }
+                
                 setButtonFinishEnabled()
             }
 

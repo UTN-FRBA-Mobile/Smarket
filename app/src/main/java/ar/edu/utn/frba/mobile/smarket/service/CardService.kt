@@ -31,7 +31,7 @@ object CardService {
 
     fun save(card: Card, context: Context) {
         var cards = this.get(context)
-        val actualCard = cards.firstOrNull { card.number != it.number }
+        val actualCard = cards.firstOrNull { card.number == it.number }
 
         if (actualCard == null || actualCard.priority > 0) {
             if (actualCard == null) {

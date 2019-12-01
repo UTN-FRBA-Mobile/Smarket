@@ -37,12 +37,12 @@ class LocationsFragment : FragmentCommunication() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (activityCommunication.exist("locations")) {
-            locations = activityCommunication.get("locations") as ArrayList<Location>
+        if (mainActivity.mViewModel.locations != null) {
+            locations = mainActivity.mViewModel.locations!!
             showLocations()
         } else {
             locations = LocationService.getLocations { showLocations() }
-            activityCommunication.put("locations", locations)
+            mainActivity.mViewModel.locations = locations
         }
 
         buttonNew.setOnClickListener {
@@ -90,7 +90,7 @@ class LocationsFragment : FragmentCommunication() {
 
     private fun remove(location: Location){
         locations.remove(location)
-        activityCommunication.put("locations", locations)
+        mainActivity.mViewModel.locations = locations
         locationsAdapter.notifyDataSetChanged()
     }
 

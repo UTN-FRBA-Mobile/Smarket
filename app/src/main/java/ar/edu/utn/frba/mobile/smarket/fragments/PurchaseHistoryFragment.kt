@@ -17,7 +17,7 @@ import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 
 class PurchaseHistoryFragment : FragmentCommunication() {
 
-    private lateinit var history: List<History>
+    private lateinit var history: ArrayList<History>
     private lateinit var purchasesAdapter: PurchasesAdapter
     private lateinit var viewManager: LinearLayoutManager
 
@@ -42,16 +42,16 @@ class PurchaseHistoryFragment : FragmentCommunication() {
         relativeLayout?.visibility = View.INVISIBLE
         noPurchasesText?.visibility = View.INVISIBLE
 
-        if (activityCommunication.exist("history")) {
-            history = activityCommunication.get("history") as List<History>
+        if (mainActivity.mViewModel.history != null) {
+            history = mainActivity.mViewModel.history!!
             showHistory()
         } else {
             history = HistoryService.getHistory { showHistory() }
-            activityCommunication.put("history", history)
+            mainActivity.mViewModel.history = history
         }
 
         buttonNewPurchase.setOnClickListener {
-            activityCommunication.remove("purchases")
+            mainActivity.mViewModel.purchases = null
             goToLocations()
         }
     }
@@ -90,11 +90,11 @@ class PurchaseHistoryFragment : FragmentCommunication() {
 
     private fun repeatPurchase(history: History) {
         if (history.purchases != null) {
-            activityCommunication.put("purchases", history.purchases!!)
+            mainActivity.mViewModel.purchases = history.purchases!!
             goToLocations()
         } else
-            activityCommunication.put("purchases", PurchaseService.getProducts(
+            mainActivity.mViewModel.purchases = PurchaseService.getProducts(
                 history.uid
-            ) { goToLocations() })
+            ) { goToLocations() }
     }
 }
