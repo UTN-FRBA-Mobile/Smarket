@@ -116,7 +116,7 @@ class OrderFragment  : FragmentCommunication() {
 
             override fun afterTextChanged(s: Editable?) {
                 val split = textCardTitular.text.toString().split(" ")
-                textCardTitularController.isEndIconVisible = (split.size > 1 && split[1].length > 1)
+                textCardTitularController.isEndIconVisible = (split.size > 1 && split[0].length > 1)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
