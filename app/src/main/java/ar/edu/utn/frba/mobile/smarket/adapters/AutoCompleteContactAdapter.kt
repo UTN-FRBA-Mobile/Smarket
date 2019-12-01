@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.model.Card
 import ar.edu.utn.frba.mobile.smarket.model.Contact
 import ar.edu.utn.frba.mobile.smarket.service.ContactService
 import com.google.android.material.button.MaterialButton
@@ -59,6 +60,11 @@ class AutoCompleteContactAdapter(context: Context, val contacts: List<Contact>, 
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val queryString = constraint?.toString()
                 val filterResults = FilterResults()
+                if (contacts.any { it.name == queryString}) {
+                    filterResults.values = ArrayList<Card>()
+                    filterResults.count = 0
+                    return filterResults
+                }
                 val suggestions = if (queryString == null || queryString.isEmpty())
                     contacts
                 else

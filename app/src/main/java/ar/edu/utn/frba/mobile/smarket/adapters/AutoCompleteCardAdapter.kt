@@ -65,6 +65,12 @@ class AutoCompleteCardAdapter(context: Context, val cards: List<Card>, val onCli
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val queryString = constraint?.toString()
                 val filterResults = FilterResults()
+
+                if (queryString != null && queryString.length == 19) {
+                    filterResults.values = ArrayList<Card>()
+                    filterResults.count = 0
+                    return filterResults
+                }
                 val suggestions = if (queryString == null || queryString.isEmpty())
                     cards
                 else
