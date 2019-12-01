@@ -6,11 +6,9 @@ import android.text.*
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.adapters.AutoCompleteCardAdapter
 import ar.edu.utn.frba.mobile.smarket.enums.PurchaseStatus
-import ar.edu.utn.frba.mobile.smarket.model.Card
-import ar.edu.utn.frba.mobile.smarket.model.Contact
-import ar.edu.utn.frba.mobile.smarket.model.Product
-import ar.edu.utn.frba.mobile.smarket.model.Purchase
+import ar.edu.utn.frba.mobile.smarket.model.*
 import ar.edu.utn.frba.mobile.smarket.service.CardService
 import ar.edu.utn.frba.mobile.smarket.service.ContactService
 import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
@@ -28,12 +26,21 @@ class OrderFragment  : FragmentCommunication() {
         return R.layout.fragment_order
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         totalPrice = activityCommunication.get("totalPrice") as Double
         textTotalPrice.text = totalPrice.toString()
         cards = CardService.get(this.context!!)
         contacts = ContactService.get(this.context!!)
+
+        val adapter = AutoCompleteCardAdapter(context!!, cards) {
+            autoCompleteCardNumber.setText(it.number)
+            textCardDueMonth.setText(it.month)
+            textCardDueYear.setText(it.year)
+            textCardTitular.setText(it.titular)
+        }
+        autoCompleteCardNumber.setAdapter(adapter)
 
         textCardNumberController.isEndIconVisible = false
         textCardTitularController.isEndIconVisible = false
@@ -53,28 +60,29 @@ class OrderFragment  : FragmentCommunication() {
             val history = activityCommunication.get("history") as ArrayList<Purchase>
             val products = activityCommunication.get("products") as ArrayList<Product>
             val purchase = Purchase(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products, PurchaseStatus.PENDING)
-            val card = Card(textCardNumber, textCardDueYear, textCardDueMonth, textCardTitular)
+            val card = Card(autoCompleteCardNumber, textCardDueYear, textCardDueMonth, textCardTitular)
             val contact = Contact(textContactName, textContactNumber)
 
             history.add(purchase)
             PurchaseService.savePurchase(purchase)
+
             CardService.save(card, this.context!!)
             ContactService.save(contact, this.context!!)
 
             findNavController().popBackStack()
         }
 
-        textCardNumber.addTextChangedListener(object : TextWatcher {
+        autoCompleteCardNumber.addTextChangedListener(object : TextWatcher {
 
             @SuppressLint("SetTextI18n")
             override fun afterTextChanged(s: Editable?) {
-                val text = textCardNumber.text.toString()
+                val text = autoCompleteCardNumber.text.toString()
                 val length = text.length
 
                 val textSplit = splitNumber(text.replace(" ", ""))
                 if (textSplit != text) {
-                    textCardNumber.setText(textSplit)
-                    textCardNumber.setSelection(textSplit.length)
+                    autoCompleteCardNumber.setText(textSplit)
+                    autoCompleteCardNumber.setSelection(textSplit.length)
                 }
                 if (length == 19) {
                     textCardDueMonth.setSelection(0)
@@ -176,7 +184,7 @@ class OrderFragment  : FragmentCommunication() {
                 } else {
                     dateInputLayoutController.isEndIconVisible = false
                     if (textCardDueMonth.text!!.length == 1)
-                        textCardNumber.setText("0" + textCardDueMonth.text.toString())
+                        autoCompleteCardNumber.setText("0" + textCardDueMonth.text.toString())
                 }
                 setButtonFinishEnabled()
             }
@@ -190,7 +198,7 @@ class OrderFragment  : FragmentCommunication() {
             override fun filter(source: CharSequence,start: Int,end: Int,dest: Spanned,
                                 dstart: Int,dend: Int): CharSequence? {
                 val text = dest.toString()
-                if (text.length == CardService.logMaxSecurityCode(textCardNumber.text.toString()))
+                if (text.length == CardService.logMaxSecurityCode(autoCompleteCardNumber.text.toString()))
                     return ""
 
                 return null
@@ -200,7 +208,7 @@ class OrderFragment  : FragmentCommunication() {
         textCardSecurityCode.addTextChangedListener(object : TextWatcher {
             @SuppressLint("SetTextI18n")
             override fun afterTextChanged(s: Editable?) {
-                val limit = CardService.logMaxSecurityCode(textCardNumber.text.toString())
+                val limit = CardService.logMaxSecurityCode(autoCompleteCardNumber.text.toString())
 
                 when (textCardSecurityCode.text.toString().length) {
                     limit -> imageCardSecurityCodeStatus.setImageResource(R.mipmap.ic_success)
@@ -257,13 +265,6 @@ class OrderFragment  : FragmentCommunication() {
     private fun validateDate(year: Int, month: Int):Boolean {
         return !((2000 + year) == Calendar.getInstance().get(Calendar.YEAR)
                         && month < Calendar.getInstance().get(Calendar.MONTH))
-        /*
-        if ((2000 + year) == Calendar.getInstance().get(Calendar.YEAR) &&
-            month < Calendar.getInstance().get(Calendar.MONTH))
-            imageCardDueDateStatus.setImageResource(R.mipmap.ic_error)
-        else
-            imageCardDueDateStatus.setImageResource(R.mipmap.ic_success)
-         */
     }
 
     private fun setButtonFinishEnabled(){

@@ -57,4 +57,11 @@ object CardService {
         return stringCards.map { gson.fromJson(it, Card::class.java) }.sortedBy { it.priority }
     }
 
+    fun remove(context: Context, card: Card) {
+        val cards = this.get(context).filter { it.number != card.number }
+        val stringCards = cards.map { gson.toJson(it) }.toSet()
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
+        preferenceManager.edit().putStringSet(PREFERENCE_KEY, stringCards).apply()
+    }
+
 }

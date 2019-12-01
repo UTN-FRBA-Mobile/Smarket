@@ -76,15 +76,15 @@
                 app:counterMaxLength="50"
                 app:startIconDrawable="@drawable/icon_credit_card">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textCardNumber"
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/autoCompleteCardNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="12dp"
                     android:inputType="number"
+                    android:completionThreshold="3"
                     android:maxLength="19"/>
             </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -244,6 +244,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="9"
+                    android:singleLine="true"
                     android:inputType="number"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -257,4 +258,6 @@
         android:layout_height="wrap_content"
         android:text="@string/finishOrder"
         android:layout_gravity="center_horizontal"/>
+
+
 </LinearLayout>
