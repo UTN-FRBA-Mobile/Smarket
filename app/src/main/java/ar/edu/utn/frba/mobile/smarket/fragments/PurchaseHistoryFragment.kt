@@ -79,7 +79,7 @@ class PurchaseHistoryFragment : FragmentCommunication() {
 
     private fun startAdapter(){
         purchasesAdapter =
-            PurchasesAdapter(history, ::repeatPurchase, context!!)
+            PurchasesAdapter(history.sortedByDescending { it.date }, ::repeatPurchase, context!!)
         viewManager = LinearLayoutManager(context)
 
         recycler_view_purchases.apply {

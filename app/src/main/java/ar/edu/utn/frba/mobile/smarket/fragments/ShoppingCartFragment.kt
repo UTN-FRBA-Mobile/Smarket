@@ -44,6 +44,7 @@ class ShoppingCartFragment : FragmentCommunication() {
         addPurchase()
         showProducts()
         setEnabledButtonFinish()
+
         buttonAddProduct.setOnClickListener {
             showScan()
         }
@@ -54,6 +55,9 @@ class ShoppingCartFragment : FragmentCommunication() {
                 ShoppingCartFragmentDirections.actionShoppingCartFragmentToOrderFragment()
             findNavController().navigate(action)
         }
+
+        if (purchases.isEmpty())
+            showScan()
     }
 
     override fun onResume() {
