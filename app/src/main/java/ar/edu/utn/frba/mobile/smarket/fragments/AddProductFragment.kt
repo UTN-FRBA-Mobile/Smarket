@@ -7,6 +7,7 @@ import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 import ar.edu.utn.frba.mobile.smarket.model.Product
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_add_product.*
 import java.util.*
 
@@ -36,6 +37,8 @@ class AddProductFragment : FragmentCommunication() {
         textUnitaryPrice.text = purchase.price.toString()
 
         textDetailProduct.text = purchase.description
+
+        Picasso.with(context!!).load(product.image).into(imageProduct)
 
         updateAmount()
 
@@ -80,7 +83,7 @@ class AddProductFragment : FragmentCommunication() {
     }
 
     private fun ok() {
-        purchase.uid = product.barcode
+        purchase.barCode = product.barcode
         findNavController().popBackStack()
     }
 

@@ -75,8 +75,8 @@ class ShoppingCartFragment : FragmentCommunication() {
 
     private fun addPurchase() {
         val purchase = activityCommunication.get("purchase") as Purchase?
-        if (purchase?.uid != null) {
-            val actualPurchase = this.purchases.firstOrNull { it.uid == purchase.uid}
+        if (purchase?.barCode != null) {
+            val actualPurchase = this.purchases.firstOrNull { it.barCode == purchase.barCode}
             if (actualPurchase != null)
                 actualPurchase.amount += purchase.amount
             else

@@ -4,7 +4,6 @@ import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -36,7 +35,7 @@ object PurchaseService {
         val products = data["purchases"] as List<HashMap<String, Any>>
         return products.map {
             Purchase(
-                UUID.randomUUID().toString(),
+                it["barcode"] as String,
                 it["amount"] as Long,
                 it["description"] as String,
                 it["price"] as Double
@@ -46,6 +45,7 @@ object PurchaseService {
 
     private fun transform(purchase: Purchase): HashMap<String, Any> {
         val query = HashMap<String, Any>()
+        query["barcode"] = purchase.barCode!!
         query["amount"] = purchase.amount
         query["price"] = purchase.price
         query["description"] = purchase.description
