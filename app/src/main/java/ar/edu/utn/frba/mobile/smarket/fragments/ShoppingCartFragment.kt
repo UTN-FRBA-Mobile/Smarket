@@ -132,7 +132,7 @@ class ShoppingCartFragment : FragmentCommunication() {
 
     private fun showProducts() {
 
-        productsAdapter = ProductsAdapter(purchases, ::removeProductCallback, ::updateCant)
+        productsAdapter = ProductsAdapter(purchases, ::removeProductCallback, ::updateCant, context!!)
         viewManager = LinearLayoutManager(context)
 
         recycler_view_products.apply {

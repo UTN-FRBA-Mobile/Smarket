@@ -51,12 +51,12 @@ class PurchaseHistoryFragment : FragmentCommunication() {
         }
 
         buttonNewPurchase.setOnClickListener {
-            val action = PurchaseHistoryFragmentDirections.actionPurchaseHistoryFragmentToLocationsFragment()
-            findNavController().navigate(action)
+            activityCommunication.remove("purchases")
+            goToLocations()
         }
     }
 
-    private fun goToShoppingCart() {
+    private fun goToLocations() {
         val action =
             PurchaseHistoryFragmentDirections.actionPurchaseHistoryFragmentToLocationsFragment()
         findNavController().navigate(action)
@@ -77,7 +77,7 @@ class PurchaseHistoryFragment : FragmentCommunication() {
         progressBar?.visibility = View.GONE
     }
 
-    fun startAdapter(){
+    private fun startAdapter(){
         purchasesAdapter =
             PurchasesAdapter(history, ::repeatPurchase, context!!)
         viewManager = LinearLayoutManager(context)
@@ -91,10 +91,10 @@ class PurchaseHistoryFragment : FragmentCommunication() {
     private fun repeatPurchase(history: History) {
         if (history.purchases != null) {
             activityCommunication.put("purchases", history.purchases!!)
-            goToShoppingCart()
+            goToLocations()
         } else
             activityCommunication.put("purchases", PurchaseService.getProducts(
                 history.uid
-            ) { goToShoppingCart() })
+            ) { goToLocations() })
     }
 }

@@ -9,7 +9,6 @@ import ar.edu.utn.frba.mobile.smarket.model.Product
 import ar.edu.utn.frba.mobile.smarket.model.Purchase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_add_product.*
-import java.util.*
 
 class AddProductFragment : FragmentCommunication() {
 
@@ -30,7 +29,7 @@ class AddProductFragment : FragmentCommunication() {
 
         product = activityCommunication.get("product") as Product
 
-        purchase = Purchase(null, 1, product.description, product.price)
+        purchase = Purchase(null, 1, product.description, product.price, product.image)
 
         activityCommunication.put("purchase", purchase)
 

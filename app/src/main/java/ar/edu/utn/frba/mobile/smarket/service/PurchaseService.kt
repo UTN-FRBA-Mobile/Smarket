@@ -38,7 +38,8 @@ object PurchaseService {
                 it["barcode"] as String,
                 it["amount"] as Long,
                 it["description"] as String,
-                it["price"] as Double
+                it["price"] as Double,
+                it["image"] as String
             )
         }
     }
@@ -49,6 +50,7 @@ object PurchaseService {
         query["amount"] = purchase.amount
         query["price"] = purchase.price
         query["description"] = purchase.description
+        query["image"] = purchase.image
         return query
     }
 
