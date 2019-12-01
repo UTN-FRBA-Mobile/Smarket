@@ -184,17 +184,13 @@ class OrderFragment  : FragmentCommunication() {
                 val textYear = textCardDueYear.text.toString()
                 val lengthYear = textYear.length
                 val textMonth = textCardDueMonth.text.toString()
-                // imageCardDueDateStatus.setImageResource(0)
                 if (lengthYear == 2) {
                     val year = textYear.toInt()
                     val month = textMonth.toInt()
                     dateInputLayoutController.isEndIconVisible = validateDate(year, month)
-                    textCardSecurityCode.setSelection(0)
-                } else {
+                } else
                     dateInputLayoutController.isEndIconVisible = false
-                    if (textCardDueMonth.text!!.length == 1)
-                        autoCompleteCardNumber.setText("0" + textCardDueMonth.text.toString())
-                }
+                
                 setButtonFinishEnabled()
             }
 
