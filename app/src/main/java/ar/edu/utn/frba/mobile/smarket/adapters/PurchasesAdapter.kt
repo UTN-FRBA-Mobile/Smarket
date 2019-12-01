@@ -35,7 +35,7 @@ class PurchasesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val history : History = dataSet[position]
+        val history = dataSet[position]
         holder.bindData(history)
 
     }
@@ -48,7 +48,7 @@ class PurchasesAdapter(
             itemView.textPrice.text = "$ " + history.price.toString()
             itemView.textProducts.text = history.amount.toString() + " productos"
 
-            itemView.textDate.text = SimpleDateFormat("dd-MM-yy hh:mm")
+            itemView.textDate.text = SimpleDateFormat("dd-MM-yy kk:mm")
                 .format(history.date).toString()
 
             setPurchaseTextStatus(history)
