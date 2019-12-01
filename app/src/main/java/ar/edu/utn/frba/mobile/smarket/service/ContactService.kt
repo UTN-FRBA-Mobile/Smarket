@@ -13,7 +13,8 @@ object ContactService {
 
     fun save(contact: Contact, context: Context) {
         var contacts = this.get(context)
-        val actualContact = contacts.firstOrNull {it.name == contact.name}
+        contact.name = contact.name.toLowerCase()
+        val actualContact = contacts.firstOrNull {it.name == contact.name }
         if (actualContact == null || actualContact.number != contact.number) {
             if (actualContact == null)
                 contacts = contacts + contact
@@ -30,6 +31,13 @@ object ContactService {
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
         val stringContacts = preferenceManager.getStringSet(PREFERENCE_KEY, ArraySet())!!
         return stringContacts.map { gson.fromJson(it, Contact::class.java) }.sortedBy { it.name }
+    }
+
+    fun remove(context: Context, contact: Contact) {
+        val contacts = this.get(context).filter { it.name != contact.name }
+        val stringContact = contacts.map { gson.toJson(it) }.toSet()
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
+        preferenceManager.edit().putStringSet(PREFERENCE_KEY, stringContact).apply()
     }
 
 }

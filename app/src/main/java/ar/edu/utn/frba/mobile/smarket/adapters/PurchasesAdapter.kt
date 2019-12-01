@@ -10,15 +10,15 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.enums.PurchaseStatus
-import ar.edu.utn.frba.mobile.smarket.model.Purchase
-import ar.edu.utn.frba.mobile.smarket.service.PurchaseService
+import ar.edu.utn.frba.mobile.smarket.model.History
+import ar.edu.utn.frba.mobile.smarket.service.HistoryService
 import kotlinx.android.synthetic.main.item_purchase.view.*
 import java.text.SimpleDateFormat
 import android.widget.Toast
 
 class PurchasesAdapter(
-    private val dataSet: List<Purchase>,
-    private val actionRepeatPurchase: (Purchase) -> Unit,
+    private val dataSet: List<History>,
+    private val actionRepeatPurchase: (History) -> Unit,
     private val context: Context
 ): RecyclerView.Adapter<PurchasesAdapter.ViewHolder>(){
 
@@ -35,8 +35,8 @@ class PurchasesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val purchase : Purchase = dataSet[position]
-        holder.bindData(purchase)
+        val history : History = dataSet[position]
+        holder.bindData(history)
 
     }
 
@@ -44,20 +44,20 @@ class PurchasesAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        fun bindData(purchase: Purchase){
-            itemView.textPrice.text = "$ " + purchase.price.toString()
-            itemView.textProducts.text = purchase.amount.toString() + " productos"
+        fun bindData(history: History){
+            itemView.textPrice.text = "$ " + history.price.toString()
+            itemView.textProducts.text = history.amount.toString() + " productos"
 
             itemView.textDate.text = SimpleDateFormat("dd-MM-yy hh:mm")
-                .format(purchase.date).toString()
+                .format(history.date).toString()
 
-            setPurchaseTextStatus(purchase)
+            setPurchaseTextStatus(history)
             itemView.buttonRepeatPurchase.setOnClickListener {
-                actionRepeatPurchase(purchase)
+                actionRepeatPurchase(history)
             }
 
             when {
-                purchase.status == PurchaseStatus.FINISHED -> {
+                history.status == PurchaseStatus.FINISHED -> {
                     setButtonQualifyVisibility()
                     itemView.buttonQualify.setOnClickListener {
 
@@ -68,35 +68,35 @@ class PurchasesAdapter(
                         builder.setView(ratingBar)
 
                         builder.setPositiveButton("Confirmar") { _, _ ->
-                            purchase.rating = ratingBar.findViewById<RatingBar>(R.id.ratingBar).rating
-                            purchase.status = PurchaseStatus.QUALIFIED
+                            history.rating = ratingBar.findViewById<RatingBar>(R.id.ratingBar).rating
+                            history.status = PurchaseStatus.QUALIFIED
 
-                            PurchaseService.updatePurchase(purchase)
-                            updateViewOnQualifyResult(purchase)
+                            HistoryService.updatePurchase(history)
+                            updateViewOnQualifyResult(history)
                             Toast.makeText(context, "Gracias por calificar!", Toast.LENGTH_SHORT).show()
                         }
                         builder.create().show()
                     }
                 }
 
-                purchase.status == PurchaseStatus.QUALIFIED -> {
+                history.status == PurchaseStatus.QUALIFIED -> {
                     setButtonQualifyGone()
-                    itemView.qualifyResult.rating = purchase.rating!!
+                    itemView.qualifyResult.rating = history.rating!!
                 }
 
                 else -> setButtonQualifyAndStatusGone()
             }
         }
 
-        private fun updateViewOnQualifyResult(purchase: Purchase){
-            itemView.qualifyResult.rating = purchase.rating!!
-            setPurchaseTextStatus(purchase)
+        private fun updateViewOnQualifyResult(history: History){
+            itemView.qualifyResult.rating = history.rating!!
+            setPurchaseTextStatus(history)
             setButtonQualifyGone()
         }
 
-        private fun setPurchaseTextStatus(purchase: Purchase){
-            itemView.textStatus.text = context.resources.getString(purchase.status.value)
-            itemView.textStatus.setTextColor(ContextCompat.getColor(context, purchase.status.color))
+        private fun setPurchaseTextStatus(history: History){
+            itemView.textStatus.text = context.resources.getString(history.status.value)
+            itemView.textStatus.setTextColor(ContextCompat.getColor(context, history.status.color))
         }
 
         private fun setButtonQualifyVisibility(){

@@ -1,15 +1,7 @@
 package ar.edu.utn.frba.mobile.smarket.model
 
-import ar.edu.utn.frba.mobile.smarket.enums.PurchaseStatus
-import java.util.*
-
-class Purchase(
-    var uid: String,
-    var date: Date,
-    var price: Number,
-    var amount: Number,
-    var products: List<Product>?,
-    var status: PurchaseStatus
-) {
-    var rating: Float? = null
+class Purchase(var barCode: String?, var amount: Long, var description: String, var price: Double) {
+    fun getTotalPrice() : Double {
+        return this.price * this.amount
+    }
 }

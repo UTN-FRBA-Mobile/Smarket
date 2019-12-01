@@ -3,13 +3,10 @@ package ar.edu.utn.frba.mobile.smarket.fragments
 import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.TableRow
-import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ar.edu.utn.frba.mobile.smarket.R
@@ -18,12 +15,13 @@ import ar.edu.utn.frba.mobile.smarket.activities.ScanActivity
 import ar.edu.utn.frba.mobile.smarket.adapters.ProductsAdapter
 import ar.edu.utn.frba.mobile.smarket.enums.RequestCode
 import ar.edu.utn.frba.mobile.smarket.model.Product
+import ar.edu.utn.frba.mobile.smarket.model.Purchase
+import ar.edu.utn.frba.mobile.smarket.service.ProductService
 import kotlinx.android.synthetic.main.fragment_shopping_cart.*
-import kotlin.random.Random
 
 class ShoppingCartFragment : FragmentCommunication() {
 
-    private var products = ArrayList<Product>()
+    private var purchases = ArrayList<Purchase>()
 
     private var totalPrice = 0.0
     private lateinit var productsAdapter: ProductsAdapter
@@ -37,13 +35,13 @@ class ShoppingCartFragment : FragmentCommunication() {
         super.onViewCreated(view, savedInstanceState)
 
         @Suppress("UNCHECKED_CAST")
-        if (activityCommunication.exist("products"))
-            products = activityCommunication.get("products") as ArrayList<Product>
+        if (activityCommunication.exist("purchases"))
+            purchases = activityCommunication.get("purchases") as ArrayList<Purchase>
 
         val activityMain = activityCommunication as MainActivity
         activityMain.permissions[RequestCode.RC_PERMISSION_CAMERA] = { showActivityScan() }
 
-        addProduct()
+        addPurchase()
         showProducts()
         setEnabledButtonFinish()
         buttonAddProduct.setOnClickListener {
@@ -75,11 +73,15 @@ class ShoppingCartFragment : FragmentCommunication() {
         startActivityForResult(intent, RequestCode.RC_SCAN)
     }
 
-    private fun addProduct() {
-        val product = activityCommunication.get("product") as Product?
-        if (product?.uid != null) {
-            products.add(product)
-            activityCommunication.remove("product")
+    private fun addPurchase() {
+        val purchase = activityCommunication.get("purchase") as Purchase?
+        if (purchase?.barCode != null) {
+            val actualPurchase = this.purchases.firstOrNull { it.barCode == purchase.barCode}
+            if (actualPurchase != null)
+                actualPurchase.amount += purchase.amount
+            else
+                purchases.add(purchase)
+            activityCommunication.remove("purchase")
             saveProducts()
             setEnabledButtonFinish()
         }
@@ -87,12 +89,12 @@ class ShoppingCartFragment : FragmentCommunication() {
     }
 
     private fun setEnabledButtonFinish() {
-        buttonFinishPurchase.isEnabled = products.isNotEmpty()
+        buttonFinishPurchase.isEnabled = purchases.isNotEmpty()
     }
 
     private fun setTotal(){
         val inicial = 0
-        totalPrice = products
+        totalPrice = purchases
             .map { it.price * it.amount }
             .fold(inicial.toDouble(), {
                 total, next -> total + next
@@ -101,27 +103,27 @@ class ShoppingCartFragment : FragmentCommunication() {
         finishPurchaseText.text = "TOTAL: $$totalPrice"
     }
 
-    private fun removeProductCallback(product: Product){
+    private fun removeProductCallback(purchase: Purchase){
         val builder = AlertDialog.Builder(context)
         builder
-            .setTitle(product.description)
+            .setTitle(purchase.description)
             .setMessage("¿Desea eliminar este producto?")
             .setPositiveButton("Eliminar") { _, _ ->
-                removeProduct(product)
+                removeProduct(purchase)
             }
         builder.create().show()
     }
 
-    private fun removeProduct(product: Product){
-        products.remove(product)
+    private fun removeProduct(purchase: Purchase){
+        purchases.remove(purchase)
         saveProducts()
         productsAdapter.notifyDataSetChanged()
         setEnabledButtonFinish()
         setTotal()
     }
 
-    private fun updateCant(product: Product, cant: Int){
-        product.amount += cant
+    private fun updateCant(purchase: Purchase, cant: Int){
+        purchase.amount += cant
 
         productsAdapter.notifyDataSetChanged()
         setEnabledButtonFinish()
@@ -130,7 +132,7 @@ class ShoppingCartFragment : FragmentCommunication() {
 
     private fun showProducts() {
 
-        productsAdapter = ProductsAdapter(products, ::removeProductCallback, ::updateCant)
+        productsAdapter = ProductsAdapter(purchases, ::removeProductCallback, ::updateCant)
         viewManager = LinearLayoutManager(context)
 
         recycler_view_products.apply {
@@ -141,7 +143,7 @@ class ShoppingCartFragment : FragmentCommunication() {
     }
 
     private fun saveProducts() {
-        activityCommunication.put("products", products)
+        activityCommunication.put("purchases", purchases)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -149,14 +151,17 @@ class ShoppingCartFragment : FragmentCommunication() {
 
         if (requestCode == RequestCode.RC_SCAN && resultCode == RESULT_OK) {
             val barCode = data?.extras?.get("barCode") as String
-            activityCommunication.put(
-                "product",
-                Product(null, 1, barCode, Random.nextInt(1, 50).toDouble())
-            )
-            val action =
-                ShoppingCartFragmentDirections.actionShoppingCartFragmentToAddProductFragment()
-            findNavController().navigate(action)
+            ProductService.getProduct(barCode, {setProduct(it)}, {
+                Toast.makeText(context!!, resources.getString(R.string.productNotFound), Toast.LENGTH_SHORT).show()
+            })
         }
+    }
+
+    private fun setProduct (product: Product) {
+        activityCommunication.put("product", product)
+        val action =
+            ShoppingCartFragmentDirections.actionShoppingCartFragmentToAddProductFragment()
+        findNavController().navigate(action)
     }
 
 }

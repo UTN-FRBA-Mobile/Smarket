@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="65dp">
@@ -12,39 +13,33 @@
         app:cardElevation="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutCardAutoComplete"
+            android:id="@+id/layoutContactAutoComplete"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:paddingTop="10dp">
 
-            <ImageView
-                android:id="@+id/imageCardType"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:paddingRight="2dp"
-                android:src="@mipmap/ic_launcher_round"
+            <TextView
+                android:id="@+id/textContactNameId"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textCardNumberId"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imageCardType"
-                app:layout_constraintVertical_bias="0.41" />
-
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonRemoveCard"
+                android:id="@+id/buttonRemoveContact"
                 style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="24dp"
                 app:icon="@drawable/icon_trash"
                 app:iconTint="#AF0000"
-                app:layout_constraintStart_toEndOf="@id/textCardNumberId"
-                app:rippleColor="#AF0000" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:rippleColor="#AF0000"
+                tools:layout_editor_absoluteY="10dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

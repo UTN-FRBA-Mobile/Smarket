@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:layout_marginTop="50dp">
+    android:layout_marginTop="5dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -12,6 +12,11 @@
         android:text="@string/detailProduct"
         android:textAlignment="center"
         android:textSize="25sp"/>
+
+    <ImageView
+        android:id="@+id/imageProduct"
+        android:layout_width="200dp"
+        android:layout_height="200dp"/>
 
     <TextView
         android:id="@+id/textDetailProduct"
@@ -37,7 +42,7 @@
 
     <Space
         android:layout_width="1dp"
-        android:layout_height="25dp"/>
+        android:layout_height="10dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -84,7 +89,7 @@
 
     <Space
         android:layout_width="0dp"
-        android:layout_height="25dp"/>
+        android:layout_height="10dp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -108,7 +113,7 @@
 
     <Space
         android:layout_width="0dp"
-        android:layout_height="20dp"/>
+        android:layout_height="10dp"/>
 
     <Button
         android:id="@+id/buttonOk"

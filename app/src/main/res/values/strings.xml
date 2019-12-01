@@ -17,9 +17,9 @@
     <string name="contact">Contacto</string>
     <string name="finishOrder">Finalizar Pedido</string>
 
-    <!--Purchase History-->
+    <!--History History-->
     <string name="price">Precio</string>
-    <string name="product">Producto</string>
+    <string name="purchase">Producto</string>
     <string name="amount">Cantidad</string>
     <string name="actions">Acciones</string>
     <string name="noPurchases"> No tenes compras!! Hacé click en el botón con este ícono para comenzar</string>
@@ -30,7 +30,7 @@
     <string name="status_on_route">En Camino</string>
     <string name="qualify">Calificar</string>
 
-    <!--Add Product-->
+    <!--Add Purchase-->
     <string name="detailProduct">Detalle del Producto</string>
     <string name="unitaryPrice">Precio por Unidad : $</string>
     <string name="unitsToBuy">Unidades a Llevar</string>
@@ -54,6 +54,7 @@
     <string name="numberPrefix">(+54) 11   </string>
     <string name="location">Ubicación</string>
     <string name="newLocation">Nueva ubicación</string>
+    <string name="productNotFound">No se encontró el producto</string>
 
     <!--Location-->
     <string name="delete">ELIMINAR</string>
