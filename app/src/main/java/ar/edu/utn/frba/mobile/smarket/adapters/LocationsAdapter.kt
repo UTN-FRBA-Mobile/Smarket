@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_location.view.*
 class LocationsAdapter(
     private val locations: List<Location>,
     private val actionRemove: (Location) -> Unit,
-    private var actionClick: (Location) -> Unit
+    private var actionClick: () -> Unit
 ): RecyclerView.Adapter<LocationsAdapter.ViewHolder>(){
 
     override fun getItemViewType(position: Int): Int {
@@ -38,7 +38,7 @@ class LocationsAdapter(
             itemView.locationDescription.text = location.address
 
             itemView.buttonRemove.setOnClickListener { actionRemove(location) }
-            itemView.setOnClickListener { actionClick(location) }
+            itemView.setOnClickListener { actionClick() }
         }
     }
 }

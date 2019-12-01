@@ -27,11 +27,11 @@ class AddProductFragment : FragmentCommunication() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        product = activityCommunication.get("product") as Product
+        product = mainActivity.mViewModel.product!!
 
         purchase = Purchase(null, 1, product.description, product.price, product.image)
 
-        activityCommunication.put("purchase", purchase)
+        mainActivity.mViewModel.purchase = purchase
 
         textUnitaryPrice.text = purchase.price.toString()
 
@@ -77,7 +77,7 @@ class AddProductFragment : FragmentCommunication() {
     }
 
     private fun cancel() {
-        activityCommunication.remove("purchase")
+        mainActivity.mViewModel.purchase = null
         findNavController().popBackStack()
     }
 

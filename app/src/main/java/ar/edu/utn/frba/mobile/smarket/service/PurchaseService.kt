@@ -13,7 +13,7 @@ object PurchaseService {
         return FirebaseFirestore.getInstance().collection("purchases")
     }
 
-    fun getProducts(uidPurchase: String, action : ()->Unit): List<Purchase> {
+    fun getProducts(uidPurchase: String, action : ()->Unit): ArrayList<Purchase> {
         val products = ArrayList<Purchase>()
         getInstance().whereEqualTo("uid", uidPurchase).get()
             .addOnCompleteListener { response ->
