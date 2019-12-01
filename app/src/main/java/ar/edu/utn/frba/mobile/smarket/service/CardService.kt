@@ -20,12 +20,13 @@ object CardService {
     private val gson = Gson()
 
     fun logMaxSecurityCode(cardNumber: String): Int {
-        return when (cardNumber[0].toInt()) {
-            START_AMERICAN_EXPRESS -> LONG_SECURITY_CODE_AMERICAN_EXPRESS
-            START_VISA -> LONG_SECURITY_CODE_VISA
-            START_MASTERCARD -> LONG_SECURITY_CODE_MASTERCARD
-            else -> 3
-        }
+        return if (cardNumber.isNotEmpty())
+             when (cardNumber[0].toInt()) {
+                START_AMERICAN_EXPRESS -> LONG_SECURITY_CODE_AMERICAN_EXPRESS
+                START_VISA -> LONG_SECURITY_CODE_VISA
+                START_MASTERCARD -> LONG_SECURITY_CODE_MASTERCARD
+                else -> 3
+            } else 3
     }
 
     fun save(card: Card, context: Context) {

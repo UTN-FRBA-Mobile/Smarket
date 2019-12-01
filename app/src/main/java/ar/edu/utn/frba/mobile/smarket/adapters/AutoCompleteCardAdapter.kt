@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import ar.edu.utn.frba.mobile.smarket.R
 import ar.edu.utn.frba.mobile.smarket.model.Card
 import ar.edu.utn.frba.mobile.smarket.model.CardType
 import ar.edu.utn.frba.mobile.smarket.service.CardService
 import com.google.android.material.button.MaterialButton
-import kotlinx.android.synthetic.main.fragment_order.*
 
 class AutoCompleteCardAdapter(context: Context, val cards: List<Card>, val onClick: (c: Card)->Unit) :
     ArrayAdapter<Card>(context, 0, cards), Filterable {
@@ -65,13 +63,13 @@ class AutoCompleteCardAdapter(context: Context, val cards: List<Card>, val onCli
         return object: Filter() {
 
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val queryString = constraint?.toString()?.toLowerCase()
+                val queryString = constraint?.toString()
                 val filterResults = FilterResults()
                 val suggestions = if (queryString == null || queryString.isEmpty())
                     cards
                 else
                     cards.filter {
-                        it.number.toLowerCase().contains(queryString) && it.enable
+                        it.number.contains(queryString) && it.enable
                     }
                 filterResults.values = suggestions
                 filterResults.count = suggestions.size
@@ -79,6 +77,7 @@ class AutoCompleteCardAdapter(context: Context, val cards: List<Card>, val onCli
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults) {
+                @Suppress("UNCHECKED_CAST")
                 cardItems = results.values as List<Card>
                 notifyDataSetChanged()
             }

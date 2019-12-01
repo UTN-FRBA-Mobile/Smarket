@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="12dp"
                     android:inputType="number"
-                    android:completionThreshold="3"
+                    android:completionThreshold="0"
                     android:maxLength="19"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -217,13 +217,14 @@
                 app:counterMaxLength="50"
                 app:startIconDrawable="@drawable/icon_contact">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textContactName"
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/autoCompleteContactName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="19"
                     android:paddingBottom="12dp"
-                    android:singleLine="true" />
+                    android:completionThreshold="0"
+                    android:singleLine="true"
+                    android:maxLength="20"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
