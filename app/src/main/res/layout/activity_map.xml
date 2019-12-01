@@ -15,7 +15,7 @@
             android:layout_height="0dp"
             android:id="@+id/editText"
             android:layout_weight="0.5"
-            android:hint="Calle y altura" />
+            android:hint="@string/titleCalleYAltura" />
         <Spinner
             android:id="@+id/locations_spinner"
             android:layout_width="match_parent"
@@ -30,16 +30,16 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/locationSearch"
-                android:layout_marginRight="5dp"
-                android:text="Buscar"/>
+                android:layout_marginEnd="5dp"
+                android:text="@string/titleDirectionSearch"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:id="@+id/confirm"
-                android:text="Confirmar" />
+                android:text="@string/titleConfirmLocation"/>
         </LinearLayout>
     </LinearLayout>
 

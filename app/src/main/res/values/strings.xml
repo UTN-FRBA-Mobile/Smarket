@@ -22,6 +22,13 @@
     <string name="product">Producto</string>
     <string name="amount">Cantidad</string>
     <string name="actions">Acciones</string>
+    <string name="noPurchases"> No tenes compras!! Hacé click en el botón con este ícono para comenzar</string>
+    <string name="repeat">REPETIR</string>
+    <string name="cardDueDate">Fecha de Vencimiento</string>
+    <string name="status_pending">Pendiente</string>
+    <string name="status_finished">Finalizado</string>
+    <string name="status_on_route">En Camino</string>
+    <string name="qualify">Calificar</string>
 
     <!--Add Product-->
     <string name="detailProduct">Detalle del Producto</string>
@@ -31,20 +38,20 @@
     <string name="ok">Continua</string>
     <string name="cancel">Cancelar</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="repeat">REPETIR</string>
+    <!--Map-->
     <string name="title_activity_maps">Mapa</string>
+    <string name="titleDirectionSearch">BUSCAR</string>
+    <string name="titleConfirmLocation">CONFIRMAR</string>
+    <string name="titleCalleYAltura">Calle y Altura</string>
+
+    <!--Order-->
+    <string name="finishPurchase">FINALIZAR COMPRA</string>
     <string name="cardNumber">Número de Tarjeta</string>
     <string name="cardTitular">Nombre Completo</string>
     <string name="cardSecurityCode">Código de Seguridad</string>
     <string name="contactName">Nombre</string>
     <string name="contactNumber">Teléfono</string>
-    <string name="cardDueDate">Fecha de Vencimiento</string>
-    <string name="status_pending">Pendiente</string>
-    <string name="status_finished">Finalizado</string>
-    <string name="status_on_route">En Camino</string>
-    <string name="qualify">Calificar</string>
-    <string name="numberPrefix">(+54) 11 </string>
+    <string name="numberPrefix">(+54) 11   </string>
     <string name="location">Ubicación</string>
     <string name="newLocation">Nueva ubicación</string>
 

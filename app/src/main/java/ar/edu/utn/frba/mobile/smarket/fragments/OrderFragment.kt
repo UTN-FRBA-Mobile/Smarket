@@ -2,10 +2,7 @@ package ar.edu.utn.frba.mobile.smarket.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Editable
-import android.text.InputFilter
-import android.text.Spanned
-import android.text.TextWatcher
+import android.text.*
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
@@ -37,6 +34,14 @@ class OrderFragment  : FragmentCommunication() {
         textTotalPrice.text = totalPrice.toString()
         cards = CardService.get(this.context!!)
         contacts = ContactService.get(this.context!!)
+
+        textCardNumberController.isEndIconVisible = false
+        textCardTitularController.isEndIconVisible = false
+        textContactNumberController.isEndIconVisible = false
+        textContactNameController.isEndIconVisible = false
+        dateInputLayoutController.isEndIconVisible = false
+        textCardSecurityCode.isEnabled = false
+        setButtonFinishEnabled()
 
         textSeeShoppingCart.setOnClickListener {
            val action = OrderFragmentDirections.actionOrderFragmentToShoppingCartFragment()
@@ -73,10 +78,16 @@ class OrderFragment  : FragmentCommunication() {
                 }
                 if (length == 19) {
                     textCardDueMonth.setSelection(0)
-                    imageCardNumberStatus.setImageResource(R.mipmap.ic_success)
                     textCardSecurityCode.isEnabled = (length == 19)
-                } else
-                    imageCardNumberStatus.setImageResource(0)
+                    textCardNumberController.isEndIconVisible = true
+                    textCardSecurityCode.isEnabled = true
+                } else{
+                    textCardNumberController.isEndIconVisible = false
+                    textCardSecurityCode.isEnabled = false
+                    textCardSecurityCode.setText("")
+                }
+                setButtonFinishEnabled()
+
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -88,10 +99,7 @@ class OrderFragment  : FragmentCommunication() {
 
             override fun afterTextChanged(s: Editable?) {
                 val split = textCardTitular.text.toString().split(" ")
-                if (split.size > 1 && split[1].length > 1)
-                    imageCardTitularStatus.setImageResource(R.mipmap.ic_success)
-                else
-                    imageCardTitularStatus.setImageResource(0)
+                textCardTitularController.isEndIconVisible = (split.size > 1 && split[1].length > 1)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -125,8 +133,9 @@ class OrderFragment  : FragmentCommunication() {
                 if (textCardDueYear.text!!.length == 2 && length > 0) {
                     val year = textCardDueYear.text.toString().toInt()
                     val month = text.toInt()
-                    validateDate(year, month)
+                    dateInputLayoutController.isEndIconVisible = validateDate(year, month)
                 }
+                setButtonFinishEnabled()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -158,16 +167,18 @@ class OrderFragment  : FragmentCommunication() {
                 val textYear = textCardDueYear.text.toString()
                 val lengthYear = textYear.length
                 val textMonth = textCardDueMonth.text.toString()
-                imageCardDueDateStatus.setImageResource(0)
+                // imageCardDueDateStatus.setImageResource(0)
                 if (lengthYear == 2) {
                     val year = textYear.toInt()
                     val month = textMonth.toInt()
-                    validateDate(year, month)
+                    dateInputLayoutController.isEndIconVisible = validateDate(year, month)
                     textCardSecurityCode.setSelection(0)
                 } else {
+                    dateInputLayoutController.isEndIconVisible = false
                     if (textCardDueMonth.text!!.length == 1)
                         textCardNumber.setText("0" + textCardDueMonth.text.toString())
                 }
+                setButtonFinishEnabled()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -205,10 +216,8 @@ class OrderFragment  : FragmentCommunication() {
         textContactName.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable?) {
-                if (textContactName.text!!.isNotEmpty())
-                    imageContactNameStatus.setImageResource(R.mipmap.ic_success)
-                else
-                    imageContactNameStatus.setImageResource(0)
+                textContactNameController.isEndIconVisible = (!TextUtils.isEmpty(textContactName.text!!))
+                setButtonFinishEnabled()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -225,10 +234,9 @@ class OrderFragment  : FragmentCommunication() {
                     textContactNumber.setText(textSplit)
                     textContactNumber.setSelection(textSplit.length)
                 }
-                if (text.length == 9)
-                    imageContactNumberStatus.setImageResource(R.mipmap.ic_success)
-                else
-                    imageContactNumberStatus.setImageResource(0)
+
+                textContactNumberController.isEndIconVisible = (text.length == 9)
+                setButtonFinishEnabled()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -246,11 +254,27 @@ class OrderFragment  : FragmentCommunication() {
             text
     }
 
-    private fun validateDate(year: Int, month: Int) {
+    private fun validateDate(year: Int, month: Int):Boolean {
+        return !((2000 + year) == Calendar.getInstance().get(Calendar.YEAR)
+                        && month < Calendar.getInstance().get(Calendar.MONTH))
+        /*
         if ((2000 + year) == Calendar.getInstance().get(Calendar.YEAR) &&
             month < Calendar.getInstance().get(Calendar.MONTH))
             imageCardDueDateStatus.setImageResource(R.mipmap.ic_error)
         else
             imageCardDueDateStatus.setImageResource(R.mipmap.ic_success)
+         */
+    }
+
+    private fun setButtonFinishEnabled(){
+        buttonFinishOrder.isEnabled = buttonFinishEnabled()
+    }
+
+    private fun buttonFinishEnabled(): Boolean{
+        return textCardNumberController.isEndIconVisible
+                && textCardTitularController.isEndIconVisible
+                && textContactNumberController.isEndIconVisible
+                && textContactNameController.isEndIconVisible
+                && dateInputLayoutController.isEndIconVisible
     }
 }

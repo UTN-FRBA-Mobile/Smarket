@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="6dp"
-        app:cardElevation="2dp">
+        app:cardElevation="2dp"
+        android:backgroundTint="@color/colorUltraLightGrey">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -78,6 +79,7 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorDarkBlue"
                 android:text="@string/repeat"
                 android:textSize="12sp"
                 android:layout_marginStart="10dp"
@@ -101,6 +103,7 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorDarkBlue"
                 android:text="@string/qualify"
                 android:textSize="12sp"
                 android:layout_marginTop="5dp"
