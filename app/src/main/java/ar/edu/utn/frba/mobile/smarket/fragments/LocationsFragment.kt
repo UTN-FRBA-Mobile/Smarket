@@ -72,7 +72,7 @@ class LocationsFragment : FragmentCommunication() {
         }
     }
 
-    private fun onItemClick(item: Location) {
+    private fun onItemClick() {
         val action = LocationsFragmentDirections.actionLocationsToShoppingCartFragment()
         findNavController().navigate(action)
     }
