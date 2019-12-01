@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import ar.edu.utn.frba.mobile.smarket.activities.Communication
-import ar.edu.utn.frba.mobile.smarket.enums.RequestCode
+import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 
 abstract class FragmentCommunication : Fragment() {
 
-    lateinit var activityCommunication: Communication
+    lateinit var mainActivity: MainActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,7 +20,7 @@ abstract class FragmentCommunication : Fragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        activityCommunication = activity as Communication
+        mainActivity = activity as MainActivity
 
         return inflater.inflate(getFragment(), container, false)
     }

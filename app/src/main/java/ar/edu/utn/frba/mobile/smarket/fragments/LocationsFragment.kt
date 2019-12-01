@@ -17,7 +17,6 @@ import ar.edu.utn.frba.mobile.smarket.model.Location
 import ar.edu.utn.frba.mobile.smarket.service.LocationService
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_locations.*
-import android.widget.Toast
 
 class LocationsFragment : FragmentCommunication() {
 
@@ -38,12 +37,12 @@ class LocationsFragment : FragmentCommunication() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (activityCommunication.exist("locations")) {
-            locations = activityCommunication.get("locations") as ArrayList<Location>
+        if (mainActivity.mViewModel.locations != null) {
+            locations = mainActivity.mViewModel.locations!!
             showHistory()
         } else {
             locations = LocationService.getLocations { showHistory() }
-            activityCommunication.put("locations", locations)
+            mainActivity.mViewModel.locations = locations
         }
 
         buttonNew.setOnClickListener {
@@ -67,7 +66,7 @@ class LocationsFragment : FragmentCommunication() {
         }
     }
 
-    fun onItemClick(item: Location) {
+    fun onItemClick() {
         val action = LocationsFragmentDirections.actionLocationsToShoppingCartFragment()
         findNavController().navigate(action)
     }
@@ -85,7 +84,7 @@ class LocationsFragment : FragmentCommunication() {
 
     private fun remove(location: Location){
         locations.remove(location)
-        activityCommunication.put("locations", locations)
+        mainActivity.mViewModel.locations = locations
         locationsAdapter.notifyDataSetChanged()
     }
 

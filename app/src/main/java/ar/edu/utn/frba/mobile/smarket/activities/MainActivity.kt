@@ -3,13 +3,15 @@ package ar.edu.utn.frba.mobile.smarket.activities
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.model.MainViewModel
 
+class MainActivity : AppCompatActivity() {
 
-class MainActivity : AppCompatActivity() , Communication {
+    lateinit var mViewModel : MainViewModel
 
-    private val cache = HashMap<String, Any>()
     val permissions = HashMap<Int, () -> Unit>()
 
     fun setActionBarTitle(title: String) {
@@ -23,23 +25,8 @@ class MainActivity : AppCompatActivity() , Communication {
         val host = NavHostFragment.create(R.navigation.nav_graph)
         supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, host)
             .setPrimaryNavigationFragment(host).commit()
-    }
 
-
-    override fun put(key: String, value: Any) {
-        cache[key] = value
-    }
-
-    override fun get(key: String): Any? {
-        return cache[key]
-    }
-
-    override fun remove(key: String) {
-        cache.remove(key)
-    }
-
-    override fun exist(key: String): Boolean {
-        return cache.containsKey(key)
+        mViewModel = ViewModelProviders.of(this)[MainViewModel::class.java]
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

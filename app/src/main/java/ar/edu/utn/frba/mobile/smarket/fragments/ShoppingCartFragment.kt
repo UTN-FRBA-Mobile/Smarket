@@ -35,10 +35,10 @@ class ShoppingCartFragment : FragmentCommunication() {
         super.onViewCreated(view, savedInstanceState)
 
         @Suppress("UNCHECKED_CAST")
-        if (activityCommunication.exist("purchases"))
-            purchases = activityCommunication.get("purchases") as ArrayList<Purchase>
+        if (mainActivity.mViewModel.purchases != null)
+            purchases = mainActivity.mViewModel.purchases!!
 
-        val activityMain = activityCommunication as MainActivity
+        val activityMain = mainActivity
         activityMain.permissions[RequestCode.RC_PERMISSION_CAMERA] = { showActivityScan() }
 
         addPurchase()
@@ -49,7 +49,7 @@ class ShoppingCartFragment : FragmentCommunication() {
         }
 
         buttonFinishPurchase.setOnClickListener {
-            activityCommunication.put("totalPrice", totalPrice)
+            mainActivity.mViewModel.totalPrice = totalPrice
             val action =
                 ShoppingCartFragmentDirections.actionShoppingCartFragmentToOrderFragment()
             findNavController().navigate(action)
@@ -74,14 +74,14 @@ class ShoppingCartFragment : FragmentCommunication() {
     }
 
     private fun addPurchase() {
-        val purchase = activityCommunication.get("purchase") as Purchase?
+        val purchase = mainActivity.mViewModel.purchase
         if (purchase?.barCode != null) {
             val actualPurchase = this.purchases.firstOrNull { it.barCode == purchase.barCode}
             if (actualPurchase != null)
                 actualPurchase.amount += purchase.amount
             else
                 purchases.add(purchase)
-            activityCommunication.remove("purchase")
+            mainActivity.mViewModel.purchase = null
             saveProducts()
             setEnabledButtonFinish()
         }
@@ -143,7 +143,7 @@ class ShoppingCartFragment : FragmentCommunication() {
     }
 
     private fun saveProducts() {
-        activityCommunication.put("purchases", purchases)
+        mainActivity.mViewModel.purchases = purchases
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -158,7 +158,7 @@ class ShoppingCartFragment : FragmentCommunication() {
     }
 
     private fun setProduct (product: Product) {
-        activityCommunication.put("product", product)
+        mainActivity.mViewModel.product = product
         val action =
             ShoppingCartFragmentDirections.actionShoppingCartFragmentToAddProductFragment()
         findNavController().navigate(action)

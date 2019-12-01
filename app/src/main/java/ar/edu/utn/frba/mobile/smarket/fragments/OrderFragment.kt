@@ -30,7 +30,7 @@ class OrderFragment  : FragmentCommunication() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        totalPrice = activityCommunication.get("totalPrice") as Double
+        totalPrice = mainActivity.mViewModel.totalPrice
         textTotalPrice.text = totalPrice.toString()
         cards = CardService.get(this.context!!)
 
@@ -66,8 +66,8 @@ class OrderFragment  : FragmentCommunication() {
 
         @Suppress("UNCHECKED_CAST")
         buttonFinishOrder.setOnClickListener {
-            val history = activityCommunication.get("history") as ArrayList<History>
-            val products = activityCommunication.get("purchases") as ArrayList<Purchase>
+            val history = mainActivity.mViewModel.history!!
+            val products = mainActivity.mViewModel.purchases!!
             val purchase = History(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products, PurchaseStatus.PENDING)
             val card = Card(autoCompleteCardNumber, textCardDueYear, textCardDueMonth, textCardTitular)
             val contact = Contact(autoCompleteContactName, textContactNumber)

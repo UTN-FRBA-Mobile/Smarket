@@ -117,10 +117,6 @@ class MainFragment : FragmentCommunication() {
         return true
     }
 
-    private fun getError(text: String) : Int {
-        return if (text.isBlank()) View.VISIBLE else View.INVISIBLE
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -155,7 +151,7 @@ class MainFragment : FragmentCommunication() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {
-                    activityCommunication.put("user", auth.currentUser!!)
+                    mainActivity.mViewModel.user = auth.currentUser!!
                     login()
                 } else {
                     Toast.makeText(activity, "Google sign in failed:(", Toast.LENGTH_LONG).show()
