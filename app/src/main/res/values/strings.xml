@@ -24,7 +24,7 @@
     <!--History History-->
     <string name="price">Precio</string>
     <string name="purchase">Producto</string>
-    <string name="amount">Cantidad</string>
+    <string name="amount">Cantidad :</string>
     <string name="actions">Acciones</string>
     <string name="noPurchases"> No tenes compras!! Hacé click en el botón con este ícono para comenzar</string>
     <string name="repeat">REPETIR</string>
@@ -43,7 +43,7 @@
     <string name="cancel">Cancelar</string>
 
     <!--Map-->
-    <string name="title_activity_maps">Mapa</string>
+    <string name="title_activity_maps">Mi Ubicación</string>
     <string name="titleDirectionSearch">BUSCAR</string>
     <string name="titleConfirmLocation">CONFIRMAR</string>
     <string name="titleCalleYAltura">Calle y Altura</string>
@@ -62,4 +62,5 @@
 
     <!--Location-->
     <string name="delete">ELIMINAR</string>
+    <string name="returnHistory">Mis Compras</string>
 </resources>

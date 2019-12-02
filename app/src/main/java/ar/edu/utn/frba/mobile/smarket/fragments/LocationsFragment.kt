@@ -59,7 +59,7 @@ class LocationsFragment : FragmentCommunication() {
 
     private fun showLocations() {
         locationsAdapter =
-            LocationsAdapter(locations, ::removeCallback, ::onItemClick)
+            LocationsAdapter(locations, ::removeCallback, ::goShoping)
         viewManager = LinearLayoutManager(context)
 
         recycler_view_locations.apply {
@@ -72,7 +72,8 @@ class LocationsFragment : FragmentCommunication() {
         }
     }
 
-    private fun onItemClick() {
+    private fun goShoping(location: Location) {
+        mainActivity.mViewModel.location = location
         val action = LocationsFragmentDirections.actionLocationsToShoppingCartFragment()
         findNavController().navigate(action)
     }
@@ -99,13 +100,13 @@ class LocationsFragment : FragmentCommunication() {
 
         if (requestCode == RequestCode.RC_MAP && resultCode == Activity.RESULT_OK) {
             val location = Location(
-                data?.extras?.get("address") as String,
+                (data?.extras?.get("address") as String).toUpperCase(),
                 data.extras?.get("latLng") as LatLng)
-            LocationService.save(location)
-            locations.add(location)
-
-            val action = LocationsFragmentDirections.actionLocationsToShoppingCartFragment()
-            findNavController().navigate(action)
+            if (locations.all { it.address != location.address}) {
+                LocationService.save(location)
+                locations.add(location)
+            }
+            goShoping(location)
         }
     }
 }

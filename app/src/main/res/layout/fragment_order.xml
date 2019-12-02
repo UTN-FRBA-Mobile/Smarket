@@ -199,7 +199,7 @@
                             android:layout_height="match_parent"
                             android:inputType="number"
                             android:maxLength="4"
-                            android:nextFocusDown="@id/textContactNumber"/>
+                            android:nextFocusDown="@id/autoCompleteContactName"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>

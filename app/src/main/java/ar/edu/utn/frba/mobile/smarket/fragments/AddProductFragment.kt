@@ -21,7 +21,7 @@ class AddProductFragment : FragmentCommunication() {
 
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).setActionBarTitle("Agregar Producto")
+        mainActivity.setActionBarTitle("Agregar Producto")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

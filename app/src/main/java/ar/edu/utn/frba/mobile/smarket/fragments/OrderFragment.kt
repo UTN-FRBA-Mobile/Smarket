@@ -69,7 +69,8 @@ class OrderFragment  : FragmentCommunication() {
         buttonFinishOrder.setOnClickListener {
             val history = mainActivity.mViewModel.history!!
             val products = mainActivity.mViewModel.purchases!!
-            val purchase = History(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products, PurchaseStatus.PENDING)
+            val location = mainActivity.mViewModel.location!!
+            val purchase = History(UUID.randomUUID().toString(), Date(), totalPrice, products.size, products, PurchaseStatus.PENDING, location.address)
             val card = Card(autoCompleteCardNumber, textCardDueYear, textCardDueMonth, textCardTitular)
             val contact = Contact(autoCompleteContactName, textContactNumber)
 

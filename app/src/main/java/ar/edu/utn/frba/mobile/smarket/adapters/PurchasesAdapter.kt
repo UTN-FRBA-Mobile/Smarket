@@ -19,6 +19,7 @@ import android.widget.Toast
 class PurchasesAdapter(
     private val dataSet: List<History>,
     private val actionRepeatPurchase: (History) -> Unit,
+    private val actionClick: (History) -> Unit,
     private val context: Context
 ): RecyclerView.Adapter<PurchasesAdapter.ViewHolder>(){
 
@@ -47,13 +48,16 @@ class PurchasesAdapter(
         fun bindData(history: History){
             itemView.textPrice.text = "$ " + history.price.toString()
             itemView.textProducts.text = history.amount.toString() + " productos"
-
             itemView.textDate.text = SimpleDateFormat("dd-MM-yy kk:mm")
                 .format(history.date).toString()
 
             setPurchaseTextStatus(history)
             itemView.buttonRepeatPurchase.setOnClickListener {
                 actionRepeatPurchase(history)
+            }
+
+            itemView.layoutInfoHistory.setOnClickListener {
+                actionClick(history)
             }
 
             when {

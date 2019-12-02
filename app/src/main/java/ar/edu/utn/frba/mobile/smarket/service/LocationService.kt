@@ -29,18 +29,7 @@ object LocationService {
     }
 
     private fun transform(query: QueryDocumentSnapshot): Location {
-        /*
-                val data = query.data
-        @Suppress("UNCHECKED_CAST")
-        val products = data["purchases"] as List<HashMap<String, Any>>
-        return products.map {
-            Location(
-                it["id"] as Long,
-                it["description"] as String
-            )
-        }
-         */
-        var latLng = query.data["latLng"] as HashMap<String, Object>
+        val latLng = query.data["latLng"] as HashMap<String, Object>
         return Location(query.data["description"] as String, LatLng(latLng["latitude"] as Double, latLng["longitude"] as Double))
     }
 

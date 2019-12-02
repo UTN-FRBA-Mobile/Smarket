@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_mainFragment_to_purchaseHistoryFragment"
             app:destination="@id/purchaseHistoryFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_orderFragment"
-            app:destination="@id/orderFragment" />
     </fragment>
 
     <fragment
@@ -66,6 +63,10 @@
         <action
             android:id="@+id/action_purchaseHistoryFragment_to_locationsFragment"
             app:destination="@id/locationsFragment" />
+        <action
+            android:id="@+id/action_purchaseHistoryFragment_to_infoOrderFragment"
+            app:destination="@id/infoOrderFragment"
+            app:popUpTo="@+id/purchaseHistoryFragment" />
     </fragment>
 	
 	<activity
@@ -74,4 +75,9 @@
         android:label="activity_map"
         tools:layout="@layout/activity_map" >
     </activity>
+    <fragment
+        android:id="@+id/infoOrderFragment"
+        android:name="ar.edu.utn.frba.mobile.smarket.fragments.InfoOrderFragment"
+        android:label="fragment_info_order"
+        tools:layout="@layout/fragment_info_order" />
 </navigation>

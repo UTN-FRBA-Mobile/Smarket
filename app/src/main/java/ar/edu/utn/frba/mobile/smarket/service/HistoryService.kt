@@ -31,7 +31,8 @@ object HistoryService {
                         data["price"] as Number,
                         data["amount"] as Number,
                         null,
-                        PurchaseStatus.valueOf(data["status"] as String))
+                        PurchaseStatus.valueOf(data["status"] as String),
+                        data["address"] as String)
         if (data["rating"] != null)
             purchase.rating = (data["rating"] as Double).toFloat()
         return purchase
@@ -53,6 +54,7 @@ object HistoryService {
         query["price"] = history.price
         query["amount"] = history.amount
         query["status"] = history.status.toString()
+        query["address"] = history.address
 
         getInstance().add(query)
             .addOnSuccessListener {
