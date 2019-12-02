@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".fragments.MainFragment"
     android:orientation="vertical"
-    android:padding="35dp">
+    android:paddingLeft="35dp"
+    android:paddingRight="35dp">
 
     <ImageView
         android:layout_gravity="center"
-        android:layout_width="180dp"
-        android:layout_height="150dp"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_smarket_text"/>
 
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content"
             android:maxLength="30"
             android:singleLine="true"
+            android:inputType="textEmailAddress"
             android:hint="@string/username"/>
     </com.google.android.material.textfield.TextInputLayout>
 
