@@ -41,9 +41,19 @@
             <TextView
                 android:id="@+id/productPrice"
                 android:paddingTop="10dp"
+                android:layout_marginEnd="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/productPriceUnitDescription"/>
+
+            <TextView
+                android:id="@+id/productPriceUnitDescription"
+                android:paddingTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/perUnitSymbol"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
