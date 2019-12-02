@@ -56,6 +56,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
+            <TextView
+                android:id="@+id/productTotalText"
+                android:paddingTop="21dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                app:layout_constraintEnd_toStartOf="@id/productTotalPrice"
+                app:layout_constraintTop_toBottomOf="@id/productPrice"/>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonDecreaseUnit"
                 style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
@@ -78,12 +88,13 @@
                 app:layout_constraintStart_toEndOf="@id/buttonDecreaseUnit"
                 app:layout_constraintTop_toBottomOf="@id/productPrice"/>
 
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonIncreaseUnit"
                 style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
                 android:layout_width="46dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="5dp"
                 app:icon="@drawable/icon_add"
                 app:iconGravity="textStart"
                 app:iconTint="#115021"
@@ -96,7 +107,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
                 android:layout_width="46dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="0dp"
                 app:icon="@drawable/icon_trash"
                 app:iconGravity="textStart"
                 app:iconTint="#AF0000"

@@ -41,7 +41,7 @@ class ProductsAdapter(
         fun bindData(purchase: Purchase){
             itemView.productName.text = purchase.description
             itemView.productPrice.text = "$ " + purchase.price.toString()
-            itemView.productTotalPrice.text = "$ " + purchase.getTotalPrice().toString()
+            itemView.productTotalPrice.text = purchase.getTotalPrice().toString()
             itemView.productUnits.text = purchase.amount.toString()
             Picasso.with(context).load(purchase.image).into(itemView.imageItemProduct)
 
