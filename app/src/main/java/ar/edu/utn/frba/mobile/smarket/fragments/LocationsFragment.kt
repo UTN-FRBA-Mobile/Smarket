@@ -59,7 +59,7 @@ class LocationsFragment : FragmentCommunication() {
 
     private fun showLocations() {
         locationsAdapter =
-            LocationsAdapter(locations, ::removeCallback, ::goShoping)
+            LocationsAdapter(locations, ::removeCallback, ::goShopping)
         viewManager = LinearLayoutManager(context)
 
         recycler_view_locations.apply {
@@ -72,7 +72,7 @@ class LocationsFragment : FragmentCommunication() {
         }
     }
 
-    private fun goShoping(location: Location) {
+    private fun goShopping(location: Location) {
         mainActivity.mViewModel.location = location
         val action = LocationsFragmentDirections.actionLocationsToShoppingCartFragment()
         findNavController().navigate(action)
@@ -106,7 +106,7 @@ class LocationsFragment : FragmentCommunication() {
                 LocationService.save(location)
                 locations.add(location)
             }
-            goShoping(location)
+            goShopping(location)
         }
     }
 }

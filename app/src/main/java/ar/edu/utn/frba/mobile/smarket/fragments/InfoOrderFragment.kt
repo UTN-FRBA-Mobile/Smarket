@@ -33,7 +33,7 @@ class InfoOrderFragment: FragmentCommunication() {
         }
 
         textTotalPriceHistoryInfo.text = "TOTAL: ${history.price}"
-        textLocation.text = "Dirección: ${history.address}"
+        textLocation.text = "Dirección de Entrega: ${history.address}"
 
         buttonReturnToHistory.setOnClickListener {
             findNavController().popBackStack()
