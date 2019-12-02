@@ -8,3 +8,18 @@ Features
 - Agrega productos al carrito escaneando el codigo de barras
 - Realiza tu pago online
 - Recibí el pedido en tu casa!!
+
+--------
+
+  <img src="https://github.com/UTN-FRBA-Mobile/Smarket/blob/master/screenshots/login.jpg" width="350"/>
+  <img src="https://github.com/UTN-FRBA-Mobile/Smarket/blob/master/screenshots/listado-compras.jpg" width="350"/>
+  <img src="https://github.com/UTN-FRBA-Mobile/Smarket/blob/master/screenshots/mapa.jpg" width="350"/>
+  <img src="https://github.com/UTN-FRBA-Mobile/Smarket/blob/master/screenshots/agregar-producto.jpg" width="350"/>
+  <img src="https://github.com/UTN-FRBA-Mobile/Smarket/blob/master/screenshots/carrito.jpg" width="350"/>
+  <img src="https://github.com/UTN-FRBA-Mobile/Smarket/blob/master/screenshots/confirmar-compra.jpg" width="350"/>
+  <img src="https://github.com/UTN-FRBA-Mobile/Smarket/blob/master/screenshots/calificar-compra.jpg" width="350"/>
+  
+	
+
+
+
