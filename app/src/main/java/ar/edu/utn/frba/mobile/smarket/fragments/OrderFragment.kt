@@ -6,6 +6,7 @@ import android.text.*
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import ar.edu.utn.frba.mobile.smarket.R
+import ar.edu.utn.frba.mobile.smarket.activities.MainActivity
 import ar.edu.utn.frba.mobile.smarket.adapters.AutoCompleteCardAdapter
 import ar.edu.utn.frba.mobile.smarket.adapters.AutoCompleteContactAdapter
 import ar.edu.utn.frba.mobile.smarket.enums.PurchaseStatus
@@ -257,6 +258,11 @@ class OrderFragment  : FragmentCommunication() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).setActionBarTitle("Finalizar compra")
     }
 
     private fun splitNumber(text: String) : String {
