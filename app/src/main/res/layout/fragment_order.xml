@@ -82,8 +82,10 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="12dp"
                     android:inputType="number"
+                    android:imeOptions="actionNext"
                     android:completionThreshold="1"
-                    android:maxLength="19"/>
+                    android:maxLength="19"
+                    android:nextFocusDown="@id/textCardTitular"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -103,7 +105,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="19"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:nextFocusDown="@id/textCardDueMonth"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -137,7 +140,8 @@
                             android:layout_height="wrap_content"
                             android:inputType="number"
                             android:maxLength="2"
-                            android:paddingBottom="12dp" />
+                            android:paddingBottom="12dp"
+                            android:nextFocusDown="@id/textCardDueYear"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -161,7 +165,8 @@
                             android:layout_height="wrap_content"
                             android:inputType="number"
                             android:maxLength="2"
-                            android:paddingBottom="12dp" />
+                            android:paddingBottom="12dp"
+                            android:nextFocusDown="@id/textCardSecurityCode"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -193,7 +198,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:inputType="number"
-                            android:maxLength="4" />
+                            android:maxLength="4"
+                            android:nextFocusDown="@id/textContactNumber"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -223,8 +229,10 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="12dp"
                     android:completionThreshold="1"
+                    android:imeOptions="actionNext"
                     android:singleLine="true"
-                    android:maxLength="20"/>
+                    android:maxLength="20"
+                    android:nextFocusDown="@id/textContactNumber"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -246,7 +254,8 @@
                     android:layout_height="wrap_content"
                     android:maxLength="9"
                     android:singleLine="true"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:nextFocusDown="@id/buttonFinishOrder"/>
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
