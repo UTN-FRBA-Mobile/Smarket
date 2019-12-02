@@ -42,6 +42,9 @@
     <string name="ok">Continua</string>
     <string name="cancel">Cancelar</string>
 
+    <!--Product List-->
+    <string name="perUnitSymbol">/u</string>
+
     <!--Map-->
     <string name="title_activity_maps">Mi Ubicación</string>
     <string name="titleDirectionSearch">BUSCAR</string>
