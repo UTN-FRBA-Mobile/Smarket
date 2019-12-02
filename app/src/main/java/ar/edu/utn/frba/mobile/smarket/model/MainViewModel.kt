@@ -14,6 +14,7 @@ class MainViewModel : ViewModel() {
     var history : ArrayList<History>? = null
     var locations : ArrayList<Location>? = null
     var historySelected : History? = null
+    var location : Location? = null
 
 
 }

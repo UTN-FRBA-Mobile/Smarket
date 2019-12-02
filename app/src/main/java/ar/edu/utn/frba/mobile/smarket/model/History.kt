@@ -10,7 +10,8 @@ class History(
     var price: Number,
     var amount: Number,
     var purchases: ArrayList<Purchase>?,
-    var status: PurchaseStatus
+    var status: PurchaseStatus,
+    var address : String
 ) {
     var rating: Float? = null
 }

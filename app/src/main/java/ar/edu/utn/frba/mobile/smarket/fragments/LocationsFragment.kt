@@ -72,7 +72,8 @@ class LocationsFragment : FragmentCommunication() {
         }
     }
 
-    private fun onItemClick() {
+    private fun onItemClick(location: Location) {
+        mainActivity.mViewModel.location = location
         val action = LocationsFragmentDirections.actionLocationsToShoppingCartFragment()
         findNavController().navigate(action)
     }

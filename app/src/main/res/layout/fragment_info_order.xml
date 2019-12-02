@@ -3,14 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.InfoOrderFragment">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#22ADA5A5"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="#2B1919"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_info_products"
+            android:layout_marginTop="38dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/finishInfoProductsLayout"
@@ -42,9 +59,7 @@
                 android:layout_marginTop="12dp"
                 android:gravity="center_horizontal"
                 android:textColor="#2B1919"
-                android:textSize="14sp">
-
-            </TextView>
+                android:textSize="14sp"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/SmarketButton"
