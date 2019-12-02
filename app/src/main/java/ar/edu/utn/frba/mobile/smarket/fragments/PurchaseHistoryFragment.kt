@@ -79,13 +79,25 @@ class PurchaseHistoryFragment : FragmentCommunication() {
 
     private fun startAdapter(){
         purchasesAdapter =
-            PurchasesAdapter(history.sortedByDescending { it.date }, ::repeatPurchase, context!!)
+            PurchasesAdapter(history.sortedByDescending { it.date }, ::repeatPurchase, ::showInfoOrderFragmet, context!!)
         viewManager = LinearLayoutManager(context)
 
         recycler_view_purchases.apply {
             layoutManager = viewManager
             adapter = purchasesAdapter
         }
+    }
+
+    private fun showInfoOrderFragmet(history: History) {
+        val action =
+            PurchaseHistoryFragmentDirections.actionPurchaseHistoryFragmentToInfoOrderFragment()
+        mainActivity.mViewModel.historySelected = history
+        if (history.purchases != null) {
+            findNavController().navigate(action)
+        } else
+            history.purchases = PurchaseService.getProducts(
+                history.uid
+            ) { findNavController().navigate(action) }
     }
 
     private fun repeatPurchase(history: History) {

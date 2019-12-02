@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.InfoOrderFragment">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_info_products"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/finishInfoProductsLayout"
+            tools:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_info_product" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignEnd="@+id/recycler_view_info_products"
+            android:gravity="end"
+            android:orientation="vertical"
+            android:paddingRight="20dp"
+            android:paddingBottom="30dp">
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/finishInfoProductsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#22ADA5A5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textTotalPriceHistoryInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_horizontal"
+                android:textColor="#2B1919"
+                android:textSize="14sp">
+
+            </TextView>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/SmarketButton"
+                android:id="@+id/buttonReturnToHistory"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:text="@string/returnHistory"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

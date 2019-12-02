@@ -11,9 +11,9 @@ class MainViewModel : ViewModel() {
     var product : Product? = null
     var purchase : Purchase? = null
     var purchases : ArrayList<Purchase>? = null
-    var products : ArrayList<Product>? =  null
     var history : ArrayList<History>? = null
     var locations : ArrayList<Location>? = null
+    var historySelected : History? = null
 
 
 }
